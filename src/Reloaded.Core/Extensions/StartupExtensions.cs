@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reloaded.Core.Business.Guns;
 using Reloaded.Core.Business.Reloads;
+using Reloaded.Data.Extensions;
 
 namespace Reloaded.Core.Extensions
 {
@@ -16,6 +17,8 @@ namespace Reloaded.Core.Extensions
 		{
 			services.AddTransient<IHandloadBusiness, HandloadBusiness>();
 			services.AddTransient<IFirearmBusiness, FirearmBusiness>();
+
+			services.ConfigureDataServices(configuration);
 
 			return services;
 		}

@@ -22,7 +22,6 @@ namespace Reloaded.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.ConfigureCoreServices(Configuration);
-			services.ConfigureDataServices(Configuration);
 
 			services.AddControllers();
 

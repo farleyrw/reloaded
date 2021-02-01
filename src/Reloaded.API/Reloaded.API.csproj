@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Reloaded.Common\Reloaded.Common.csproj" />
     <ProjectReference Include="..\Reloaded.Core\Reloaded.Core.csproj" />
-    <ProjectReference Include="..\Reloaded.Data\Reloaded.Data.csproj" />
   </ItemGroup>
 
 </Project>
