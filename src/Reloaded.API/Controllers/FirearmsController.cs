@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Reloaded.Core.Business.Guns;
 
 namespace Reloaded.API.Controllers
 {
@@ -11,11 +12,11 @@ namespace Reloaded.API.Controllers
 	[Route("[controller]")]
 	public class FirearmsController : ControllerBase
 	{
-		private readonly ILogger<FirearmsController> _logger;
+		private readonly IFirearmBusiness firearmBusiness;
 
-		public FirearmsController(ILogger<FirearmsController> logger)
+		public FirearmsController(IFirearmBusiness firearmBusiness)
 		{
-			_logger = logger;
+			this.firearmBusiness = firearmBusiness;
 		}
 
 		[HttpGet]

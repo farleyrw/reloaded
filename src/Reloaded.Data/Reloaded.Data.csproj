@@ -6,10 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Reloaded.Common\Reloaded.Common.csproj" />
+    <ProjectReference Include="..\Reloaded.Common\Reloaded.Common.csproj" />
   </ItemGroup>
 
 </Project>
