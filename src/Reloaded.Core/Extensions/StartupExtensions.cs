@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reloaded.Core.Business.Guns;
-using Reloaded.Core.Business.Reloads;
+using Reloaded.Core.Business.Reloading;
 using Reloaded.Data.Extensions;
 
 namespace Reloaded.Core.Extensions

@@ -12,16 +12,16 @@ namespace Reloaded.Common.Models
 
 		public int AccountId { get; set; }
 
-		public GunPowder Powder { get; set; }
+		public GunPowder Powder { get; set; } = GunPowder.None;
 
 		[Required]
 		public double PowderCharge { get; set; }
 
-		public Primer Primer { get; set; }
+		public Primer Primer { get; set; } = new Primer();
 
-		public Brass Casing { get; set; }
+		public Brass Casing { get; set; } = new Brass();
 
-		public Bullet Bullet { get; set; }
+		public Bullet Bullet { get; set; } = new Bullet();
 
 		[Required]
 		public double SeatingDepth { get; set; }
@@ -29,15 +29,6 @@ namespace Reloaded.Common.Models
 		[Required]
 		public int FirearmId { get; set; }
 
-		public List<HandloadResult> Results { get; set; }
-
-		public Handload()
-		{
-			this.Powder = GunPowder.None;
-			this.Primer = new Primer();
-			this.Casing = new Brass();
-			this.Bullet = new Bullet();
-			this.Results = new List<HandloadResult>();
-		}
+		public List<HandloadResult> Results { get; set; } = new List<HandloadResult>();
 	}
 }

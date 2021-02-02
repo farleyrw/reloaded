@@ -1,7 +1,9 @@
-﻿using Reloaded.Common.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Reloaded.Common.Enums;
 
 namespace Reloaded.Common.Models
 {
+	[ComplexType]
 	public class WeatherConditions
 	{
 		public int Temperature { get; set; }

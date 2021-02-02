@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Reloaded.Common.Models;
 
-namespace Reloaded.Core.Business.Reloads
+namespace Reloaded.Core.Business.Reloading
 {
 	public class HandloadBusiness : IHandloadBusiness
 	{

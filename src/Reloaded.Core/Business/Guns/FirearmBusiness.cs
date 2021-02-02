@@ -16,10 +16,19 @@ namespace Reloaded.Core.Business.Guns
 		{
 			this.firearmRepository = firearmRepository;
 		}
+		public Task<Firearm> GetFirearm(int firearmId)
+		{
+			return this.firearmRepository.GetFirearm(firearmId);
+		}
 
 		public Task<IEnumerable<Firearm>> GetFirearms(int accountId)
 		{
-			return null;
+			return this.firearmRepository.GetFirearms(accountId);
+		}
+
+		public Task<Firearm> SaveFirearm(Firearm firearm)
+		{
+			return this.firearmRepository.SaveFirearm(firearm);
 		}
 	}
 }
