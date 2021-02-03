@@ -6,12 +6,16 @@ namespace Reloaded.Common.Models
 	[ComplexType]
 	public class WeatherConditions
 	{
+		[Column("weatherTemperatureF")]
 		public int Temperature { get; set; }
 
-		public int ElevationFeet { get; set; }
+		[Column("weatherElevationFt")]
+		public int Elevation { get; set; }
 
-		public int WindSpeedMph { get; set; }
+		[Column("weatherWindSpeedMph")]
+		public int WindSpeed { get; set; }
 
+		[Column("weatherWindDirection")]
 		public WindDirection WindDirection { get; set; }
 	}
 }

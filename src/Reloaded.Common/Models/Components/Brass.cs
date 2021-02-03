@@ -10,14 +10,17 @@ namespace Reloaded.Common.Models.Components
 	{
 		/// <summary>Gets or sets the manufacturer.</summary>
 		/// <value>The manufacturer.</value>
-		public BrassManufacturer Manufacturer { get; set; }
+		[Column("brassBrand")]
+		public BrassManufacturer Brand { get; set; }
 
 		/// <summary>Gets or sets the caliber.</summary>
 		/// <value>The caliber.</value>
+		[Column("brassCaliber")]
 		public Cartridge Caliber { get; set; }
 
 		/// <summary>Gets or sets the times fired.</summary>
 		/// <value>The times fired.</value>
+		[Column("brassTimesFired")]
 		public int TimesFired { get; set; }
 	}
 }

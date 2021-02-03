@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Reloaded.Common.Enums;
 using Reloaded.Common.Helpers;
@@ -13,12 +12,17 @@ namespace Reloaded.Common.Models
 		[Key]
 		public int FirearmId { get; set; }
 
+		[Required]
 		public int AccountId { get; set; }
 
 		[Required]
 		public string Model { get; set; }
 
+		[Required]
 		public string Brand { get; set; }
+
+		[Required]
+		public decimal BarrelLength { get; set; }
 
 		public FirearmType Type { get; set; } = FirearmType.Other;
 
@@ -37,10 +41,5 @@ namespace Reloaded.Common.Models
 				);
 			}
 		}
-
-		[Required]
-		public decimal BarrelLength { get; set; }
-
-		//public List<Handload> Handloads { get; set; } = new List<Handload>();
 	}
 }

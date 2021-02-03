@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Reloaded.Core.Extensions;
 using Reloaded.Data.Extensions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Reloaded.API
 {
@@ -23,7 +25,10 @@ namespace Reloaded.API
 		{
 			services.ConfigureCoreServices(Configuration);
 
-			services.AddControllers();
+			services.AddControllers().AddJsonOptions(opts =>
+			{
+				opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+			});
 
 			services.AddSwaggerGen(c =>
 			{

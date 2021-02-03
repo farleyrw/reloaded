@@ -7,7 +7,7 @@ using Reloaded.Core.Business.Guns;
 namespace Reloaded.API.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
+	[Route("api/[controller]")]
 	public class FirearmsController : ControllerBase
 	{
 		private readonly IFirearmBusiness firearmBusiness;

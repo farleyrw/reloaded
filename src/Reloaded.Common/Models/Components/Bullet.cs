@@ -9,16 +9,22 @@ namespace Reloaded.Common.Models.Components
 	public class Bullet
 	{
 		[Required]
+		[Column("bulletWeightGr")]
 		public int Weight { get; set; }
 
+		[Column("bulletBrand")]
 		public BulletManufacturer Brand { get; set; }
 
+		[Column("bulletConstruction")]
 		public BulletConstruction Construction { get; set; }
 
+		[Column("bulletType")]
 		public BulletType Type { get; set; }
 
+		[Column("bulletBaseType")]
 		public BulletBaseType BaseType { get; set; }
 
+		[Column("bulletCaliber")]
 		public Caliber Caliber { get; set; }
 	}
 }

@@ -15,7 +15,8 @@ CREATE TABLE [dbo].[firearm] (
     [brand]        NVARCHAR (100) NOT NULL,
     [type]         INT            NOT NULL,
     [chamberType]  INT            NOT NULL,
-    [barrelLength] DECIMAL (18)   NOT NULL
+    [barrelLength] DECIMAL (18)   NOT NULL,
+    CONSTRAINT [PK_firearm] PRIMARY KEY ([firearmId])
 );
 
 

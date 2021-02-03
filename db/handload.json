@@ -1,0 +1,25 @@
+{
+	"handloadId": 0,
+	"accountId": 0,
+	"firearmId": 1,
+	"powder": "Varget",
+	"powderCharge": 25,
+	"seatingDepth": 2.5,
+	"primer": {
+		"brand": "Winchester",
+		"type": "SmallRifle"
+	},
+	"casing": {
+		"brand": "Winchester",
+		"caliber": "TwoTwoThreeRemington",
+		"timesFired": 0
+	},
+	"bullet": {
+		"weight": 0,
+		"brand": "Nosler",
+		"construction": "CopperJacket",
+		"type": "BallisticTip",
+		"baseType": "Boattail",
+		"caliber": "TwentyTwo"
+	}
+}
