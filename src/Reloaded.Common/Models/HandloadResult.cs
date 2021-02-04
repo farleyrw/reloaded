@@ -20,10 +20,15 @@ namespace Reloaded.Common.Models
 		public DateTime Date { get; set; }
 
 		[Required]
-		public int Yardage { get; set; }
+		[Column("distanceYds")]
+		public int Distance { get; set; }
 
 		[Required]
 		public int TotalShots { get; set; }
+
+		[Required]
+		[Column("velocityMph")]
+		public int Velocity { get; set; }
 
 		[Required]
 		[Column("groupSizeIn")]
