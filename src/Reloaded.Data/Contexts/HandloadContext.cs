@@ -9,9 +9,13 @@ namespace Reloaded.Data.Contexts
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Handload>().OwnsOne(h => h.Casing);
-			modelBuilder.Entity<Handload>().OwnsOne(h => h.Bullet);
-			modelBuilder.Entity<Handload>().OwnsOne(h => h.Primer);
+			modelBuilder.Entity<Handload>(table =>
+			{
+				table.OwnsOne(h => h.Casing);
+				table.OwnsOne(h => h.Bullet);
+				table.OwnsOne(h => h.Primer);
+			});
+			
 			modelBuilder.Entity<HandloadResult>().OwnsOne(h => h.Weather);
 
 			base.OnModelCreating(modelBuilder);

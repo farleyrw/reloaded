@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Reloaded.Common.Enums;
+using Reloaded.Common.Helpers;
 using Reloaded.Common.Models;
 using Reloaded.Core.Business.Guns;
 
@@ -39,6 +41,18 @@ namespace Reloaded.API.Controllers
 			var savedFirearm = await this.firearmBusiness.SaveFirearm(firearm);
 
 			return savedFirearm;
+		}
+
+		[HttpGet("enums")]
+		public IActionResult GetEnums()
+		{
+			var enums = new
+			{
+				Cartidges = EnumHelper.Descriptions<Cartridge>(),
+				Types = EnumHelper.Descriptions<FirearmType>()
+			};
+
+			return Ok(enums);
 		}
 	}
 }

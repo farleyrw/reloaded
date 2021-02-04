@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Reloaded.Common.Enums;
+using Reloaded.Common.Enums.Components;
+using Reloaded.Common.Enums.Components.Bullet;
+using Reloaded.Common.Helpers;
 using Reloaded.Common.Models;
 using Reloaded.Core.Business.Reloading;
 
@@ -47,6 +51,27 @@ namespace Reloaded.API.Controllers
 			var savedHandloadResult = await this.handloadBusiness.SaveHandloadResult(handloadResult);
 
 			return savedHandloadResult;
+		}
+
+		[HttpGet("enums")]
+		public IActionResult GetEnums()
+		{
+			var enums = new
+			{
+				BrassManufacturers = EnumHelper.Descriptions<BrassManufacturer>(),
+				BulletConstuction = EnumHelper.Descriptions<BulletConstruction>(),
+				BulletTypes = EnumHelper.Descriptions<BulletType>(),
+				BulletBaseTypes = EnumHelper.Descriptions<BulletBaseType>(),
+				BulletManufacturers = EnumHelper.Descriptions<BulletManufacturer>(),
+				Calibers = EnumHelper.Descriptions<Caliber>(),
+				Cartidges = EnumHelper.Descriptions<Cartridge>(),
+				PrimerTypes = EnumHelper.Descriptions<PrimerType>(),
+				PrimerManufacturers = EnumHelper.Descriptions<PrimerManufacturer>(),
+				Powders = EnumHelper.Descriptions<GunPowder>(),
+				FirearmTypes = EnumHelper.Descriptions<FirearmType>()
+			};
+
+			return Ok(enums);
 		}
 	}
 }
