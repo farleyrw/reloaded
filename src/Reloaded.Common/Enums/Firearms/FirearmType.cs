@@ -1,5 +1,5 @@
 ﻿
-namespace Reloaded.Common.Enums
+namespace Reloaded.Common.Enums.Firearms
 {
 	/// <summary>The gun type</summary>
 	public enum FirearmType

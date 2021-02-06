@@ -6,8 +6,8 @@ namespace Reloaded.Common.Models.Components
 	[ComplexType]
 	public class Primer
 	{
-		public PrimerManufacturer Brand { get; set; }
+		public PrimerManufacturer Brand { get; set; } = PrimerManufacturer.Other;
 
-		public PrimerType Type { get; set; }
+		public PrimerType Type { get; set; } = PrimerType.Other;
 	}
 }
