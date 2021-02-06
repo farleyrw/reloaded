@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Reloaded.Common.Enums;
+using Reloaded.Common.Enums.Firearms;
 using Reloaded.Common.Helpers;
 
 namespace Reloaded.Common.Models
