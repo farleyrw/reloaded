@@ -1,0 +1,9 @@
+{
+	"firearmId": 0,
+	"accountId": 1,
+	"model": "700 SPS",
+	"brand": "Remington",
+	"barrelLength": 22,
+	"type": "Rifle",
+	"chamber": "TwentyTwoTwoFiftyRemington"
+}

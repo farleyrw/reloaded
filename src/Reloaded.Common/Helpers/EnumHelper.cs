@@ -23,16 +23,15 @@ namespace Reloaded.Common.Helpers
 
 			// Enum.TryParse doesn't take a generic type and Enum.IsDefined checks the enum values by data type.
 			// i.e. Evaluates to false when passing in "1" (string) to trying to see if the One = 1 value exists.
-			int i;
-			if(int.TryParse(value, out i))
+			if (int.TryParse(value, out int i))
 			{
-				if(Enum.IsDefined(enumType, i))
+				if (Enum.IsDefined(enumType, i))
 				{
 					return (T)Enum.Parse(enumType, i.ToString(), false);
 				}
 			}
 
-			if(Enum.IsDefined(enumType, value))
+			if (Enum.IsDefined(enumType, value))
 			{
 				return (T)Enum.Parse(enumType, value);
 			}
@@ -44,7 +43,7 @@ namespace Reloaded.Common.Helpers
 				return Parse<T>(defaultAttribute.Value.ToString());
 			}
 
-			return default(T);
+			return default;
 		}
 
 		/// <summary>Gets the default enum value, checking the attribute first.</summary>
@@ -55,7 +54,7 @@ namespace Reloaded.Common.Helpers
 
 			return defaultAttribute != null
 				? (T)defaultAttribute.Value
-				: default(T);
+				: default;
 		}
 
 		/// <summary>Parses the <see cref="DescriptionAttribute" /> to return the enum value.</summary>

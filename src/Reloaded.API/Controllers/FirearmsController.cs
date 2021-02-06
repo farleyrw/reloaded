@@ -1,27 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Reloaded.Common.Enums;
+using Reloaded.Common.Helpers;
+using Reloaded.Common.Models;
+using Reloaded.Core.Business.Guns;
 
 namespace Reloaded.API.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
+	[Route("api/[controller]")]
 	public class FirearmsController : ControllerBase
 	{
-		private readonly ILogger<FirearmsController> _logger;
+		private readonly IFirearmBusiness firearmBusiness;
 
-		public FirearmsController(ILogger<FirearmsController> logger)
+		public FirearmsController(IFirearmBusiness firearmBusiness)
 		{
-			_logger = logger;
+			this.firearmBusiness = firearmBusiness;
 		}
 
-		[HttpGet]
-		public string Get()
+		[HttpGet("{firearmId:int}")]
+		public async Task<Firearm> Get(int firearmId)
 		{
-			return "hello world";
+			var firearm = await this.firearmBusiness.GetFirearm(firearmId);
+
+			return firearm;
+		}
+
+		[HttpGet("list/{accountId:int}")]
+		public async Task<IEnumerable<Firearm>> GetList(int accountId)
+		{
+			var firearms = await this.firearmBusiness.GetFirearms(accountId);
+
+			return firearms;
+		}
+
+		[HttpPost]
+		public async Task<Firearm> SaveFirearm(Firearm firearm)
+		{
+			var savedFirearm = await this.firearmBusiness.SaveFirearm(firearm);
+
+			return savedFirearm;
+		}
+
+		[HttpGet("enums")]
+		public IActionResult GetEnums()
+		{
+			var enums = new
+			{
+				Cartidges = EnumHelper.Descriptions<Cartridge>(),
+				Types = EnumHelper.Descriptions<FirearmType>()
+			};
+
+			return Ok(enums);
 		}
 	}
 }
