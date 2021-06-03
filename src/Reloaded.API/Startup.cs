@@ -1,13 +1,14 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NLog;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using Reloaded.Core.Extensions;
-using Reloaded.Data.Extensions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Reloaded.API
 {
@@ -54,6 +55,14 @@ namespace Reloaded.API
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+			LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
+
+			var logger = LogManager.Setup()
+					   .LoadConfigurationFromAppSettings()
+					   .GetCurrentClassLogger();
+
+			logger.Info("Startin' up!");
 		}
 	}
 }

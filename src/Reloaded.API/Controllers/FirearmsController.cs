@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Reloaded.Common.Enums;
 using Reloaded.Common.Enums.Firearms;
 using Reloaded.Common.Helpers;
@@ -14,10 +15,12 @@ namespace Reloaded.API.Controllers
 	public class FirearmsController : ControllerBase
 	{
 		private readonly IFirearmBusiness firearmBusiness;
+		private readonly ILogger<FirearmsController> logger;
 
-		public FirearmsController(IFirearmBusiness firearmBusiness)
+		public FirearmsController(IFirearmBusiness firearmBusiness, ILogger<FirearmsController> logger)
 		{
 			this.firearmBusiness = firearmBusiness;
+			this.logger = logger;
 		}
 
 		[HttpGet("{firearmId:int}")]
@@ -25,6 +28,8 @@ namespace Reloaded.API.Controllers
 		{
 			var firearm = await this.firearmBusiness.GetFirearm(firearmId);
 
+			logger.LogWarning("{@firearm}", firearm);
+			
 			return firearm;
 		}
 
