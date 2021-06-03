@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Reloaded.Common.Enums;
 using Reloaded.Common.Enums.Components;
 using Reloaded.Common.Enums.Components.Bullet;
+using Reloaded.Common.Enums.Firearms;
 using Reloaded.Common.Helpers;
 using Reloaded.Common.Models;
 using Reloaded.Core.Business.Reloading;

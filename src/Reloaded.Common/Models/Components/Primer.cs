@@ -7,9 +7,9 @@ namespace Reloaded.Common.Models.Components
 	public class Primer
 	{
 		[Column("primerBrand")]
-		public PrimerManufacturer Brand { get; set; }
+		public PrimerManufacturer Brand { get; set; } = PrimerManufacturer.Other;
 
 		[Column("primerType")]
-		public PrimerType Type { get; set; }
+		public PrimerType Type { get; set; } = PrimerType.Other;
 	}
 }
