@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reloaded.Core", "src\Reload
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reloaded.Data", "src\Reloaded.Data\Reloaded.Data.csproj", "{34810DC4-127F-44D7-B7F0-9C50A1140BDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reloaded.Common.Tests", "tests\Reloaded.Common.Tests\Reloaded.Common.Tests.csproj", "{8EAF3A31-42EE-43E6-8ACF-304F10E95C93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,9 +37,16 @@ Global
 		{34810DC4-127F-44D7-B7F0-9C50A1140BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34810DC4-127F-44D7-B7F0-9C50A1140BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34810DC4-127F-44D7-B7F0-9C50A1140BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EAF3A31-42EE-43E6-8ACF-304F10E95C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EAF3A31-42EE-43E6-8ACF-304F10E95C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EAF3A31-42EE-43E6-8ACF-304F10E95C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EAF3A31-42EE-43E6-8ACF-304F10E95C93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8EAF3A31-42EE-43E6-8ACF-304F10E95C93} = {07BC7D39-A5D0-4B9A-AA8B-CFDD0D77CF01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73F68603-7CE1-489E-9141-1290A89161EE}
