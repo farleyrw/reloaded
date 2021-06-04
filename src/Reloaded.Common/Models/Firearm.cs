@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Reloaded.Common.Attributes;
 using Reloaded.Common.Enums;
 using Reloaded.Common.Enums.Firearms;
 using Reloaded.Common.Helpers;
@@ -23,6 +24,7 @@ namespace Reloaded.Common.Models
 		public string Brand { get; set; }
 
 		[Required]
+		[Column(TypeName = "decimal(18)")]
 		public decimal BarrelLength { get; set; }
 
 		public FirearmType Type { get; set; } = FirearmType.Other;
