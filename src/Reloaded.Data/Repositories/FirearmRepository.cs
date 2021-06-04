@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Reloaded.Common.Models;
 using Reloaded.Data.Contexts;
 
@@ -10,14 +11,17 @@ namespace Reloaded.Data.Repositories
 	public class FirearmRepository : IFirearmRepository
 	{
 		private readonly FirearmContext firearmContext;
+		private readonly ILogger<FirearmRepository> logger;
 
-		public FirearmRepository(FirearmContext firearmContext)
+		public FirearmRepository(FirearmContext firearmContext, ILogger<FirearmRepository> logger)
 		{
 			this.firearmContext = firearmContext;
+			this.logger = logger;
 		}
 
 		public async Task<Firearm> GetFirearm(int firearmId)
 		{
+			logger.LogInformation("lookup firearm id: {firearmId}", firearmId);
 			return await this.firearmContext.FindAsync<Firearm>(firearmId);
 		}
 
