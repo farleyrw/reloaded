@@ -51,6 +51,7 @@ jobs:
         shell: powershell
         run: |
           dotnet build
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
       - name: Switch to .NET 5
         uses: actions/setup-dotnet@v1
         with:
