@@ -13,8 +13,8 @@ namespace Reloaded.Data.Extensions
 			services.AddTransient<IFirearmRepository, FirearmRepository>();
 			services.AddTransient<IHandloadRepository, HandloadRepository>();
 
-			services.AddDbContext<FirearmContext>(options => options.UseSqlServer(configuration.GetConnectionString("Reloaded")));
-			services.AddDbContext<HandloadContext>(options => options.UseSqlServer(configuration.GetConnectionString("Reloaded")));
+			services.AddSqlServer<FirearmContext>(configuration.GetConnectionString("Reloaded"));
+			services.AddSqlServer<HandloadContext>(configuration.GetConnectionString("Reloaded"));
 
 			return services;
 		}
