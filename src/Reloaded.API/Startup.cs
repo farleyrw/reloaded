@@ -8,11 +8,12 @@ using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Reloaded.API.Extensions;
 using Reloaded.Core.Extensions;
 
 namespace Reloaded.API
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -25,6 +26,9 @@ namespace Reloaded.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.ConfigureCoreServices(Configuration);
+
+			services.AddHealthChecks().AddSqlServer(Configuration.GetConnectionString("Reloaded"), name: "Reloaded SQL Connection");
+			services.AddHealthChecksUI().AddInMemoryStorage();
 
 			services.AddControllers().AddJsonOptions(opts =>
 			{
@@ -54,7 +58,12 @@ namespace Reloaded.API
 
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints => endpoints.MapControllers());
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+				endpoints.ConfigureHealthCheck();
+				endpoints.MapHealthChecksUI();
+			});
 
 			LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
 
