@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
 
 namespace Reloaded.API
 {
+	[ExcludeFromCodeCoverage]
 	public class Program
 	{
 		public static void Main(string[] args)

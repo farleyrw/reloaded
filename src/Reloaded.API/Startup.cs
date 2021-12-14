@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +14,8 @@ using Reloaded.Core.Extensions;
 
 namespace Reloaded.API
 {
-    public class Startup
+	[ExcludeFromCodeCoverage]
+	public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
