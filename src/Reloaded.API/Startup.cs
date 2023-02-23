@@ -32,6 +32,8 @@ namespace Reloaded.API
 			services.AddHealthChecks().AddSqlServer(Configuration.GetConnectionString("Reloaded"), name: "Reloaded SQL Connection");
 			services.AddHealthChecksUI().AddInMemoryStorage();
 
+			services.AddCors();
+
 			services.AddControllers().AddJsonOptions(opts =>
 			{
 				opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -40,6 +42,7 @@ namespace Reloaded.API
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "reloaded", Version = "v1" });
+				c.ConfigureSwaggerDocs();
 			});
 		}
 
@@ -59,6 +62,7 @@ namespace Reloaded.API
 			app.UseRouting();
 
 			app.UseAuthorization();
+			app.UseCors(policy => policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
 
 			app.UseEndpoints(endpoints =>
 			{

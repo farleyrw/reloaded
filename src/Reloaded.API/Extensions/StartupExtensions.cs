@@ -1,11 +1,13 @@
-﻿using System.Linq;
-using System.Net.Mime;
-using System.Text.Json;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Reloaded.API.Extensions
 {
@@ -17,30 +19,20 @@ namespace Reloaded.API.Extensions
 			{
 				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 			});
+		}
 
-			endpoints.MapHealthChecks("/healthcheck-details", new HealthCheckOptions
+		public static void ConfigureSwaggerDocs(this SwaggerGenOptions options)
+        {
+			var currentAssembly = Assembly.GetExecutingAssembly();
+			
+			currentAssembly.GetReferencedAssemblies()
+			.Union(new AssemblyName[] { currentAssembly.GetName() })
+			.Select(a => Path.Combine(Path.GetDirectoryName(currentAssembly.Location), $"{a.Name}.xml"))
+			.Where(f => File.Exists(f))
+			.ToList()
+			.ForEach(d =>
 			{
-				ResponseWriter = async (context, report) =>
-				{
-					var result = JsonSerializer.Serialize(
-						new
-						{
-							status = report.Status.ToString(),
-							totalDurationSeconds = report.TotalDuration.TotalSeconds,
-							entries = report.Entries.Select(e => new
-							{
-								key = e.Key,
-								status = e.Value.Status.ToString(),
-								description = e.Value.Description,
-								durationSeconds = e.Value.Duration.TotalSeconds,
-								data = e.Value.Data
-							})
-						});
-
-					context.Response.ContentType = MediaTypeNames.Application.Json;
-					   
-					await context.Response.WriteAsync(result);
-				}
+				options.IncludeXmlComments(d);
 			});
 		}
 	}
