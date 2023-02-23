@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Reloaded.Web.Extensions
@@ -18,6 +20,20 @@ namespace Reloaded.Web.Extensions
 			{
 				options.IncludeXmlComments(d);
 			});
+		}
+
+		public static WebApplication ConfigureHealtChecks(this WebApplication app)
+		{
+
+            app.MapHealthChecks("/health", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+
+            app.MapHealthChecksUI();
+
+            return app;
 		}
 	}
 }

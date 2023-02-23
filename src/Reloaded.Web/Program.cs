@@ -1,10 +1,8 @@
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
 using Reloaded.Core.Extensions;
 using Reloaded.Web.Extensions;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +28,6 @@ services.AddSwaggerGen(c =>
     c.ConfigureSwaggerDocs();
 });
 
-// TODO: nlog not respecting logging appsettings section: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-configuration-with-appsettings.json
 builder.Host.UseNLog(new NLogAspNetCoreOptions { RemoveLoggerFactoryFilter = false });
 
 var app = builder.Build();
@@ -59,12 +56,6 @@ app.MapControllerRoute(
 
 app.MapFallbackToFile("index.html");
 
-app.MapHealthChecks("/health", new HealthCheckOptions
-{
-    Predicate = _ => true,
-    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
-
-app.MapHealthChecksUI();
+app.ConfigureHealtChecks();
 
 app.Run();
