@@ -1,34 +1,9 @@
-using System.Text.Json.Serialization;
-using Microsoft.OpenApi.Models;
-using NLog.Web;
-using Reloaded.Core.Extensions;
 using Reloaded.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var services = builder.Services;
-services.AddControllersWithViews();
-
-services.ConfigureCoreServices(builder.Configuration);
-
-services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("Reloaded"), name: "Reloaded DB");
-services.AddHealthChecksUI().AddInMemoryStorage();
-
-services.AddCors();
-
-services.AddControllers().AddJsonOptions(opts =>
-{
-    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-});
-
-services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "reloaded", Version = "v1" });
-    c.ConfigureSwaggerDocs();
-});
-
-builder.Host.UseNLog(new NLogAspNetCoreOptions { RemoveLoggerFactoryFilter = false });
+builder.ConfigureWebServices();
 
 var app = builder.Build();
 
@@ -56,6 +31,6 @@ app.MapControllerRoute(
 
 app.MapFallbackToFile("index.html");
 
-app.ConfigureHealtChecks();
+app.ConfigureHealthChecks();
 
 app.Run();

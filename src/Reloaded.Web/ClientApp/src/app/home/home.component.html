@@ -16,3 +16,59 @@
   <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
 </ul>
 <p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
+
+<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <div class="accordion accordion-flush" id="topMenu">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Menu Item #1
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#topMenu">
+          <div class="accordion accordion-flush" id="subMenu1-1">
+            <div class="accordion-item submenu">
+              <h2 class="accordion-header" id="headingOneSubmenu">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneSubmenu" aria-expanded="true" aria-controls="collapseOneSubmenu">
+                  Sub Menu Item #1
+                </button>
+              </h2>
+              <div id="collapseOneSubmenu" class="accordion-collapse collapse" aria-labelledby="headingOneSubmenu" data-bs-parent="#subMenu1-1">
+                Menu Content Item #1
+              </div>
+            </div>
+            <div class="accordion-item submenu">
+              <h2 class="accordion-header" id="headingTwoSubmenu">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoSubmenu" aria-expanded="true" aria-controls="collapseTwoSubmenu">
+                  Sub Menu Item #2
+                </button>
+              </h2>
+              <div id="collapseTwoSubmenu" class="accordion-collapse collapse" aria-labelledby="headingTwoSubmenu" data-bs-parent="#subMenu1-1">
+                Menu Content Item #2
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Menu Item #2
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#topMenu">
+          Sub Menu Item #1
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
