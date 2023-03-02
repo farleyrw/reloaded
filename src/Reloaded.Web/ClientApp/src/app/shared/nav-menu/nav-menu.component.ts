@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,11 +9,11 @@ import { Component } from '@angular/core';
 export class NavMenuComponent {
   isExpanded = false;
 
-  collapse() {
-    this.isExpanded = false;
-  }
+  menu: { [key: string]: string } = {
+    'Home': '/',
+    'Firearms': '/firearms',
+    'Reloads': '/reloads'
+  };
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
+  originalOrder = (a: KeyValue<string, string>, b: KeyValue<string, string>) => 0;
 }
