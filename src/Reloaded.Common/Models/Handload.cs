@@ -7,13 +7,10 @@ using Reloaded.Common.Models.Components;
 namespace Reloaded.Common.Models
 {
 	[Table("handload")]
-	public class Handload : IBaseModel
+	public class Handload : BaseModel
 	{
 		[Key]
 		public int HandloadId { get; set; }
-
-		[Required]
-		public int AccountId { get; set; }
 
 		[Required]
 		public int FirearmId { get; set; }
@@ -36,5 +33,5 @@ namespace Reloaded.Common.Models
 		public Bullet Bullet { get; set; } = new Bullet();
 
 		public List<HandloadResult> Results { get; set; } = new List<HandloadResult>();
-	}
+    }
 }

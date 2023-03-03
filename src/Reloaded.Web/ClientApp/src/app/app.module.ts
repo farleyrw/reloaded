@@ -9,6 +9,7 @@ import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
 import { FirearmListComponent } from './firearms/list/firearm-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReloadListComponent } from './reloads/list/reload-list.component';
+import { FirearmEditComponent } from './firearms/edit/firearm-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ReloadListComponent } from './reloads/list/reload-list.component';
     NavMenuComponent,
     HomeComponent,
     FirearmListComponent,
-    ReloadListComponent
+    ReloadListComponent,
+    FirearmEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
