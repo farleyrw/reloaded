@@ -5,6 +5,7 @@ import { Reload } from '@app/models/reload';
 import { FirearmService } from '@app/shared/services/firearm.service';
 import { ReloadService } from '@app/shared/services/reload.service';
 import { Firearm } from '@app/models/firearm';
+import { OrderingService } from '@app/shared/pipes/ordering.service';
 
 @Component({
   selector: 'app-firearm-edit',
@@ -29,4 +30,6 @@ export class FirearmEditComponent implements OnInit {
 
     this.firearm$ = this.firearmService.getFirearm(firearmId);
   }
+
+  originalOrder = OrderingService.originalOrder;
 }

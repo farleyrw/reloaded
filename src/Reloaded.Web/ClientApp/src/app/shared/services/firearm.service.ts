@@ -33,7 +33,7 @@ export class FirearmService {
       lastUpdatedOn: new Date("2023-03-03T04:56:15.488Z"),
     },
     {
-      firearmId: 1,
+      firearmId: 2,
       model: "Model 70",
       brand: "Winchester",
       barrelLength: 20,

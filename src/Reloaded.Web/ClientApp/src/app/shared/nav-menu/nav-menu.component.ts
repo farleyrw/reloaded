@@ -1,5 +1,5 @@
-import { KeyValue } from '@angular/common';
 import { Component } from '@angular/core';
+import { OrderingService } from '../pipes/ordering.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -15,5 +15,5 @@ export class NavMenuComponent {
     'Reloads': '/reloads'
   };
 
-  originalOrder = (a: KeyValue<string, string>, b: KeyValue<string, string>) => 0;
+  originalOrder = OrderingService.originalOrder;
 }

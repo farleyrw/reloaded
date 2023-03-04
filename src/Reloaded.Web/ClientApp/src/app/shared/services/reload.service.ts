@@ -22,7 +22,7 @@ export class ReloadService {
         "lastUpdatedOn": new Date("2023-03-03T04:56:15.488Z"),
         "handloadId": 0,
         "firearmId": 1,
-        "powder": "Custom",
+        "powder": "IMR4895",
         "powderCharge": 30,
         "seatingDepth": 2.25,
         "primer": {
@@ -36,10 +36,37 @@ export class ReloadService {
         },
         "bullet": {
           "weight": 40,
-          "brand": "Other",
+          "brand": "Nosler",
           "construction": "Other",
-          "type": "Other",
-          "baseType": "Other",
+          "type": "Ballistic Tip",
+          "baseType": "Boat Tail",
+          "caliber": "Other"
+        }
+      },
+      {
+        "accountId": 0,
+        "createdOn": new Date("2023-01-11T04:56:15.488Z"),
+        "lastUpdatedOn": new Date("2023-03-03T04:56:15.488Z"),
+        "handloadId": 0,
+        "firearmId": 1,
+        "powder": "H380",
+        "powderCharge": 32,
+        "seatingDepth": 2.25,
+        "primer": {
+          "brand": "Other",
+          "type": "Other"
+        },
+        "casing": {
+          "brand": "Other",
+          "caliber": "Custom",
+          "timesFired": 3
+        },
+        "bullet": {
+          "weight": 45,
+          "brand": "Nosler",
+          "construction": "Other",
+          "type": "Ballistic Tip",
+          "baseType": "Boat Tail",
           "caliber": "Other"
         }
       }
