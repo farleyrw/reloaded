@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Reload } from '@app/models/reload';
-import { FirearmService } from '@app/shared/services/firearm.service';
-import { ReloadService } from '@app/shared/services/reload.service';
 import { Firearm } from '@app/models/firearm';
-import { OrderingService } from '@app/shared/pipes/ordering.service';
+import { FirearmService } from '@app/shared/services/firearm.service';
 
 @Component({
   selector: 'app-firearm-edit',
@@ -13,23 +9,33 @@ import { OrderingService } from '@app/shared/pipes/ordering.service';
   styleUrls: ['./firearm-edit.component.scss']
 })
 export class FirearmEditComponent implements OnInit {
-  reloads$!: Observable<Reload[]>;
+  mode: 'edit' | 'add' = 'add';
 
-  firearm$!: Observable<Firearm>;
+  firearmId = 0;
 
-  constructor(
-    private route: ActivatedRoute,
-    private reloadService: ReloadService,
-    private firearmService: FirearmService
-  ) { }
+  firearm = new Firearm();
+
+  constructor(private firearmService: FirearmService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let firearmId = this.route.snapshot.paramMap.get('id')!;
+    this.route.params.subscribe(params => {
+      let param = params.id;
 
-    this.reloads$ = this.reloadService.getHandloadsForFirearm(firearmId);
+      if (!isNaN(param)) {
+        this.mode = 'edit';
+        this.firearmId = +param;
 
-    this.firearm$ = this.firearmService.getFirearm(firearmId);
+        this.loadFirearm();
+      } else if (param != 'add') {
+        // invalid parameter
+        console.log('invalid paramter', param);
+      }
+    });
   }
 
-  originalOrder = OrderingService.originalOrder;
+  loadFirearm() {
+    // http service call
+
+    this.firearmService.getFirearm(this.firearmId).subscribe(firearm => this.firearm = firearm);
+  }
 }

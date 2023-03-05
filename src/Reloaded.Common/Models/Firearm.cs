@@ -13,6 +13,8 @@ namespace Reloaded.Common.Models
 		[Key]
 		public int FirearmId { get; set; }
 
+		public string NickName { get; set; }
+
 		[Required]
 		public string Model { get; set; }
 
@@ -23,6 +25,9 @@ namespace Reloaded.Common.Models
 		[Column(TypeName = "decimal(18)")]
         [Range(1, 30)]
         public decimal BarrelLength { get; set; }
+
+		[Range(5, 20)]
+		public int BarrelTwist { get; set; }
 
 		[Required]
 		public FirearmType Type { get; set; } = FirearmType.Other;

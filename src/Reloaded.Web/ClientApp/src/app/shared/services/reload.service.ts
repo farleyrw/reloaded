@@ -14,7 +14,7 @@ export class ReloadService {
     return this.http.get('/api/handloads/1');
   }
 
-  getHandloadsForFirearm(firearmId: string): Observable<Reload[]> {
+  getHandloadsForFirearm(firearmId: number): Observable<Reload[]> {
     return of([
       {
         "accountId": 0,

@@ -27,3 +27,9 @@ code {
 .offcanvas {
   --bs-offcanvas-bg: #1861ac;
 }
+
+input, select, select option, textarea {
+  &.form-control, &.form-control:focus {
+    color: black;
+  }
+}

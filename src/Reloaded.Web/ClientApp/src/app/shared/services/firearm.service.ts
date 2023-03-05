@@ -10,7 +10,7 @@ export class FirearmService {
 
   constructor(private http: HttpClient) { }
 
-  getFirearm(firearmId: string): Observable<Firearm> {
+  getFirearm(firearmId: number): Observable<Firearm> {
     return of(this.firearms[0]);
   }
 
@@ -22,6 +22,7 @@ export class FirearmService {
   private firearms = [
     {
       firearmId: 1,
+      nickname: "Sharts",
       model: "700 SPS",
       brand: "Remington",
       barrelLength: 22,
@@ -34,6 +35,7 @@ export class FirearmService {
     },
     {
       firearmId: 2,
+      nickname: "",
       model: "Model 70",
       brand: "Winchester",
       barrelLength: 20,

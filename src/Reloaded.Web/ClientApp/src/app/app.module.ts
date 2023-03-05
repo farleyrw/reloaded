@@ -9,6 +9,7 @@ import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
 import { FirearmListComponent } from './firearms/list/firearm-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReloadListComponent } from './reloads/list/reload-list.component';
+import { FirearmViewComponent } from './firearms/view/firearm-view.component';
 import { FirearmEditComponent } from './firearms/edit/firearm-edit.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FirearmEditComponent } from './firearms/edit/firearm-edit.component';
     HomeComponent,
     FirearmListComponent,
     ReloadListComponent,
+    FirearmViewComponent,
     FirearmEditComponent
   ],
   imports: [
