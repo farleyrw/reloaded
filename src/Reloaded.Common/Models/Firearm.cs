@@ -29,6 +29,8 @@ namespace Reloaded.Common.Models
 		[Range(5, 20)]
 		public int BarrelTwist { get; set; }
 
+		// TODO: action property?
+
 		[Required]
 		public FirearmType Type { get; set; } = FirearmType.Other;
 

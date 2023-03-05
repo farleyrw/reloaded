@@ -19,13 +19,14 @@ export class FirearmService {
     //return this.http.get('/api/firearms');
   }
 
-  private firearms = [
+  private firearms: Firearm[] = [
     {
       firearmId: 1,
       nickname: "Sharts",
       model: "700 SPS",
       brand: "Remington",
       barrelLength: 22,
+      barrelTwist: 8,
       type: "Rifle",
       chamber: "TwentyTwoTwoFiftyRemington",
       name: "Remington 700 SPS 22-250 Remington",
@@ -39,6 +40,7 @@ export class FirearmService {
       model: "Model 70",
       brand: "Winchester",
       barrelLength: 20,
+      barrelTwist: 10,
       type: "Rifle",
       chamber: "30-06",
       name: "Winchester 30-06 Model 70",

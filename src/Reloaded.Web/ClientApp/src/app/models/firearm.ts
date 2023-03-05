@@ -4,7 +4,7 @@ export class Firearm {
   model!: string;
   brand!: string;
   barrelLength!: number;
-  // barrelTwist!: number;
+  barrelTwist!: number;
   type!: string;
   chamber!: string;
   name!: string;

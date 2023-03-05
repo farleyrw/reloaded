@@ -9,24 +9,56 @@
     <label for="brand" class="form-label">Brand</label>
     <input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="firearm.brand" />
   </div>
-  <div class="mb-3">
-    <label for="type" class="form-label">Type</label>
-    <select class="form-control form-select" id="type" name="type" [(ngModel)]="firearm.type">
-      <option selected disabled [ngValue]="undefined">Select firearm type</option>
-      <option>Rifle</option>
-      <option>Pistol</option>
-      <option>Other</option>
-    </select>
+  <div class="row mb-3">
+    <div class="col">
+      <label for="chamber" class="form-label">Chamber</label>
+      <input type="text" class="form-control" id="chamber" name="chamber" [(ngModel)]="firearm.chamber" />
+    </div>
+    <div class="col-auto">
+      <label for="type" class="form-label">Type</label>
+      <div class="btn-group d-block" role="group">
+        <input type="radio" class="btn-check" name="type" id="type-rifle" value="Rifle" autocomplete="off" [(ngModel)]="firearm.type" />
+        <label class="btn btn-outline-primary" for="type-rifle">Rifle</label>
+
+        <input type="radio" class="btn-check" name="type" id="type-pistol" value="Pistol" autocomplete="off" [(ngModel)]="firearm.type" />
+        <label class="btn btn-outline-primary" for="type-pistol">Pistol</label>
+
+        <input type="radio" class="btn-check" name="type" id="type-other" value="Other" autocomplete="off" [(ngModel)]="firearm.type" />
+        <label class="btn btn-outline-primary" for="type-other">Other</label>
+      </div>
+    </div>
   </div>
   <div class="mb-3">
     <label for="model" class="form-label">Model</label>
     <input type="text" class="form-control" id="model" name="model" [(ngModel)]="firearm.model" />
   </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label for="barrelLength" class="form-label">Barrel Length (in.)</label>
+      <input type="number" class="form-control" id="barrelLength" name="barrelLength" [(ngModel)]="firearm.barrelLength" />
+    </div>
+    <div class="col">
+      <label for="barrelTwist" class="form-label">Barrel Twist (1:X)</label>
+      <input type="number" class="form-control" id="barrelTwist" name="barrelTwist" [(ngModel)]="firearm.barrelTwist" />
+    </div>
+  </div>
 
+
+  <div class="row m-3 g-3 justify-content-sm-end text-center">
+    <button type="button" class="col-12 col-sm-auto btn btn-primary me-3">
+      <i class="bi bi-check-circle-fill"></i>
+      Save
+    </button>
+    <button type="button" class="col-12 col-sm-auto btn btn-secondary">
+      <i class="bi bi-x-circle"></i>
+      Discard
+    </button>
+  </div>
   <pre>{{ firearm | json }}</pre>
 
 </div>
 
 <!-- TODO:
   Enum lookups
+  Validations
 -->
