@@ -33,3 +33,7 @@ input, select, select option, textarea {
     color: black;
   }
 }
+
+.ng-submitted input.ng-invalid + label {
+  border-color: $danger;
+}

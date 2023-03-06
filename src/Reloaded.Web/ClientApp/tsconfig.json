@@ -22,7 +22,8 @@
     "paths": {
       "@app/*": [ "./src/app/*" ]
     },
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "suppressImplicitAnyIndexErrors": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

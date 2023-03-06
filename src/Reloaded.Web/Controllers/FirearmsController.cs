@@ -51,7 +51,7 @@ namespace Reloaded.Web.Controllers
 		{
 			var enums = new
 			{
-				Cartidges = EnumHelper.Descriptions<Cartridge>(),
+				Cartridges = EnumHelper.Descriptions<Cartridge>(),
 				Types = EnumHelper.Descriptions<FirearmType>()
 			};
 

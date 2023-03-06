@@ -17,6 +17,8 @@ export class FirearmViewComponent implements OnInit {
 
   firearm$!: Observable<Firearm>;
 
+  lookups$!: Observable<{ [key: string]: string }>;
+
   constructor(
     private route: ActivatedRoute,
     private reloadService: ReloadService,
@@ -29,6 +31,8 @@ export class FirearmViewComponent implements OnInit {
     this.reloads$ = this.reloadService.getHandloadsForFirearm(firearmId);
 
     this.firearm$ = this.firearmService.getFirearm(firearmId);
+
+    this.lookups$ = this.firearmService.getEnums();
   }
 
   originalOrder = OrderingService.originalOrder;

@@ -19,12 +19,16 @@
     <div class="row">
       <div class="col">
         {{ firearm.name }}
+        <span *ngIf="firearm.nickname">({{ firearm.nickname }})</span>
       </div>
       <div class="col-2">
         {{ firearm.type }}
       </div>
       <div class="col-2 text-end">
         <a routerLink="/firearms/{{ firearm.firearmId }}">
+          <i class="bi bi-eye" role="button" title="View"></i>
+        </a>
+        <a routerLink="/firearms/edit/{{ firearm.firearmId }}">
           <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
         </a>
         <i class="bi bi-bullseye" role="button" title="Results"></i>
@@ -35,6 +39,7 @@
 
 <!-- TODO:
   Link to handloads for each gun
+  Breadcrumbs
   Show icon for type
   Add filter options
   Create aggregate query for view model (name, #handloads, )

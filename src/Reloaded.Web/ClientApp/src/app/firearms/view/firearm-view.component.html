@@ -30,8 +30,8 @@
         <div class="col fw-bold">
           Chamber
         </div>
-        <div class="col-8">
-          {{ firearm.chamber }}
+        <div class="col-8" *ngIf="lookups$ | async as lookup">
+          {{ lookup.cartridges[firearm.chamber] }}
         </div>
       </div>
     </li>
@@ -53,7 +53,6 @@
       Edit
     </button>
   </div>
-  <!-- TODO: use enum values -->
 </div>
 
 <div *ngIf="reloads$ | async as reloads" class="container">

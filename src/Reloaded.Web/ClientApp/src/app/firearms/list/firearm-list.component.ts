@@ -11,9 +11,12 @@ import { Firearm } from '@app/models/firearm';
 export class FirearmListComponent implements OnInit {
   firearms$!: Observable<Firearm[]>;
 
+  lookups$!: Observable<{ [key: string]: string }>;
+
   constructor(private firearmService: FirearmService) { }
 
   ngOnInit() {
     this.firearms$ = this.firearmService.getFirearms();
+    this.lookups$ = this.firearmService.getEnums();
   }
 }

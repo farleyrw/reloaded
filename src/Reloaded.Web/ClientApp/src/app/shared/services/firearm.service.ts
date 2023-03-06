@@ -7,6 +7,7 @@ import { Firearm } from '@app/models/firearm';
   providedIn: 'root'
 })
 export class FirearmService {
+  private baseUrl = '/api/firearms';
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +17,15 @@ export class FirearmService {
 
   getFirearms(): Observable<Firearm[]> {
     return of(this.firearms);
-    //return this.http.get('/api/firearms');
+    //return this.http.get(this.baseUrl);
+  }
+
+  getEnums(): Observable<{}> {
+    return this.http.get(`${this.baseUrl}/enums`);
+  }
+
+  saveFirearm(firearm: Firearm) {
+    return this.http.post(this.baseUrl, firearm);
   }
 
   private firearms: Firearm[] = [
