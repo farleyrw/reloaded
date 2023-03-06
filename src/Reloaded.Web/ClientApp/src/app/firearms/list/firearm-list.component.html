@@ -11,8 +11,6 @@
   <li class="list-group-item fw-bold">
     <div class="row">
       <div class="col">Gun</div>
-      <div class="col-2">Type</div>
-      <div class="col-2"></div>
     </div>
   </li>
   <li *ngFor="let firearm of firearms$ | async" class="list-group-item">
@@ -21,10 +19,10 @@
         {{ firearm.name }}
         <span *ngIf="firearm.nickname">({{ firearm.nickname }})</span>
       </div>
-      <div class="col-2">
+      <div class="col-auto">
         {{ firearm.type }}
       </div>
-      <div class="col-2 text-end">
+      <div class="col-auto">
         <a routerLink="/firearms/{{ firearm.firearmId }}">
           <i class="bi bi-eye" role="button" title="View"></i>
         </a>

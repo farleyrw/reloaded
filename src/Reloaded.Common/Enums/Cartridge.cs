@@ -20,27 +20,27 @@ namespace Reloaded.Common.Enums
 		TwentyTwoLongRifle,
 
 		/// <summary>.223 Remington</summary>
-		[Description("223 Remington")]
+		[Description("223 Rem.")]
 		TwoTwoThreeRemington,
 
 		/// <summary>22-250 Remington</summary>
-		[Description("22-250 Remington")]
+		[Description("22-250 Rem.")]
 		TwentyTwoTwoFiftyRemington,
 
 		/// <summary>.243 Winchester</summary>
-		[Description("243 Winchester")]
+		[Description("243 Win.")]
 		TwoFourtyThreeWinchester,
 
 		/// <summary>7mm08 Remington</summary>
-		[Description("7mm-08 Remington")]
+		[Description("7mm-08 Rem.")]
 		SevenOEightRemington,
 
 		/// <summary>7mm Remington Magnum</summary>
-		[Description("7mm Remington Magnum")]
+		[Description("7mm Rem. Magnum")]
 		SevenRemingtonMagnum,
 
 		/// <summary>308 Winchester</summary>
-		[Description("308 Winchester")]
+		[Description("308 Win.")]
 		ThreeOEightWinchester,
 
 		/// <summary>30-06 Springfield</summary>
@@ -52,7 +52,7 @@ namespace Reloaded.Common.Enums
 		EightMauser,
 
 		/// <summary>35 Remington</summary>
-		[Description("35 Remington")]
+		[Description("35 Rem.")]
 		ThirtyFiveRemington,
 
 		/// <summary>9mm Luger</summary>

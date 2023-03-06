@@ -38,7 +38,7 @@ export class FirearmService {
       barrelTwist: 8,
       type: "Rifle",
       chamber: "TwentyTwoTwoFiftyRemington",
-      name: "Remington 700 SPS 22-250 Remington",
+      name: "Remington 700 SPS 22-250 Rem.",
       accountId: 1,
       createdOn: new Date("2022-01-05T04:56:15.488Z"),
       lastUpdatedOn: new Date("2023-03-03T04:56:15.488Z"),
