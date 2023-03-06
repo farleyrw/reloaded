@@ -26,7 +26,7 @@ export class FirearmViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let firearmId = +this.route.snapshot.paramMap.get('id')!;
+    let firearmId = +this.route.snapshot.paramMap.get('firearmId')!;
 
     this.reloads$ = this.reloadService.getHandloadsForFirearm(firearmId);
 

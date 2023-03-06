@@ -53,49 +53,52 @@
       Edit
     </button>
   </div>
+
+  <div *ngIf="reloads$ | async as reloads">
+    <h2 class="my-4">
+      Reloads
+      <span class="fs-6 align-text-top badge rounded-pill text-bg-info">{{ reloads.length }}</span>
+    </h2>
+
+    <ul class="list-group list-group-flush" *ngIf="reloads.length > 0">
+      <li class="list-group-item">
+        <div class="row fw-bold">
+          <div class="col">Date</div>
+          <div class="col">Powder</div>
+          <div class="col">Bullet</div>
+        </div>
+      </li>
+      <!-- TODO: order by create date  -->
+      <li class="list-group-item" *ngFor="let reload of reloads; index as i">
+        <div class="row">
+          <!-- TODO: link out to manage reload -->
+          <!-- TODO: link out to view results-->
+          <div class="col">{{ reload.createdOn | date: 'longDate' }}</div>
+          <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
+          <div class="col">{{ reload.bullet.weight }} gr {{ reload.bullet.brand }} {{ reload.bullet.type }}</div>
+        </div>
+        <!--<pre>{{ reload | json }}</pre>-->
+      </li>
+    </ul>
+    <div *ngIf="reloads.length == 0">
+      No reloads yet
+    </div>
+
+    <div class="row m-3 g-3 justify-content-sm-end text-center">
+      <button type="button" class="col-12 col-sm-auto btn btn-primary me-3" routerLink="/reloads/{{ firearm.firearmId }}/edit/add">
+        <i class="bi bi-plus-lg"></i>
+        Add
+      </button>
+      <button type="button" class="col-12 col-sm-auto btn btn-secondary">
+        <i class="bi bi-list"></i>
+        View All
+      </button>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="reloads$ | async as reloads" class="container">
-  <h2 class="my-4">
-    Reloads
-    <span class="fs-6 align-text-top badge rounded-pill text-bg-info">{{ reloads.length }}</span>
-  </h2>
-
-  <ul class="list-group list-group-flush" *ngIf="reloads.length > 0">
-    <li class="list-group-item">
-      <div class="row fw-bold">
-        <div class="col">Date</div>
-        <div class="col">Powder</div>
-        <div class="col">Bullet</div>
-      </div>
-    </li>
-    <!-- TODO: order by create date  -->
-    <li class="list-group-item" *ngFor="let reload of reloads; index as i">
-      <div class="row">
-        <!-- TODO: link out to full reload detail -->
-        <div class="col">{{ reload.createdOn | date: 'longDate' }}</div>
-        <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
-        <div class="col">{{ reload.bullet.weight }} gr {{ reload.bullet.brand }} {{ reload.bullet.type }}</div>
-      </div>
-      <!--<pre>{{ reload | json }}</pre>-->
-    </li>
-  </ul>
-  <div *ngIf="reloads.length == 0">
-    No reloads yet
-  </div>
-
-  <div class="row m-3 g-3 justify-content-sm-end text-center">
-    <button type="button" class="col-12 col-sm-auto btn btn-primary me-3">
-      <i class="bi bi-plus-lg"></i>
-      Add
-    </button>
-    <button type="button" class="col-12 col-sm-auto btn btn-secondary">
-      <i class="bi bi-list"></i>
-      View All
-    </button>
-  </div>
-</div>
 
 <!-- TODO:
   Create reload summary component
+  Show top 5 most recent
 -->

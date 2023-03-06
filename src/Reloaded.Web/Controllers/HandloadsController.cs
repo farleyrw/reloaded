@@ -58,15 +58,15 @@ namespace Reloaded.Web.Controllers
 			var enums = new
 			{
 				BrassManufacturers = EnumHelper.Descriptions<BrassManufacturer>(),
-				BulletConstuction = EnumHelper.Descriptions<BulletConstruction>(),
+				BulletConstruction = EnumHelper.Descriptions<BulletConstruction>(),
 				BulletTypes = EnumHelper.Descriptions<BulletType>(),
 				BulletBaseTypes = EnumHelper.Descriptions<BulletBaseType>(),
 				BulletManufacturers = EnumHelper.Descriptions<BulletManufacturer>(),
 				Calibers = EnumHelper.Descriptions<Caliber>(),
-				Cartidges = EnumHelper.Descriptions<Cartridge>(),
+				Cartridges = EnumHelper.Descriptions<Cartridge>(),
 				PrimerTypes = EnumHelper.Descriptions<PrimerType>(),
 				PrimerManufacturers = EnumHelper.Descriptions<PrimerManufacturer>(),
-				Powders = EnumHelper.Descriptions<GunPowder>(),
+				GunPowders = EnumHelper.Descriptions<GunPowder>(),
 				FirearmTypes = EnumHelper.Descriptions<FirearmType>()
 			};
 

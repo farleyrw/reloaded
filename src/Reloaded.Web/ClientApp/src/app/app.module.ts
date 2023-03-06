@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReloadListComponent } from './reloads/list/reload-list.component';
 import { FirearmViewComponent } from './firearms/view/firearm-view.component';
 import { FirearmEditComponent } from './firearms/edit/firearm-edit.component';
+import { ReloadEditComponent } from './reloads/edit/reload-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FirearmEditComponent } from './firearms/edit/firearm-edit.component';
     FirearmListComponent,
     ReloadListComponent,
     FirearmViewComponent,
-    FirearmEditComponent
+    FirearmEditComponent,
+    ReloadEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

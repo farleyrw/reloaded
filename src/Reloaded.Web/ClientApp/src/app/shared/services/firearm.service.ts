@@ -13,11 +13,14 @@ export class FirearmService {
 
   getFirearm(firearmId: number): Observable<Firearm> {
     return of(this.firearms[0]);
+
+    //return this.http.get(`${this.baseUrl}/${firearmId}`);
   }
 
   getFirearms(): Observable<Firearm[]> {
     return of(this.firearms);
-    //return this.http.get(this.baseUrl);
+
+    //return this.http.get(`${this.baseUrl}/list/1`); // account # hard coded
   }
 
   getEnums(): Observable<{}> {

@@ -28,7 +28,7 @@ export class FirearmEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.add(this.route.params.subscribe(params => {
-      let param = params.id;
+      let param = params.firearmId;
 
       if (!isNaN(param)) {
         this.mode = 'edit';
@@ -54,5 +54,9 @@ export class FirearmEditComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log('form submitted');
+
+    //this.subscriptions.add(this.firearmService.saveFirearm(this.firearm).subscribe(x => {
+    //  // TODO:
+    //}));
   }
 }
