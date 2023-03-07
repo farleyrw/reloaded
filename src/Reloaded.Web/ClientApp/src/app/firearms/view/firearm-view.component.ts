@@ -6,6 +6,7 @@ import { FirearmService } from '@app/shared/services/firearm.service';
 import { ReloadService } from '@app/shared/services/reload.service';
 import { Firearm } from '@app/models/firearm';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
+import { Lookup } from '@app/models/lookup';
 
 @Component({
   selector: 'app-firearm-view',
@@ -17,7 +18,7 @@ export class FirearmViewComponent implements OnInit {
 
   firearm$!: Observable<Firearm>;
 
-  lookups$!: Observable<{ [key: string]: string }>;
+  lookups$!: Observable<Lookup>;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,11 +29,11 @@ export class FirearmViewComponent implements OnInit {
   ngOnInit() {
     let firearmId = +this.route.snapshot.paramMap.get('firearmId')!;
 
-    this.reloads$ = this.reloadService.getHandloadsForFirearm(firearmId);
+    this.reloads$ = this.reloadService.getReloadsForFirearm(firearmId);
 
     this.firearm$ = this.firearmService.getFirearm(firearmId);
 
-    this.lookups$ = this.firearmService.getEnums();
+    this.lookups$ = this.reloadService.getEnums();
   }
 
   originalOrder = OrderingService.originalOrder;

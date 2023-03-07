@@ -11,19 +11,19 @@ export class ReloadService {
 
   constructor(private http: HttpClient) { }
 
-  getHandloads() {
+  getReloads() {
     return of(this.reloads);
 
     //return this.http.get(`${this.baseUrl}/1`); // account # hard coded
   }
 
-  getHandload(reloadId: number): Observable<Reload> {
+  getReload(reloadId: number): Observable<Reload> {
     return of(this.reloads.filter(r => r.handloadId == reloadId)[0]);
 
     //return this.http.get(`${this.baseUrl}/${reloadId}`);
   }
 
-  getHandloadsForFirearm(firearmId: number): Observable<Reload[]> {
+  getReloadsForFirearm(firearmId: number): Observable<Reload[]> {
     return of(this.reloads);
 
     //return this.http.get(`${this.baseUrl}/firearm/${firearmId}`);

@@ -1,6 +1,49 @@
-<p>reload-list works!</p>
+<h1 class="mb-4">
+  My Reloads
+
+  <!-- TODO: need to select a firearm, routerLink="/reloads/?/edit/add"'-->
+  <button type="button" class="btn btn-primary float-end">
+    <i class="bi bi-plus-lg"></i>
+    Create
+  </button>
+</h1>
+
+<ng-container *ngIf="{reloads: reloads$ | async, lookups: lookups$ | async} as data">
+  <div *ngIf="data.reloads && data.lookups">
+
+    <ul class="list-group list-group-flush" *ngIf="data.reloads.length > 0">
+      <li class="list-group-item">
+        <div class="row fw-bold">
+          <div class="col">Date</div>
+          <div class="col">Powder</div>
+          <div class="col">Bullet</div>
+          <div class="col">Casing</div>
+        </div>
+      </li>
+      <!-- TODO: order by create date  -->
+      <li class="list-group-item" *ngFor="let reload of data.reloads; index as i">
+        <div class="row">
+          <!-- TODO: link out to manage reload -->
+          <!-- TODO: link out to view results-->
+          <div class="col">{{ reload.createdOn | date: 'longDate' }}</div>
+          <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
+          <div class="col">
+            {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
+            {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
+          </div>
+          <div class="col">{{ reload.casing.brand }} {{ data.lookups.cartridges[reload.casing.cartridge] }}</div>
+        </div>
+        <!--<pre>{{ reload | json }}</pre>-->
+      </li>
+    </ul>
+    <div *ngIf="data.reloads.length == 0">
+      No reloads yet
+    </div>
+  </div>
+</ng-container>
 
 <!-- TODO:
+  list firearm and link to
   create clone function
   results
 

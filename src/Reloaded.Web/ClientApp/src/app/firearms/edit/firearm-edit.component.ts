@@ -4,6 +4,7 @@ import { Firearm } from '@app/models/firearm';
 import { FirearmService } from '@app/shared/services/firearm.service';
 import { Subscription } from 'rxjs';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
+import { Lookup } from '@app/models/lookup';
 
 @Component({
   selector: 'app-firearm-edit',
@@ -18,7 +19,7 @@ export class FirearmEditComponent implements OnInit, OnDestroy {
   // TODO: replace with observable?
   firearm = new Firearm();
 
-  lookups!: { [key: string]: string };
+  lookups!: Lookup;
 
   originalOrder = OrderingService.originalOrder;
 

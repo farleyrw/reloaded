@@ -6,6 +6,7 @@ import { Reload } from '@app/models/reload';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
 import { Subscription } from 'rxjs';
 import { Firearm } from '@app/models/firearm';
+import { Lookup } from '@app/models/lookup';
 
 @Component({
   selector: 'app-reload-edit',
@@ -22,7 +23,7 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
 
   firearm!: Firearm;
 
-  lookups!: { [key: string]: string };
+  lookups!: Lookup;
 
   originalOrder = OrderingService.originalOrder;
 
@@ -65,7 +66,7 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
   }
 
   loadReload(reloadId: number) {
-    this.subscriptions.add(this.reloadService.getHandload(reloadId).subscribe(reload => this.reload = reload));
+    this.subscriptions.add(this.reloadService.getReload(reloadId).subscribe(reload => this.reload = reload));
   }
 
   ngOnDestroy() {
