@@ -6,7 +6,7 @@ using Reloaded.Common.Models.Components;
 
 namespace Reloaded.Common.Models
 {
-	[Table("handload")]
+	[Table("handload")] // TODO: rename to reload
 	public class Handload : BaseModel
 	{
 		[Key]
@@ -23,10 +23,12 @@ namespace Reloaded.Common.Models
 		public double PowderCharge { get; set; }
 
 		[Required]
-		[Column("seatingDepthIn")]
-		public double SeatingDepth { get; set; }
+		[Column("overallLengthIn")]
+		public double OverallLength { get; set; }
 
-		public Primer Primer { get; set; } = new Primer();
+        public string Notes { get; set; }
+
+        public Primer Primer { get; set; } = new Primer();
 
 		public Brass Casing { get; set; } = new Brass();
 

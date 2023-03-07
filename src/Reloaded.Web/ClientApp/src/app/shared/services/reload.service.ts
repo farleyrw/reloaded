@@ -17,10 +17,10 @@ export class ReloadService {
     //return this.http.get(`${this.baseUrl}/1`); // account # hard coded
   }
 
-  getHandloadForFirearm(firearmId: number): Observable<Reload> {
-    return of(this.reloads[0]);
+  getHandload(reloadId: number): Observable<Reload> {
+    return of(this.reloads.filter(r => r.handloadId == reloadId)[0]);
 
-    //return this.http.get(`${this.baseUrl}/${firearmId}`); // account # hard coded
+    //return this.http.get(`${this.baseUrl}/${reloadId}`);
   }
 
   getHandloadsForFirearm(firearmId: number): Observable<Reload[]> {
@@ -43,57 +43,61 @@ export class ReloadService {
 
   private reloads: Reload[] = [
     {
-      "accountId": 0,
-      "createdOn": new Date("2023-03-03T04:56:15.488Z"),
-      "lastUpdatedOn": new Date("2023-03-03T04:56:15.488Z"),
-      "handloadId": 0,
-      "firearmId": 1,
-      "powder": "IMR4895",
-      "powderCharge": 30,
-      "seatingDepth": 2.25,
-      "primer": {
-        "brand": "Other",
-        "type": "Other"
+      accountId: 0,
+      createdOn: new Date("2023-03-03T04:56:15.488Z"),
+      lastUpdatedOn: new Date("2023-03-03T04:56:15.488Z"),
+      handloadId: 1,
+      firearmId: 1,
+      nickname: "Best",
+      powder: "IMR4895",
+      powderCharge: 30,
+      overallLength: 2.25,
+      notes: "The best reload",
+      primer: {
+        brand: "Other",
+        type: "Other"
       },
-      "casing": {
-        "brand": "Other",
-        "caliber": "Custom",
-        "timesFired": 3
+      casing: {
+        brand: "Nosler",
+        cartridge: "TwentyTwoTwoFiftyRemington",
+        newBrass: true
       },
-      "bullet": {
-        "weight": 40,
-        "brand": "Nosler",
-        "construction": "Other",
-        "type": "Ballistic Tip",
-        "baseType": "Boat Tail",
-        "caliber": "Other"
+      bullet: {
+        weight: 40,
+        brand: "Nosler",
+        construction: "Other",
+        tipType: "BallisticTip",
+        baseType: "Boattail",
+        caliber: "TwentyTwo"
       }
     },
     {
-      "accountId": 0,
-      "createdOn": new Date("2023-01-11T04:56:15.488Z"),
-      "lastUpdatedOn": new Date("2023-03-03T04:56:15.488Z"),
-      "handloadId": 0,
-      "firearmId": 1,
-      "powder": "H380",
-      "powderCharge": 32,
-      "seatingDepth": 2.25,
-      "primer": {
-        "brand": "Other",
-        "type": "Other"
+      accountId: 0,
+      createdOn: new Date("2023-01-11T04:56:15.488Z"),
+      lastUpdatedOn: new Date("2023-03-03T04:56:15.488Z"),
+      handloadId: 2,
+      firearmId: 1,
+      nickname: "Fair",
+      powder: "H380",
+      powderCharge: 32,
+      overallLength: 2.25,
+      notes: "A fair reload",
+      primer: {
+        brand: "Other",
+        type: "Other"
       },
-      "casing": {
-        "brand": "Other",
-        "caliber": "Custom",
-        "timesFired": 3
+      casing: {
+        brand: "Winchester",
+        cartridge: "TwentyTwoTwoFiftyRemington",
+        newBrass: true
       },
-      "bullet": {
-        "weight": 45,
-        "brand": "Nosler",
-        "construction": "Other",
-        "type": "Ballistic Tip",
-        "baseType": "Boat Tail",
-        "caliber": "Other"
+      bullet: {
+        weight: 45,
+        brand: "Nosler",
+        construction: "Other",
+        tipType: "BallisticTip",
+        baseType: "Boattail",
+        caliber: "TwentyTwo"
       }
     }
   ];

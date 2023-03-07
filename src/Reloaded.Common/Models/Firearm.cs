@@ -38,6 +38,8 @@ namespace Reloaded.Common.Models
 		[Column("chamberType")]
 		public Cartridge Chamber { get; set; } = Cartridge.None;
 
+		public string Notes { get; set; }
+
 		public string Name
 		{
 			get

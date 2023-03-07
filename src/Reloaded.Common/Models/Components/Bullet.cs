@@ -18,8 +18,8 @@ namespace Reloaded.Common.Models.Components
 		[Column("bulletConstruction")]
 		public BulletConstruction Construction { get; set; } = BulletConstruction.Other;
 
-		[Column("bulletType")]
-		public BulletType Type { get; set; } = BulletType.Other;
+		[Column("bulletTipType")]
+		public BulletType TipType { get; set; } = BulletType.Other;
 
 		[Column("bulletBaseType")]
 		public BulletBaseType BaseType { get; set; } = BulletBaseType.Other;

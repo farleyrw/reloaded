@@ -35,6 +35,7 @@ export class FirearmService {
     {
       firearmId: 1,
       nickname: "Sharts",
+      notes: "Super awesome scope",
       model: "700 SPS",
       brand: "Remington",
       barrelLength: 22,
@@ -49,6 +50,7 @@ export class FirearmService {
     {
       firearmId: 2,
       nickname: "",
+      notes: "A truck gun",
       model: "Model 70",
       brand: "Winchester",
       barrelLength: 20,

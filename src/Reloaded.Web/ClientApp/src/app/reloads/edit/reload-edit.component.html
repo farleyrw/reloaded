@@ -1,8 +1,163 @@
-<p>reload-edit works!</p>
+<form name="reloadForm" class="container needs-validation" novalidate
+      *ngIf="reload && lookups" #reloadForm="ngForm" [ngClass]="{ 'was-validated': reloadForm.submitted }"
+      (ngSubmit)="reloadForm.valid && onSubmit()">
+  <h1 class="mb-3">{{ mode | titlecase }} Reload</h1>
 
-<pre>{{ mode }} {{ reloadId }}</pre>
+  <div class="mb-3">
+    <label for="nickname" class="form-label">Nickname (optional)</label>
+    <input type="text" class="form-control" id="nickname" name="nickname"
+           [(ngModel)]="reload.nickname" maxlength="50" />
+  </div>
+  <div class="mb-3">
+    <label for="notes" class="form-label">Notes (optional)</label>
+    <textarea class="form-control" id="notes" name="notes"
+           [(ngModel)]="reload.notes" maxlength="500"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="overallLength" class="form-label">Overall Length</label>
+    <div class="input-group">
+      <input type="number" class="form-control" id="overallLength" name="overallLength"
+             [(ngModel)]="reload.overallLength" #overallLength="ngModel" min="1" max="5" step=".01" required />
+      <span class="input-group-text">in.</span>
+      <div class="invalid-feedback" *ngIf="reloadForm.submitted && overallLength.errors">
+        Please provide a valid overall length between 1 and 5 inches.
+      </div>
+    </div>
+  </div>
+  <!-- Bullet -->
+  <div class="mb-3">
+    <label for="bulletWeight" class="form-label">Weight</label>
+    <div class="input-group">
+      <input type="number" class="form-control" id="bulletWeight" name="bulletWeight"
+             [(ngModel)]="reload.bullet.weight" #bulletWeight="ngModel" min="1" max="300" step=".01" required />
+      <span class="input-group-text">gr.</span>
+      <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletWeight.errors">
+        Please provide a bullet weight between 1 and 300 gr.
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="bulletBrand" class="form-label">Brand</label>
+    <select name="bulletBrand" class="form-select form-control"
+            [(ngModel)]="reload.bullet.brand" #bulletBrand="ngModel" required>
+      <option *ngFor="let brand of lookups.bulletManufacturers | keyvalue: originalOrder" [value]="brand.key">{{ brand.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletBrand.errors">
+      Please select a bullet brand.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="bulletConstruction" class="form-label">Construction</label>
+    <select name="bulletConstruction" class="form-select form-control"
+            [(ngModel)]="reload.bullet.construction" #bulletConstruction="ngModel" required>
+      <option *ngFor="let construction of lookups.bulletConstructions | keyvalue: originalOrder" [value]="construction.key">{{ construction.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletConstruction.errors">
+      Please select a bullet construction.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="bulletTipType" class="form-label">Tip Type</label>
+    <select name="bulletTipType" class="form-select form-control"
+            [(ngModel)]="reload.bullet.tipType" #bulletTipType="ngModel" required>
+      <option *ngFor="let tip of lookups.bulletTipTypes | keyvalue: originalOrder" [value]="tip.key">{{ tip.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletTipType.errors">
+      Please select a bullet tip type.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="bulletBaseType" class="form-label">Base Type</label>
+    <select name="bulletBaseType" class="form-select form-control"
+            [(ngModel)]="reload.bullet.baseType" #bulletBaseType="ngModel" required>
+      <option *ngFor="let base of lookups.bulletBaseTypes | keyvalue: originalOrder" [value]="base.key">{{ base.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletBaseType.errors">
+      Please select a bullet base type.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="bulletCaliber" class="form-label">Caliber</label>
+    <select name="bulletCaliber" class="form-select form-control"
+            [(ngModel)]="reload.bullet.caliber" #bulletCaliber="ngModel" required>
+      <option *ngFor="let caliber of lookups.calibers | keyvalue: originalOrder" [value]="caliber.key">{{ caliber.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletCaliber.errors">
+      Please select a bullet caliber.
+    </div>
+  </div>
+  <!-- Powder -->
+  <div class="row mb-3">
+    <div class="col">
+      <label for="powderCharge" class="form-label">Powder Charge</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="powderCharge" name="powderCharge"
+               [(ngModel)]="reload.powderCharge" #powderCharge="ngModel" min="1" max="100" step=".01" required />
+        <span class="input-group-text">gr.</span>
+        <div class="invalid-feedback" *ngIf="reloadForm.submitted && powderCharge.errors">
+          Please provide a powder charge between 1 and 100 gr.
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label for="powderBrand" class="form-label">Powder Brand</label>
+      <select name="powderBrand" class="form-select form-control"
+              [(ngModel)]="reload.powder" #powderBrand="ngModel" required>
+        <option *ngFor="let powder of lookups.gunPowders | keyvalue: originalOrder" [value]="powder.key">{{ powder.value }}</option>
+      </select>
+      <div class="invalid-feedback" *ngIf="reloadForm.submitted && powderBrand.errors">
+        Please select a powder brand.
+      </div>
+    </div>
+  </div>
+  <!-- Brass -->
+  <div class="mb-3">
+    <label for="casingBrand" class="form-label">Casing Brand</label>
+    <select name="casingBrand" class="form-select form-control"
+            [(ngModel)]="reload.casing.brand" #casingBrand="ngModel" required>
+      <option *ngFor="let casing of lookups.brassManufacturers | keyvalue: originalOrder" [value]="casing.key">{{ casing.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingBrand.errors">
+      Please select a casing brand.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="casingCartridge" class="form-label">Casing Cartridge</label>
+    <select name="casingCartridge" class="form-select form-control"
+            [(ngModel)]="reload.casing.cartridge" #casingCartridge="ngModel" required>
+      <option *ngFor="let cartridge of lookups.cartridges | keyvalue: originalOrder" [value]="cartridge.key">{{ cartridge.value }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingCartridge.errors">
+      Please select a casing cartridge.
+    </div>
+  </div>
+  <div class="mb-3">
+    <div class="form-check form-switch">
+      <input type="checkbox" class="form-check-input" id="casingNewBrass" name="casingNewBrass"
+             [(ngModel)]="reload.casing.newBrass" />
+      <label for="casingNewBrass" class="form-check-label">New Brass?</label>
+    </div>
+  </div>
 
-<!-- TODO: 
-  Display warning when results exist
+  <div class="row m-3 g-3 justify-content-sm-end text-center">
+    <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3">
+      <i class="bi bi-check-circle-fill"></i>
+      Save
+    </button>
+    <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/reloads">
+      <i class="bi bi-x-circle"></i>
+      Discard
+    </button>
+  </div>
 
--->
+</form>
+
+<pre>{{ reload | json }}</pre>
+
+  <!-- TODO:
+    Display warning modifying when results exist
+    Interactive diagram of input component attributes
+    Form layout optimization
+    Set bullet caliber and casing cartridge from firearm, hide input
+    Create reload related loads (from cloning)
+  -->

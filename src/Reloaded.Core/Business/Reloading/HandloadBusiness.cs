@@ -14,7 +14,12 @@ namespace Reloaded.Core.Business.Reloading
 			this.handloadRepository = handloadRepository;
 		}
 
-		public Task<IEnumerable<Handload>> GetHandloads(int accountId)
+        public Task<Handload> GetReload(int reloadId)
+        {
+            return this.handloadRepository.GetReload(reloadId);
+        }
+
+        public Task<IEnumerable<Handload>> GetHandloads(int accountId)
 		{
 			return this.handloadRepository.GetHandloads(accountId);
 		}

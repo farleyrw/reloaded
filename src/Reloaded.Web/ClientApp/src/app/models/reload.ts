@@ -1,4 +1,7 @@
 export class Reload {
+  constructor(firearmId: number) {
+    this.firearmId = firearmId;
+  }
   accountId!: number;
   createdOn!: Date;
   lastUpdatedOn!: Date;
@@ -6,10 +9,12 @@ export class Reload {
   firearmId!: number;
   powder!: string;
   powderCharge!: number;
-  seatingDepth!: number;
-  primer!: Primer;
-  casing!: Casing;
-  bullet!: Bullet;
+  overallLength!: number;
+  primer = new Primer();
+  casing = new Casing();
+  bullet = new Bullet();
+  nickname!: string;
+  notes!: string;
 }
 
 export class Primer {
@@ -19,15 +24,15 @@ export class Primer {
 
 export class Casing {
   brand!: string;
-  caliber!: string;
-  timesFired!: number;
+  cartridge!: string;
+  newBrass!: boolean;
 }
 
 export class Bullet {
   weight!: number;
   brand!: string;
   construction!: string;
-  type!: string;
+  tipType!: string;
   baseType!: string;
   caliber!: string;
 }

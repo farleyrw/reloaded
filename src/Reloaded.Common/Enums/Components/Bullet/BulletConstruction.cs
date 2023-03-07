@@ -9,6 +9,8 @@ namespace Reloaded.Common.Enums.Components.Bullet
 
 		Lead,
 
+		Copper,
+
 		[Description("Lead Free")]
 		LeadFree,
 

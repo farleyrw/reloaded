@@ -13,14 +13,13 @@ namespace Reloaded.Common.Models.Components
 		[Column("brassBrand")]
 		public BrassManufacturer Brand { get; set; } = BrassManufacturer.Other;
 
-		/// <summary>Gets or sets the caliber.</summary>
-		/// <value>The caliber.</value>
-		[Column("brassCaliber")]
-		public Cartridge Caliber { get; set; } = Cartridge.None;
+		/// <summary>Gets or sets the cartridge.</summary>
+		/// <value>The cartridge.</value>
+		[Column("brassCartridge")]
+		public Cartridge Cartridge { get; set; } = Cartridge.None;
 
-		/// <summary>Gets or sets the times fired.</summary>
-		/// <value>The times fired.</value>
-		[Column("brassTimesFired")]
-		public int TimesFired { get; set; }
+		/// <summary>Gets or sets the state of the brass.</summary>
+		/// <value>The brass new state.</value>
+		public bool NewBrass { get; set; } // TODO: should this go on the result or be removed?
 	}
 }

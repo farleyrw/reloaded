@@ -6,7 +6,8 @@ namespace Reloaded.Data.Repositories
 {
 	public interface IHandloadRepository
 	{
-		Task<IEnumerable<Handload>> GetHandloads(int accountId);
+        Task<Handload> GetReload(int reloadId);
+        Task<IEnumerable<Handload>> GetHandloads(int accountId);
 		Task<IEnumerable<Handload>> GetHandloadsForGun(int firearmId);
 		Task<Handload> SaveHandload(Handload handload);
 		Task<HandloadResult> SaveHandloadResult(HandloadResult handloadResult);

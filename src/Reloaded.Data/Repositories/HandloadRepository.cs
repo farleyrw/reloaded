@@ -7,7 +7,7 @@ using Reloaded.Data.Contexts;
 
 namespace Reloaded.Data.Repositories
 {
-	public class HandloadRepository : IHandloadRepository
+    public class HandloadRepository : IHandloadRepository
 	{
 		private readonly HandloadContext context;
 
@@ -16,7 +16,14 @@ namespace Reloaded.Data.Repositories
 			this.context = context;
 		}
 
-		public async Task<IEnumerable<Handload>> GetHandloads(int accountId)
+        public async Task<Handload> GetReload(int reloadId)
+        {
+			var reload = await this.context.Handloads.FirstOrDefaultAsync(r => r.HandloadId == reloadId);
+
+            return reload;
+        }
+
+        public async Task<IEnumerable<Handload>> GetHandloads(int accountId)
 		{
 			var handloads = await this.context.Handloads.Where(h => h.AccountId == accountId)
 				.Include(h => h.Results)
@@ -34,7 +41,7 @@ namespace Reloaded.Data.Repositories
 			return handloads;
 		}
 
-		public async Task<Handload> SaveHandload(Handload handload)
+        public async Task<Handload> SaveHandload(Handload handload)
 		{
 			this.context.Handloads.Update(handload);
 

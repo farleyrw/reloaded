@@ -11,4 +11,5 @@ export class Firearm {
   accountId!: number;
   createdOn!: Date;
   lastUpdatedOn!: Date;
+  notes!: string;
 }

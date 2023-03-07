@@ -20,7 +20,7 @@ namespace Reloaded.Web.Controllers
 			this.handloadBusiness = handloadBusiness;
 		}
 
-		[HttpGet("{accountId:int}")]
+		[HttpGet("/list/{accountId:int}")]
 		public async Task<IEnumerable<Handload>> GetHandloads(int accountId)
 		{
 			var handloads = await this.handloadBusiness.GetHandloads(accountId);
@@ -28,7 +28,15 @@ namespace Reloaded.Web.Controllers
 			return handloads;
 		}
 
-		[HttpGet("firearm/{firearmId:int}")]
+        [HttpGet("{reloadId:int}")]
+        public async Task<Handload> GetHandload(int reloadId)
+        {
+            var handload = await this.handloadBusiness.GetReload(reloadId);
+
+            return handload;
+        }
+
+        [HttpGet("firearm/{firearmId:int}")]
 		public async Task<IEnumerable<Handload>> GetHandloadsForGun(int firearmId)
 		{
 			var handloads = await this.handloadBusiness.GetHandloadsForGun(firearmId);
@@ -58,8 +66,8 @@ namespace Reloaded.Web.Controllers
 			var enums = new
 			{
 				BrassManufacturers = EnumHelper.Descriptions<BrassManufacturer>(),
-				BulletConstruction = EnumHelper.Descriptions<BulletConstruction>(),
-				BulletTypes = EnumHelper.Descriptions<BulletType>(),
+				BulletConstructions = EnumHelper.Descriptions<BulletConstruction>(),
+				BulletTipTypes = EnumHelper.Descriptions<BulletType>(),
 				BulletBaseTypes = EnumHelper.Descriptions<BulletBaseType>(),
 				BulletManufacturers = EnumHelper.Descriptions<BulletManufacturer>(),
 				Calibers = EnumHelper.Descriptions<Caliber>(),
