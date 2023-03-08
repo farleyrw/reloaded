@@ -1,6 +1,8 @@
 {
 	"firearmId": 0,
 	"accountId": 1,
+	"nickname": "Sharts",
+	"notes": "Heavy barrel, 18x scope, thumbhole stock",
 	"model": "700 SPS",
 	"brand": "Remington",
 	"barrelLength": 22,

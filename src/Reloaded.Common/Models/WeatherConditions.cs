@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Reloaded.Common.Enums;
 
 namespace Reloaded.Common.Models
 {
@@ -14,8 +13,5 @@ namespace Reloaded.Common.Models
 
 		[Column("weatherWindSpeedMph")]
 		public int WindSpeed { get; set; }
-
-		[Column("weatherWindDirection")]
-		public WindDirection WindDirection { get; set; }
 	}
 }

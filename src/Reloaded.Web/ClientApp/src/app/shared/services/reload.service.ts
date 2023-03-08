@@ -7,7 +7,7 @@ import { Reload } from '@app/models/reload';
   providedIn: 'root'
 })
 export class ReloadService {
-  private baseUrl = '/api/handloads';
+  private baseUrl = '/api/reloads';
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class ReloadService {
   }
 
   getReload(reloadId: number): Observable<Reload> {
-    return of(this.reloads.filter(r => r.handloadId == reloadId)[0]);
+    return of(this.reloads.filter(r => r.reloadId == reloadId)[0]);
 
     //return this.http.get(`${this.baseUrl}/${reloadId}`);
   }
@@ -43,11 +43,10 @@ export class ReloadService {
 
   private reloads: Reload[] = [
     {
-      accountId: 0,
+      accountId: 1,
       createdOn: new Date("2023-03-03T04:56:15.488Z"),
       lastUpdatedOn: new Date("2023-03-03T04:56:15.488Z"),
-      handloadId: 1,
-      firearmId: 1,
+      reloadId: 1,
       nickname: "Best",
       powder: "IMR4895",
       powderCharge: 30,
@@ -72,11 +71,10 @@ export class ReloadService {
       }
     },
     {
-      accountId: 0,
+      accountId: 1,
       createdOn: new Date("2023-01-11T04:56:15.488Z"),
       lastUpdatedOn: new Date("2023-03-03T04:56:15.488Z"),
-      handloadId: 2,
-      firearmId: 1,
+      reloadId: 2,
       nickname: "Fair",
       powder: "H380",
       powderCharge: 32,

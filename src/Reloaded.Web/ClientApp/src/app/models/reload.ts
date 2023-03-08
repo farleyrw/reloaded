@@ -1,12 +1,8 @@
 export class Reload {
-  constructor(firearmId: number) {
-    this.firearmId = firearmId;
-  }
+  reloadId!: number;
   accountId!: number;
   createdOn!: Date;
   lastUpdatedOn!: Date;
-  handloadId!: number;
-  firearmId!: number;
   powder!: string;
   powderCharge!: number;
   overallLength!: number;

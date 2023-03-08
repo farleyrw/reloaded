@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Reloaded.Common.Models
 {
-	/// <summary>The base model class.</summary>
-	public abstract class BaseModel
+	/// <summary>The base entity class.</summary>
+	public abstract class BaseEntity : IAuditTimestamp
 	{
-        /// <summary>Gets or sets the account identifier.</summary>
-        /// <value>The account identifier.</value>
+        // TODO: query with this automatically with context hooks
         [Required]
         public int AccountId { get; set; }
 
+        // TODO: set these automatically with context hooks
         public DateTime CreatedOn { get; set; }
 
         public DateTime LastUpdatedOn { get; set; }

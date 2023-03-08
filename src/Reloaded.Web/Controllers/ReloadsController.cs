@@ -11,53 +11,53 @@ namespace Reloaded.Web.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class HandloadsController : ControllerBase
+	public class ReloadsController : ControllerBase
 	{
-		private readonly IHandloadBusiness handloadBusiness;
+		private readonly IReloadBusiness reloadBusiness;
 
-		public HandloadsController(IHandloadBusiness handloadBusiness)
+		public ReloadsController(IReloadBusiness reloadBusiness)
 		{
-			this.handloadBusiness = handloadBusiness;
+			this.reloadBusiness = reloadBusiness;
 		}
 
-		[HttpGet("/list/{accountId:int}")]
-		public async Task<IEnumerable<Handload>> GetHandloads(int accountId)
+		[HttpGet("list/{accountId:int}")]
+		public async Task<IEnumerable<Reload>> GetReloads(int accountId)
 		{
-			var handloads = await this.handloadBusiness.GetHandloads(accountId);
+			var reloads = await this.reloadBusiness.GetReloads(accountId);
 
-			return handloads;
+			return reloads;
 		}
 
         [HttpGet("{reloadId:int}")]
-        public async Task<Handload> GetHandload(int reloadId)
+        public async Task<Reload> GetReload(int reloadId)
         {
-            var handload = await this.handloadBusiness.GetReload(reloadId);
+            var reload = await this.reloadBusiness.GetReload(reloadId);
 
-            return handload;
+            return reload;
         }
 
         [HttpGet("firearm/{firearmId:int}")]
-		public async Task<IEnumerable<Handload>> GetHandloadsForGun(int firearmId)
+		public async Task<IEnumerable<Reload>> GetReloadsForGun(int firearmId)
 		{
-			var handloads = await this.handloadBusiness.GetHandloadsForGun(firearmId);
+			var reloads = await this.reloadBusiness.GetReloadsForGun(firearmId);
 
-			return handloads;
+			return reloads;
 		}
 
 		[HttpPost("")]
-		public async Task<Handload> SaveHandload(Handload handload)
+		public async Task<Reload> SaveReload(Reload reload)
 		{
-			var savedHandload = await this.handloadBusiness.SaveHandload(handload);
+			var savedReload = await this.reloadBusiness.SaveReload(reload);
 
-			return savedHandload;
+			return savedReload;
 		}
 
 		[HttpPost("result")]
-		public async Task<HandloadResult> SaveHandloadResult(HandloadResult handloadResult)
+		public async Task<ReloadResult> SaveReloadResult(ReloadResult reloadResult)
 		{
-			var savedHandloadResult = await this.handloadBusiness.SaveHandloadResult(handloadResult);
+			var savedReloadResult = await this.reloadBusiness.SaveReloadResult(reloadResult);
 
-			return savedHandloadResult;
+			return savedReloadResult;
 		}
 
 		[HttpGet("enums")]

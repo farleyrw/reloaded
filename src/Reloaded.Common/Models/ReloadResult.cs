@@ -4,14 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Reloaded.Common.Models
 {
-	[Table("handloadResult")]
-	public class HandloadResult : BaseModel
+	[Table("reloadResult")]
+	public class ReloadResult : BaseEntity
 	{
 		[Key]
-		public int HandloadResultId { get; set; }
+		public int ReloadResultId { get; set; }
 
 		[Required]
-		public int HandloadId { get; set; }
+		public int ReloadId { get; set; }
+
+		[Required]
+		public int FirearmId { get; set; }
 
 		[Required]
 		public DateTime Date { get; set; }
@@ -20,12 +23,12 @@ namespace Reloaded.Common.Models
 		[Column("distanceYds")]
 		public int Distance { get; set; }
 
-		[Required]
-		public int TotalShots { get; set; }
+        [Required]
+        [Column("velocityMph")]
+        public int Velocity { get; set; } // TODO: calculate if not known
 
-		[Required]
-		[Column("velocityMph")]
-		public int Velocity { get; set; }
+        [Required]
+		public int TotalShots { get; set; }
 
 		[Required]
 		[Column("groupSizeIn")]

@@ -18,8 +18,9 @@ namespace Reloaded.Common.Models.Components
 		[Column("brassCartridge")]
 		public Cartridge Cartridge { get; set; } = Cartridge.None;
 
-		/// <summary>Gets or sets the state of the brass.</summary>
-		/// <value>The brass new state.</value>
-		public bool NewBrass { get; set; } // TODO: should this go on the result or be removed?
+        /// <summary>Gets or sets the state of the brass.</summary>
+        /// <value>The brass new state.</value>
+        [Column("brassIsNew")]
+        public bool NewBrass { get; set; } // TODO: should this go on the result or be removed?
 	}
 }

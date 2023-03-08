@@ -46,7 +46,7 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
 
       this.loadReload(this.reloadId);
     } else if (param == 'add') {
-      this.reload = new Reload(firearmId);
+      this.reload = new Reload();
     } else {
       // invalid parameter
       console.log('invalid paramter', param);

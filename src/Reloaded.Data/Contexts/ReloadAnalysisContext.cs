@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reloaded.Data.Contexts
 {
-	public class HandloadAnalysisContext
+	public class ReloadAnalysisContext
 	{
 	}
 }

@@ -10,7 +10,7 @@ namespace Reloaded.Core.Extensions
 	{
 		public static IServiceCollection ConfigureCoreServices(this IServiceCollection services, IConfiguration configuration)
 		{
-			services.AddTransient<IHandloadBusiness, HandloadBusiness>();
+			services.AddTransient<IReloadBusiness, ReloadBusiness>();
 			services.AddTransient<IFirearmBusiness, FirearmBusiness>();
 
 			services.ConfigureDataServices(configuration);

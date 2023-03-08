@@ -6,16 +6,17 @@ using Reloaded.Common.Models.Components;
 
 namespace Reloaded.Common.Models
 {
-	[Table("handload")] // TODO: rename to reload
-	public class Handload : BaseModel
+	[Table("reload")]
+	public class Reload : BaseEntity
 	{
 		[Key]
-		public int HandloadId { get; set; }
+		public int ReloadId { get; set; }
 
-		[Required]
-		public int FirearmId { get; set; }
+        public string NickName { get; set; }
 
-		[Column("powderType")]
+        public string Notes { get; set; }
+
+        [Column("powderType")]
 		public GunPowder Powder { get; set; } = GunPowder.None;
 
 		[Required]
@@ -26,14 +27,12 @@ namespace Reloaded.Common.Models
 		[Column("overallLengthIn")]
 		public double OverallLength { get; set; }
 
-        public string Notes { get; set; }
-
         public Primer Primer { get; set; } = new Primer();
 
 		public Brass Casing { get; set; } = new Brass();
 
 		public Bullet Bullet { get; set; } = new Bullet();
 
-		public List<HandloadResult> Results { get; set; } = new List<HandloadResult>();
+		public List<ReloadResult> Results { get; set; } = new List<ReloadResult>();
     }
 }

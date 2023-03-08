@@ -1,7 +1,6 @@
 {
-	"handloadId": 0,
+	"reloadId": 0,
 	"accountId": 0,
-	"firearmId": 1,
 	"powder": "Varget",
 	"powderCharge": 25,
 	"seatingDepth": 2.5,

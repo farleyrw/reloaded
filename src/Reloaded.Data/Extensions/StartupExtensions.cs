@@ -11,10 +11,10 @@ namespace Reloaded.Data.Extensions
 		public static IServiceCollection ConfigureDataServices(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddTransient<IFirearmRepository, FirearmRepository>();
-			services.AddTransient<IHandloadRepository, HandloadRepository>();
+			services.AddTransient<IReloadRepository, ReloadRepository>();
 
 			services.AddSqlServer<FirearmContext>(configuration.GetConnectionString("Reloaded"));
-			services.AddSqlServer<HandloadContext>(configuration.GetConnectionString("Reloaded"));
+			services.AddSqlServer<ReloadContext>(configuration.GetConnectionString("Reloaded"));
 
 			return services;
 		}

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReloadListComponent } from './reload-list.component';
 
-describe('HandloadListComponent', () => {
+describe('ReloadListComponent', () => {
   let component: ReloadListComponent;
   let fixture: ComponentFixture<ReloadListComponent>;
 

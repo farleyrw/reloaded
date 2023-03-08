@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ReloadService } from './reload.service';
 
-describe('HandloadService', () => {
+describe('ReloadService', () => {
   let service: ReloadService;
 
   beforeEach(() => {
