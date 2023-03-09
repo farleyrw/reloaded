@@ -14,8 +14,12 @@ import { ReloadEditComponent } from './reloads/edit/reload-edit.component';
       { path: 'firearms', component: FirearmListComponent, title: 'My Firearms' },
       { path: 'firearms/:firearmId', component: FirearmViewComponent, title: 'My Firearm' },
       { path: 'firearms/edit/:firearmId', component: FirearmEditComponent, title: 'Manage Firearm' },
-      { path: 'reloads', component: ReloadListComponent, title: 'My Reloads' }, // TODO: should be /list?
-      { path: 'reloads/:firearmId/edit/:reloadId', component: ReloadEditComponent, title: 'Manage Reload' }
+      { path: 'reloads', component: ReloadListComponent, title: 'My Reloads' },
+      // reloads/firearm/:firearmId
+      { path: 'reloads/edit/:reloadId', component: ReloadEditComponent, title: 'Manage Reload' },
+      { path: 'reloads/edit/:reloadId/:firearmId', component: ReloadEditComponent, title: 'Manage Reload' }
+      // reloads/results/:reloadId
+      // reloads/results/edit/:reloadResultId
     ])
   ],
   exports: [RouterModule]

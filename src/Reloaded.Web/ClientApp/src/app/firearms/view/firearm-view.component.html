@@ -1,33 +1,31 @@
 
 <div *ngIf="firearm$ | async as firearm" class="container">
-  <h1 class="my-4">{{ firearm.name }}</h1>
+  <div class="row align-items-center">
+    <h1 class="col my-4 text-truncate">{{ firearm.name }}</h1>
 
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary" routerLink="/firearms/edit/{{ firearm.firearmId }}">
+        <i class="bi bi-pencil-fill"></i>
+        Edit
+      </button>
+    </div>
+  </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <div class="row">
-        <div class="col fw-bold">
-          Brand
-        </div>
-        <div class="col-8">
-          {{ firearm.brand }}
-        </div>
+        <div class="col fw-bold">Brand</div>
+        <div class="col-8">{{ firearm.brand }}</div>
       </div>
     </li>
     <li class="list-group-item">
       <div class="row">
-        <div class="col fw-bold">
-          Model
-        </div>
-        <div class="col-8">
-          {{ firearm.model }}
-        </div>
+        <div class="col fw-bold">Model</div>
+        <div class="col-8">{{ firearm.model }}</div>
       </div>
     </li>
     <li class="list-group-item">
       <div class="row">
-        <div class="col fw-bold">
-          Chamber
-        </div>
+        <div class="col fw-bold">Chamber</div>
         <div class="col-8" *ngIf="lookups$ | async as lookup">
           {{ lookup.cartridges[firearm.chamber] }}
         </div>
@@ -35,9 +33,7 @@
     </li>
     <li class="list-group-item">
       <div class="row">
-        <div class="col fw-bold">
-          Barrel Length
-        </div>
+        <div class="col fw-bold">Barrel Length</div>
         <div class="col-8">
           {{ firearm.barrelLength | number: '2.2-2' }} inches
         </div>
@@ -45,20 +41,13 @@
     </li>
   </ul>
 
-  <div class="row m-3 justify-content-sm-end">
-    <button type="button" class="col col-sm-auto btn btn-primary" routerLink="/firearms/edit/{{ firearm.firearmId }}">
-      <i class="bi bi-pencil-fill"></i>
-      Edit
-    </button>
-  </div>
-
   <ng-container *ngIf="{reloads: reloads$ | async, lookups: lookups$ | async} as data">
     <div *ngIf="data.reloads && data.lookups">
       <h2 class="my-4">
         Reloads
         <span class="fs-6 align-text-top badge rounded-pill text-bg-info">{{ data.reloads.length }}</span>
 
-        <button type="button" class="btn btn-primary float-end" routerLink="/reloads/{{ firearm.firearmId }}/edit/add">
+        <button type="button" class="btn btn-primary float-end" routerLink="/reloads/edit/add/{{ firearm.firearmId }}">
           <i class="bi bi-plus-lg"></i>
           Add
         </button>
@@ -94,13 +83,9 @@
       <div *ngIf="data.reloads.length == 0">
         No reloads yet
       </div>
-
-      <div class="row m-3 g-3 justify-content-sm-end text-center">
-      </div>
     </div>
   </ng-container>
 </div>
-
 
 <!-- TODO:
   Create reload summary component

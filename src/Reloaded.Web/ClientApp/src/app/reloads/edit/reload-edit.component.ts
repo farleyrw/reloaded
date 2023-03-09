@@ -36,11 +36,11 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    let firearmId = +this.route.snapshot.paramMap.get('firearmId')!;
+    let firearmId = this.route.snapshot.paramMap.get('firearmId')!;
 
-    let param = this.route.snapshot.paramMap.get('reloadId')! as any;
+    let param = this.route.snapshot.paramMap.get('reloadId')!;
 
-    if (!isNaN(param)) {
+    if (!isNaN(param as any)) {
       this.mode = 'edit';
       this.reloadId = +param;
 
@@ -52,15 +52,20 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
       console.log('invalid paramter', param);
     }
 
-    this.loadFirearm(firearmId);
+    if (firearmId) {
+      this.loadFirearm(+firearmId);
+    }
 
     this.subscriptions.add(this.reloadService.getEnums().subscribe(enums => this.lookups = enums));
   }
 
   loadFirearm(firearmId: number) {
     this.subscriptions.add(this.firearmService.getFirearm(firearmId).subscribe(firearm => {
-      this.firearm = firearm;
-      this.reload.casing.cartridge = this.firearm.chamber;
+      this.firearm = firearm; // locks cartridge selection
+
+      if (this.mode == 'add') {
+        this.reload.casing.cartridge = this.firearm.chamber;
+      }
       // TODO: set bullet.caliber from above, needs mapping
     }));
   }
@@ -82,4 +87,6 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
   }
 
   // TODO: clone reload functionality
+  // TODO: map to firearm by caliber
+  // TODO: lock cartridge & caliber
 }

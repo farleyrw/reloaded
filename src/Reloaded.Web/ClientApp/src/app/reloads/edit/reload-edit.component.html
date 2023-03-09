@@ -79,7 +79,7 @@
   <div class="mb-3">
     <label for="bulletCaliber" class="form-label">Caliber</label>
     <select name="bulletCaliber" class="form-select form-control"
-            [(ngModel)]="reload.bullet.caliber" #bulletCaliber="ngModel" required>
+            [(ngModel)]="reload.bullet.caliber" #bulletCaliber="ngModel" required [disabled]="mode == 'edit'">
       <option *ngFor="let caliber of lookups.calibers | keyvalue: originalOrder" [value]="caliber.key">{{ caliber.value }}</option>
     </select>
     <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletCaliber.errors">
@@ -124,7 +124,7 @@
   <div class="mb-3">
     <label for="casingCartridge" class="form-label">Casing Cartridge</label>
     <select name="casingCartridge" class="form-select form-control"
-            [(ngModel)]="reload.casing.cartridge" #casingCartridge="ngModel" required>
+            [(ngModel)]="reload.casing.cartridge" #casingCartridge="ngModel" required [disabled]="mode == 'edit'">
       <option *ngFor="let cartridge of lookups.cartridges | keyvalue: originalOrder" [value]="cartridge.key">{{ cartridge.value }}</option>
     </select>
     <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingCartridge.errors">
@@ -149,15 +149,15 @@
       Discard
     </button>
   </div>
-
 </form>
 
 <pre>{{ reload | json }}</pre>
 
   <!-- TODO:
-    Display warning modifying when results exist
+    Display warning or lock when modifying and results exist
     Interactive diagram of input component attributes
     Form layout optimization
     Set bullet caliber and casing cartridge from firearm, hide input
     Create reload related loads (from cloning)
+    Firearm picker by cartridge
   -->
