@@ -6,28 +6,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
-import { FirearmListComponent } from './firearms/list/firearm-list.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ReloadListComponent } from './reloads/list/reload-list.component';
-import { FirearmViewComponent } from './firearms/view/firearm-view.component';
-import { FirearmEditComponent } from './firearms/edit/firearm-edit.component';
-import { ReloadEditComponent } from './reloads/edit/reload-edit.component';
+import { FirearmModule } from './firearms/firearm.module';
+import { ResultsModule } from './results/results.module';
+import { ReloadModule } from './reloads/reload.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    FirearmListComponent,
-    ReloadListComponent,
-    FirearmViewComponent,
-    FirearmEditComponent,
-    ReloadEditComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    FirearmModule,
+    ReloadModule,
+    ResultsModule,
     AppRoutingModule
   ],
   providers: [],

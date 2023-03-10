@@ -32,3 +32,8 @@ export class Bullet {
   baseType!: string;
   caliber!: string;
 }
+
+export class ReloadFirearmMap {
+  reloadId!: number;
+  firearmId!: number;
+}
