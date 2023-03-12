@@ -9,6 +9,7 @@ import { ReloadEditComponent } from './edit/reload-edit.component';
     CommonModule,
     RouterModule.forChild([
       { path: 'reloads', component: ReloadListComponent, title: 'My Reloads' },
+      // reloads/view/:reloadId
       // reloads/firearm/:firearmId
       { path: 'reloads/edit/:reloadId', component: ReloadEditComponent, title: 'Manage Reload' },
       { path: 'reloads/edit/:reloadId/:firearmId', component: ReloadEditComponent, title: 'Manage Reload' }

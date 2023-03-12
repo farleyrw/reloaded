@@ -26,6 +26,7 @@ export class ResultService {
     reloadId: 1,
     firearmId: 1,
     date: new Date("2022-01-05T04:56:15.488Z"),
+    notes: 'Upset stomach, indigestion',
     distance: 100,
     totalShots: 5,
     velocity: 3350,

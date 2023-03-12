@@ -3,7 +3,7 @@
   <div class="row align-items-center">
     <h1 class="col my-4 text-truncate">
       Result:
-      {{ result.date | date: 'mediumDate' }}
+      {{ result.date | date: 'longDate' }}
     </h1>
 
     <ul class="list-group list-group-flush">
@@ -17,12 +17,17 @@
         <div class="row">
           <div class="col fw-bold">Reload</div>
           <div class="col-8">{{ result.reloadId }}</div>
+          <!-- TODO: link to reload view -->
         </div>
       </li>
       <li class="list-group-item">
         <div class="row">
           <div class="col fw-bold">Firearm</div>
-          <div class="col-8">{{ result.firearmId }}</div>
+          <div class="col-8">
+            <a routerLink="/firearms/{{ result.firearmId }}">
+              {{ result.firearmId }}
+            </a>
+          </div>
         </div>
       </li>
       <li class="list-group-item">
@@ -49,6 +54,28 @@
           </div>
         </div>
       </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Notes</div>
+          <div class="col-8">
+            {{ result.notes }}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Weather</div>
+          <div class="col-8" >
+            <div *ngIf="result.weather.hasData(); else noData">
+              <div>{{ result.weather.temperature }} F</div>
+              <div>{{ result.weather.elevation }} ft</div>
+              <div>{{ result.weather.windSpeed }} mph</div>
+            </div>
+            <ng-template #noData>N/A</ng-template>
+          </div>
+        </div>
+      </li>
+      <!-- TODO: weather conditions-->
     </ul>
   </div>
 </div>

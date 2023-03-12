@@ -3,6 +3,7 @@ export class Result {
   reloadId!: number;
   firearmId!: number;
   date!: Date;
+  notes!: string;
   distance!: number;
   velocity!: number;
   totalShots!: number;
@@ -10,8 +11,12 @@ export class Result {
   weather = new Weather();
 }
 
+// TODO: turn into metadata
 export class Weather {
   temperature!: number;
   elevation!: number;
   windSpeed!: number;
+  hasData(): boolean {
+    return !!this.temperature || !!this.elevation || !!this.windSpeed;
+  }
 }

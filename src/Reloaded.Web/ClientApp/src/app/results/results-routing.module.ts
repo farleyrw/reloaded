@@ -9,7 +9,7 @@ import { ResultViewComponent } from './view/result-view.component';
       { path: 'results', component: ResultListComponent, title: 'All Results' },
       { path: 'results/view/:resultId', component: ResultViewComponent, title: 'Reload Results' }
       // results for reload
-      // results for result instance
+      // result for result instance
       // TODO: results/analysis/:resultsId
     ])
   ],
