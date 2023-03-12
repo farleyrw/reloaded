@@ -7,8 +7,6 @@ import { HomeComponent } from './home/home.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
       { path: '**', redirectTo: '/', pathMatch: 'full' }
-      // reloads/results/:reloadId
-      // reloads/results/edit/:reloadResultId
     ])
   ],
   exports: [RouterModule]

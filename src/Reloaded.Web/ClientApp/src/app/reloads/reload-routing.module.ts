@@ -12,6 +12,7 @@ import { ReloadEditComponent } from './edit/reload-edit.component';
       // reloads/firearm/:firearmId
       { path: 'reloads/edit/:reloadId', component: ReloadEditComponent, title: 'Manage Reload' },
       { path: 'reloads/edit/:reloadId/:firearmId', component: ReloadEditComponent, title: 'Manage Reload' }
+      // TODO: reloads/analysis/:reloadId
     ])
   ],
   exports: [RouterModule]

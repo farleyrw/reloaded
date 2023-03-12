@@ -1,1 +1,43 @@
-<p>result-list works!</p>
+<h1 class="mb-4">
+  Results
+
+  <!-- TODO: Add firearm and reload IDs-->
+  <!-- Maybe add button doesn't work here -->
+  <button type="button" class="btn btn-primary float-end" routerLink="/results/edit/add/">
+    <i class="bi bi-plus-lg"></i>
+    Add
+  </button>
+</h1>
+
+<div class="container" *ngIf="results$ | async as results">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Firearm</th>
+        <th scope="col">Reload</th>
+        <th scope="col">Result</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let result of results">
+        <td>{{ result.date | date: 'longDate' }}</td>
+        <td>{{ result.firearmId }}</td>
+        <td>{{ result.reloadId }}</td>
+        <td>
+          <a routerLink="/results/view/{{ result.reloadResultId }}">
+            <i class="bi bi-eye" role="button" title="View"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pre>{{ results$ | async | json }}</pre>
+
+<!-- TODO:
+  When none show message, check for reloads and firearms
+  Reloads without results, with reloadId and firearmId
+  list all, per firearm
+-->

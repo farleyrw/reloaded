@@ -12,7 +12,8 @@ export class NavMenuComponent {
   menu: { [key: string]: string } = {
     'Home': '/',
     'Firearms': '/firearms',
-    'Reloads': '/reloads'
+    'Reloads': '/reloads',
+    'Results': '/results'
   };
 
   originalOrder = OrderingService.originalOrder;

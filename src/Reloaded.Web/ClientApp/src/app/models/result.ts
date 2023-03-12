@@ -1,4 +1,4 @@
-export class Results {
+export class Result {
   reloadResultId!: number;
   reloadId!: number;
   firearmId!: number;
@@ -7,7 +7,7 @@ export class Results {
   velocity!: number;
   totalShots!: number;
   groupSize!: number;
-  weather!: Weather;
+  weather = new Weather();
 }
 
 export class Weather {

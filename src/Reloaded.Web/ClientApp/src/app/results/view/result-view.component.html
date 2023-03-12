@@ -1,0 +1,54 @@
+
+<div *ngIf="result$ | async as result" class="container">
+  <div class="row align-items-center">
+    <h1 class="col my-4 text-truncate">
+      Result:
+      {{ result.date | date: 'mediumDate' }}
+    </h1>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Date</div>
+          <div class="col-8">{{ result.date | date: 'MMMM d, y, h:mm:ss a' }}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Reload</div>
+          <div class="col-8">{{ result.reloadId }}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Firearm</div>
+          <div class="col-8">{{ result.firearmId }}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Distance</div>
+          <div class="col-8">
+            {{ result.distance }} yards
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Group Size</div>
+          <div class="col-8">
+            {{ result.groupSize | number: '1.2-2' }} inches
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col fw-bold">Velocity</div>
+          <div class="col-8">
+            {{ result.velocity }} fps
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

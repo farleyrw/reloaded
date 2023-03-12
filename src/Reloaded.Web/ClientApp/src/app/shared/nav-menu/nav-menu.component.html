@@ -10,7 +10,7 @@
 
       <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
-          <li *ngFor="let item of menu | keyvalue: originalOrder" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <li *ngFor="let item of menu | keyvalue: originalOrder" class="nav-item" [routerLinkActive]="['active']">
             <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
           </li>
         </ul>
@@ -25,7 +25,7 @@
     </div>
     <div class="offcanvas-body">
       <ul class="navbar-nav">
-        <li *ngFor="let item of menu | keyvalue: originalOrder" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <li *ngFor="let item of menu | keyvalue: originalOrder" class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="[item.value]" data-bs-dismiss="offcanvas">{{ item.key }}</a>
         </li>
       </ul>
