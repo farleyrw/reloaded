@@ -1,10 +1,10 @@
 <h1 class="mb-4">
   Firearms
 
-  <button type="button" class="btn btn-primary float-end" routerLink="/firearms/edit/add">
+  <a class="btn btn-primary float-end" routerLink="/firearms/edit/add">
     <i class="bi bi-plus-lg"></i>
     Add
-  </button>
+  </a>
 </h1>
 
 <ul class="list-group list-group-flush container">
@@ -24,7 +24,7 @@
       </div>
       <div class="col-auto">
         <a routerLink="/firearms/{{ firearm.firearmId }}">
-          <i class="bi bi-eye" role="button" title="View"></i>
+          <i class="bi bi-eye-fill" role="button" title="View"></i>
         </a>
         <a routerLink="/firearms/edit/{{ firearm.firearmId }}">
           <i class="bi bi-pencil-fill" role="button" title="Edit"></i>

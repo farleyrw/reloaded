@@ -1,58 +1,54 @@
 <h1 class="mb-4">
-  My Reloads
+    My Reloads
 
-  <button type="button" class="btn btn-primary float-end" routerLink="/reloads/edit/add">
-    <i class="bi bi-plus-lg"></i>
-    Add
-  </button>
+    <a class="btn btn-primary float-end" routerLink="/reloads/edit/add">
+        <i class="bi bi-plus-lg"></i>
+        Add
+    </a>
 </h1>
 
 <ng-container *ngIf="{ reloads: reloads$ | async, lookups: lookups$ | async } as data">
-  <div *ngIf="data.reloads && data.lookups">
-    <ul class="list-group list-group-flush" *ngIf="data.reloads.length > 0">
-      <li class="list-group-item">
-        <div class="row fw-bold">
-          <div class="col">Date</div>
-          <div class="col">Bullet</div>
-          <div class="col">Powder</div>
-          <div class="col-1"></div>
-        </div>
-      </li>
-      <!-- TODO: order by create date -->
-      <li class="list-group-item" *ngFor="let reload of data.reloads; index as i">
-        <div class="row">
-          <div class="col">{{ reload.createdOn | date: 'longDate' }}</div>
-          <div class="col">
-            {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
-            {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
-          </div>
-          <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
-          <div class="col-1 px-0 text-end">
-            <a routerLink="/reloads/view/{{ reload.reloadId }}">
-              <i class="bi bi-eye" role="button" title="View"></i>
-            </a>
-            <a routerLink="/reloads/edit/{{ reload.reloadId }}">
-              <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
-            </a>
-            <a routerLink="/results/view/{{ reload.reloadId }}">
-              <i class="bi bi-bullseye" role="button" title="Results"></i>
-            </a>
-          </div>
-        </div>
-        <!--<pre>{{ reload | json }}</pre>-->
-      </li>
-    </ul>
+    <div *ngIf="data.reloads && data.lookups">
+        <ul class="list-group list-group-flush" *ngIf="data.reloads.length > 0">
+            <li class="list-group-item">
+                <div class="row fw-bold">
+                    <div class="col">Date</div>
+                    <div class="col">Bullet</div>
+                    <div class="col">Powder</div>
+                    <div class="col-1"></div>
+                </div>
+            </li>
+            <!-- TODO: order by create date -->
+            <li class="list-group-item" *ngFor="let reload of data.reloads; index as i">
+                <div class="row">
+                    <div class="col">{{ reload.createdOn | date: 'longDate' }}</div>
+                    <div class="col">
+                        {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
+                        {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
+                    </div>
+                    <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
+                    <div class="col-1 px-0 text-end">
+                        <a routerLink="/reloads/view/{{ reload.reloadId }}">
+                            <i class="bi bi-eye-fill" role="button" title="View"></i>
+                        </a>
+                        <a routerLink="/reloads/edit/{{ reload.reloadId }}">
+                            <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
+                        </a>
+                        <a routerLink="/results/view/{{ reload.reloadId }}">
+                            <i class="bi bi-bullseye" role="button" title="Results"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--<pre>{{ reload | json }}</pre>-->
+            </li>
+        </ul>
 
-    <div *ngIf="data.reloads.length == 0">
-      No reloads yet
+        <div *ngIf="data.reloads.length == 0">
+            No reloads yet
+        </div>
     </div>
-  </div>
 </ng-container>
 
 <!-- TODO:
-  list firearm and link to
-  create clone function
-  link to results
   show message when no firearms
-  reload tags: high velocity, hunting, target, etc
 -->

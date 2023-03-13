@@ -5,10 +5,24 @@
             <h1 class="col my-4 text-truncate">{{ getTitle(data.reload, data.lookups) }}</h1>
 
             <div class="col-auto">
-                <button type="button" class="btn btn-primary" routerLink="/reloads/edit/{{ data.reload.reloadId }}">
-                    <i class="bi bi-pencil-fill"></i>
-                    Edit
-                </button>
+                <div class="btn-group">
+                    <a class="btn btn-primary" routerLink="/reloads/edit/{{ data.reload.reloadId }}">
+                        <i class="bi bi-pencil-fill"></i>
+                        Edit
+                    </a>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" routerLink="/reload/clone">
+                                <i class="bi bi-clipboard-plus-fill"></i>
+                                Clone
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <ul class="list-group list-group-flush">
@@ -107,4 +121,6 @@
 
 <!-- TOOD:
   Use lookups
+  create clone function
+  reload tags: high velocity, hunting, target, etc
 -->

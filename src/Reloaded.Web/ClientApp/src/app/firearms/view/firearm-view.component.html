@@ -4,41 +4,55 @@
     <h1 class="col my-4 text-truncate">{{ firearm.name }}</h1>
 
     <div class="col-auto">
-      <button type="button" class="btn btn-primary" routerLink="/firearms/edit/{{ firearm.firearmId }}">
+      <a class="btn btn-primary" routerLink="/firearms/edit/{{ firearm.firearmId }}">
         <i class="bi bi-pencil-fill"></i>
         Edit
-      </button>
+      </a>
     </div>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col fw-bold">Brand</div>
-        <div class="col-8">{{ firearm.brand }}</div>
-      </div>
-    </li>
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col fw-bold">Model</div>
-        <div class="col-8">{{ firearm.model }}</div>
-      </div>
-    </li>
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col fw-bold">Chamber</div>
-        <div class="col-8" *ngIf="lookups$ | async as lookup">
-          {{ lookup.cartridges[firearm.chamber] }}
-        </div>
-      </div>
-    </li>
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col fw-bold">Barrel Length</div>
-        <div class="col-8">
-          {{ firearm.barrelLength | number: '2.2-2' }} inches
-        </div>
-      </div>
-    </li>
+      <li class="list-group-item" *ngIf="firearm.nickname">
+          <div class="row">
+              <div class="col fw-bold">Nickname</div>
+              <div class="col-8">{{ firearm.nickname }}</div>
+          </div>
+      </li>
+      <li class="list-group-item">
+          <div class="row">
+              <div class="col fw-bold">Brand</div>
+              <div class="col-8">{{ firearm.brand }}</div>
+          </div>
+      </li>
+      <li class="list-group-item">
+          <div class="row">
+              <div class="col fw-bold">Model</div>
+              <div class="col-8">{{ firearm.model }}</div>
+          </div>
+      </li>
+      <li class="list-group-item">
+          <div class="row">
+              <div class="col fw-bold">Chamber</div>
+              <div class="col-8" *ngIf="lookups$ | async as lookup">
+                  {{ lookup.cartridges[firearm.chamber] }}
+              </div>
+          </div>
+      </li>
+      <li class="list-group-item">
+          <div class="row">
+              <div class="col fw-bold">Barrel Length</div>
+              <div class="col-8">
+                  {{ firearm.barrelLength | number: '2.2-2' }} inches
+              </div>
+          </div>
+      </li>
+      <li class="list-group-item">
+          <div class="row">
+              <div class="col fw-bold">Barrel Twist</div>
+              <div class="col-8">
+                  1 in {{ firearm.barrelTwist }} inches
+              </div>
+          </div>
+      </li>
   </ul>
 
   <ng-container *ngIf="{reloads: reloads$ | async, lookups: lookups$ | async} as data">
@@ -47,14 +61,15 @@
         Reloads
         <span class="fs-6 align-text-top badge rounded-pill text-bg-info">{{ data.reloads.length }}</span>
 
-        <button type="button" class="btn btn-primary float-end" routerLink="/reloads/edit/add/{{ firearm.firearmId }}">
+        <a class="btn btn-primary float-end" routerLink="/reloads/edit/add/{{ firearm.firearmId }}">
           <i class="bi bi-plus-lg"></i>
           Add
-        </button>
-        <button type="button" class="btn btn-link float-end me-2" routerLink="/reloads">
+        </a>
+        <!-- TODO: link to reload view for firearm -->
+        <a class="btn btn-link float-end me-2" routerLink="/reloads">
           <i class="bi bi-list"></i>
           View All
-        </button>
+        </a>
       </h2>
 
       <ul class="list-group list-group-flush" *ngIf="data.reloads.length > 0">

@@ -4,7 +4,7 @@ import { FirearmService } from '@app/shared/services/firearm.service';
 import { ReloadService } from '@app/shared/services/reload.service';
 import { Reload } from '@app/models/reload';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Firearm } from '@app/models/firearm';
 import { Lookup } from '@app/models/lookup';
 
@@ -23,7 +23,7 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
 
   firearm!: Firearm;
 
-  lookups!: Lookup;
+  lookups$!: Observable<Lookup>;
 
   originalOrder = OrderingService.originalOrder;
 
@@ -56,7 +56,7 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
       this.loadFirearm(+firearmId);
     }
 
-    this.subscriptions.add(this.reloadService.getEnums().subscribe(enums => this.lookups = enums));
+    this.lookups$ = this.reloadService.getEnums();
   }
 
   loadFirearm(firearmId: number) {

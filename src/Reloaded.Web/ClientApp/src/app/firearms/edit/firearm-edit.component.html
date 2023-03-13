@@ -1,5 +1,5 @@
 <form name="firearmForm" class="container needs-validation" novalidate
-      *ngIf="firearm && lookups" #firearmForm="ngForm" [ngClass]="{ 'was-validated': firearmForm.submitted }"
+      *ngIf="firearm" #firearmForm="ngForm" [ngClass]="{ 'was-validated': firearmForm.submitted }"
       (ngSubmit)="firearmForm.valid && onSubmit()">
   <h1 class="mb-3">{{ mode | titlecase }} Firearm</h1>
 
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="row mb-3">
-    <div class="col">
+    <div class="col" *ngIf="lookups$ | async as lookups">
       <label for="chamber" class="form-label">Chamber</label>
       <select name="chamber" class="form-select form-control"
               [(ngModel)]="firearm.chamber" #chamber="ngModel" required>
@@ -72,9 +72,10 @@
     <div class="col">
       <label for="barrelTwist" class="form-label">Barrel Twist (optional)</label>
       <div class="input-group">
-        <span class="input-group-text">1 in </span>
-        <input type="number" class="form-control" id="barrelTwist" name="barrelTwist"
-               [(ngModel)]="firearm.barrelTwist" min="1" max="20" />
+          <span class="input-group-text">1 in </span>
+          <input type="number" class="form-control" id="barrelTwist" name="barrelTwist"
+                 [(ngModel)]="firearm.barrelTwist" min="1" max="20" />
+          <span class="input-group-text">in.</span>
       </div>
     </div>
   </div>

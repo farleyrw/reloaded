@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Firearm } from '@app/models/firearm';
 import { FirearmService } from '@app/shared/services/firearm.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
 import { Lookup } from '@app/models/lookup';
 
@@ -19,7 +19,7 @@ export class FirearmEditComponent implements OnInit, OnDestroy {
   // TODO: replace with observable?
   firearm = new Firearm();
 
-  lookups!: Lookup;
+  lookups$!: Observable<Lookup>;
 
   originalOrder = OrderingService.originalOrder;
 
@@ -42,7 +42,7 @@ export class FirearmEditComponent implements OnInit, OnDestroy {
       }
     }));
 
-    this.subscriptions.add(this.firearmService.getEnums().subscribe(enums => this.lookups = enums));
+    this.lookups$ = this.firearmService.getEnums();
   }
 
   ngOnDestroy() {
