@@ -1,0 +1,110 @@
+
+<ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
+    <div *ngIf="data.reload && data.lookups" class="container">
+        <div class="row align-items-center">
+            <h1 class="col my-4 text-truncate">{{ getTitle(data.reload, data.lookups) }}</h1>
+
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" routerLink="/reloads/edit/{{ data.reload.reloadId }}">
+                    <i class="bi bi-pencil-fill"></i>
+                    Edit
+                </button>
+            </div>
+        </div>
+        <ul class="list-group list-group-flush">
+            <!-- TODO: group by properties -->
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Bullet Weight</div>
+                    <div class="col-md-8 col">{{ data.reload.bullet.weight }} gr</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Bullet Brand</div>
+                    <div class="col-md-8 col">{{ data.reload.bullet.brand }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Bullet Construction</div>
+                    <div class="col-md-8 col">{{ data.lookups.bulletConstructions[data.reload.bullet.construction] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Bullet Tip</div>
+                    <div class="col-md-8 col">{{ data.lookups.bulletTipTypes[data.reload.bullet.tipType] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Bullet Base</div>
+                    <div class="col-md-8 col">{{ data.lookups.bulletBaseTypes[data.reload.bullet.baseType] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Bullet Caliber</div>
+                    <div class="col-md-8 col">{{ data.lookups.calibers[data.reload.bullet.caliber] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Powder</div>
+                    <div class="col-md-8 col">{{ data.reload.powder }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Powder Weight</div>
+                    <div class="col-md-8 col">{{ data.reload.powderCharge }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Casing</div>
+                    <div class="col-md-8 col">{{ data.reload.casing.brand }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Cartridge</div>
+                    <div class="col-md-8 col">{{ data.lookups.cartridges[data.reload.casing.cartridge] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Overall Length</div>
+                    <div class="col-md-8 col">{{ data.reload.overallLength | number: '1.2-4' }} in</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Primer</div>
+                    <div class="col-md-8 col">{{ data.lookups.primerManufacturers[data.reload.primer.brand] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Primer Type</div>
+                    <div class="col-md-8 col">{{ data.lookups.primerTypes[data.reload.primer.type] }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col fw-bold">Notes</div>
+                    <div class="col-md-8 col">{{ data.reload.notes }}</div>
+                </div>
+            </li>
+        </ul>
+
+        <!--<pre>{{ data.lookups | json }}</pre>-->
+        <!-- TODO: list firearms -->
+        <!-- TODO: list reloads -->
+    </div>
+</ng-container>
+
+<!-- TOOD:
+  Use lookups
+-->

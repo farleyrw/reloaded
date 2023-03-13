@@ -53,8 +53,8 @@ export class ReloadService {
       overallLength: 2.25,
       notes: "The best reload",
       primer: {
-        brand: "Other",
-        type: "Other"
+        brand: "CCI",
+        type: "SmallRifleMagnum"
       },
       casing: {
         brand: "Nosler",
@@ -81,8 +81,8 @@ export class ReloadService {
       overallLength: 2.25,
       notes: "A fair reload",
       primer: {
-        brand: "Other",
-        type: "Other"
+        brand: "Winchester",
+        type: "SmallRifle"
       },
       casing: {
         brand: "Winchester",

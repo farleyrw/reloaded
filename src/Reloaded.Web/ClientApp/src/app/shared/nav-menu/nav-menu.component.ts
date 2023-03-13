@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OrderingService } from '../pipes/ordering.service';
+import { OrderingService } from '@app/shared/pipes/ordering.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,12 +9,14 @@ import { OrderingService } from '../pipes/ordering.service';
 export class NavMenuComponent {
   isExpanded = false;
 
-  menu: { [key: string]: string } = {
-    'Home': '/',
-    'Firearms': '/firearms',
-    'Reloads': '/reloads',
-    'Results': '/results'
+  menu: MenuLinks = {
+    'Home': { path: '/', activeOptions: { exact: true } },
+    'Firearms': { path: '/firearms', activeOptions: { exact: false } },
+    'Reloads': { path: '/reloads', activeOptions: { exact: false } },
+    'Results': { path: '/results', activeOptions: { exact: false } }
   };
 
   originalOrder = OrderingService.originalOrder;
 }
+
+type MenuLinks = { [key: string]: { path: string, activeOptions: { exact: boolean } } };

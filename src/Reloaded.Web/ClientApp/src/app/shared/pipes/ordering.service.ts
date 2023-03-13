@@ -6,5 +6,5 @@ import { Injectable } from '@angular/core';
 })
 export class OrderingService {
 
-  static originalOrder = (a: KeyValue<string, string>, b: KeyValue<string, string>) => 0;
+  static originalOrder = (a: KeyValue<string, any>, b: KeyValue<string, any>) => 0;
 }

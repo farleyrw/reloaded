@@ -16,8 +16,11 @@
       <li class="list-group-item">
         <div class="row">
           <div class="col fw-bold">Reload</div>
-          <div class="col-8">{{ result.reloadId }}</div>
-          <!-- TODO: link to reload view -->
+          <div class="col-8">
+            <a routerLink="/reloads/view/{{ result.reloadId}}">
+              {{ result.reloadId }}
+            </a>
+          </div>
         </div>
       </li>
       <li class="list-group-item">
@@ -75,7 +78,6 @@
           </div>
         </div>
       </li>
-      <!-- TODO: weather conditions-->
     </ul>
   </div>
 </div>
