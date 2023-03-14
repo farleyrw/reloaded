@@ -17,8 +17,14 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <a class="dropdown-item" routerLink="/reload/clone">
-                                <i class="bi bi-clipboard-plus-fill"></i>
+                                <i class="bi bi-node-plus-fill"></i>
                                 Clone
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/results/edit/add" [queryParams]="{ reloadId: data.reload.reloadId }">
+                                <i class="bi bi-journal-plus"></i>
+                                Add result
                             </a>
                         </li>
                     </ul>
@@ -26,17 +32,14 @@
             </div>
         </div>
         <ul class="list-group list-group-flush">
-            <!-- TODO: group by properties -->
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col fw-bold">Bullet Weight</div>
-                    <div class="col-md-8 col">{{ data.reload.bullet.weight }} gr</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col fw-bold">Bullet Brand</div>
-                    <div class="col-md-8 col">{{ data.reload.bullet.brand }}</div>
+                    <div class="col fw-bold">Bullet</div>
+                    <div class="col-md-8 col">
+                        {{ data.reload.bullet.weight }} gr
+                        {{ data.reload.bullet.brand }}
+                        {{ data.lookups.calibers[data.reload.bullet.caliber] }}
+                    </div>
                 </div>
             </li>
             <li class="list-group-item">
@@ -59,32 +62,17 @@
             </li>
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col fw-bold">Bullet Caliber</div>
-                    <div class="col-md-8 col">{{ data.lookups.calibers[data.reload.bullet.caliber] }}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
                     <div class="col fw-bold">Powder</div>
-                    <div class="col-md-8 col">{{ data.reload.powder }}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col fw-bold">Powder Weight</div>
-                    <div class="col-md-8 col">{{ data.reload.powderCharge }}</div>
+                    <div class="col-md-8 col">{{ data.reload.powderCharge }} gr {{ data.reload.powder }}</div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="row">
                     <div class="col fw-bold">Casing</div>
-                    <div class="col-md-8 col">{{ data.reload.casing.brand }}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col fw-bold">Cartridge</div>
-                    <div class="col-md-8 col">{{ data.lookups.cartridges[data.reload.casing.cartridge] }}</div>
+                    <div class="col-md-8 col">
+                        {{ data.reload.casing.brand }}
+                        {{ data.lookups.cartridges[data.reload.casing.cartridge] }}
+                    </div>
                 </div>
             </li>
             <li class="list-group-item">
@@ -96,13 +84,10 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col fw-bold">Primer</div>
-                    <div class="col-md-8 col">{{ data.lookups.primerManufacturers[data.reload.primer.brand] }}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col fw-bold">Primer Type</div>
-                    <div class="col-md-8 col">{{ data.lookups.primerTypes[data.reload.primer.type] }}</div>
+                    <div class="col-md-8 col">
+                        {{ data.lookups.primerManufacturers[data.reload.primer.brand] }}
+                        {{ data.lookups.primerTypes[data.reload.primer.type] }}
+                    </div>
                 </div>
             </li>
             <li class="list-group-item">
@@ -120,7 +105,6 @@
 </ng-container>
 
 <!-- TOOD:
-  Use lookups
   create clone function
   reload tags: high velocity, hunting, target, etc
 -->
