@@ -16,6 +16,7 @@ export class ResultEditComponent implements OnInit, OnDestroy {
   mode: 'add' | 'edit' = 'add';
 
   maxDate = new Date();
+  minDate = (new Date().getFullYear() - 1).toString() + "-01-01";
 
   result!: Result;
 

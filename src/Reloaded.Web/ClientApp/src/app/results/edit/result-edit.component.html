@@ -5,12 +5,85 @@
 
     <div class="mb-3">
         <label for="date" class="form-label">Date</label>
-        <!--<input type="text" class="form-control" id="nickname" name="nickname"
-               [(ngModel)]="result.date" maxlength="50" />-->
-        <p-calendar id="date" name="date" [(ngModel)]="result.date"></p-calendar>
+        <input type="date" class="form-control" id="date" name="date"
+               [(ngModel)]="result.date" #date="ngModel"
+               [min]="minDate | date:'yyyy-MM-dd'" [max]="maxDate | date:'yyyy-MM-dd'" required />
+        <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
+            Please select a valid date.
+        </div>
     </div>
 
-    <p-calendar id="date" name="date" [(ngModel)]="result.date" [maxDate]="maxDate"></p-calendar>
+    <div class="mb-3">
+        <label for="notes" class="form-label">Notes (optional)</label>
+        <textarea class="form-control" id="notes" name="notes"
+                  [(ngModel)]="result.notes" maxlength="500"></textarea>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label for="distance" class="form-label">Distance</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="distance" name="distance"
+                       [(ngModel)]="result.distance" #distance="ngModel" min="10" max="1000" required />
+                <span class="input-group-text">yds.</span>
+                <div class="invalid-feedback" *ngIf="resultForm.submitted && distance.errors">
+                    Please provide a distance between 10 and 1000 yds.
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="velocity" class="form-label">Velocity (optional)</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="velocity" name="velocity"
+                       [(ngModel)]="result.velocity" #velocity="ngModel" min="500" max="5000" />
+                <span class="input-group-text">fps</span>
+                <div class="invalid-feedback" *ngIf="resultForm.submitted && velocity.errors">
+                    Please provide a velocity between 500 and 5000 fps.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label for="totalShots" class="form-label">Total Shots</label>
+            <input type="number" class="form-control" id="totalShots" name="totalShots"
+                   [(ngModel)]="result.totalShots" #totalShots="ngModel" min="2" max="10" required />
+            <div class="invalid-feedback" *ngIf="resultForm.submitted && totalShots.errors">
+                Please provide the # of shots between 2 and 10.
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="groupSize" class="form-label">Group Size</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="groupSize" name="groupSize"
+                       [(ngModel)]="result.groupSize" #groupSize="ngModel" min="0" max="20" step=".01" required />
+                <span class="input-group-text">in.</span>
+                <div class="invalid-feedback" *ngIf="resultForm.submitted && groupSize.errors">
+                    Please provide a group size between 0 and 20 inches.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3 g-3 justify-content-sm-end text-center">
+        <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3">
+            <i class="bi bi-check-circle-fill"></i>
+            Save
+        </button>
+        <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/results">
+            <i class="bi bi-x-circle"></i>
+            Discard
+        </button>
+    </div>
 </form>
 
 <pre>{{ result | json }}</pre>
+
+<!-- TODO:
+    Implement save
+    Accept firearmId from querystring
+    Accept reloadId from querystring
+-->

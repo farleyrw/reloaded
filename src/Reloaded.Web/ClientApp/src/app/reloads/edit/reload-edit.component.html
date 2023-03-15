@@ -146,7 +146,7 @@
                        [(ngModel)]="reload.overallLength" #overallLength="ngModel" min="1" max="5" step=".01" required />
                 <span class="input-group-text">in.</span>
                 <div class="invalid-feedback" *ngIf="reloadForm.submitted && overallLength.errors">
-                    Please provide a valid overall length between 1 and 5 inches.
+                    Please provide an overall length between 1 and 5 inches.
                 </div>
             </div>
         </div>
@@ -200,10 +200,12 @@
 
 <!--<pre>{{ reload | json }}</pre>-->
 
-  <!-- TODO:
+<!-- TODO:
+    Implement save
+    Implement firearm mapping by caliber
     Display warning or lock when modifying and results exist
     Interactive diagram of input component attributes
     Set bullet caliber and casing cartridge from firearm, hide input
     Create reload related loads (from cloning)
     Firearm picker by cartridge
-  -->
+-->
