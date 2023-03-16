@@ -5,6 +5,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Lookup } from '@app/models/lookup';
 import { Result } from '@app/models/result';
 import { ReloadService } from '@app/shared/services/reload.service';
+import { Firearm } from '@app/models/firearm';
+import { Reload } from '@app/models/reload';
+import { FirearmService } from '@app/shared/services/firearm.service';
 
 @Component({
   selector: 'app-result-edit',
@@ -19,6 +22,8 @@ export class ResultEditComponent implements OnInit, OnDestroy {
   minDate = (new Date().getFullYear() - 1).toString() + "-01-01";
 
   result!: Result;
+  firearm$!: Observable<Firearm>;
+  reload$!: Observable<Reload>;
 
   lookups$!: Observable<Lookup>;
 
@@ -27,32 +32,33 @@ export class ResultEditComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private resultService: ResultService,
-    private reloadService: ReloadService
+    private reloadService: ReloadService,
+    private firearmService: FirearmService
   ) { }
 
   ngOnInit() {
     let param = this.route.snapshot.paramMap.get('resultId')!;
 
+    let reloadId = +this.route.snapshot.queryParamMap.get('reloadId')!;
+    let firearmId = +this.route.snapshot.queryParamMap.get('firearmId')!;
+
     if (param == 'add') {
+      if (!reloadId && !firearmId) {
+        // TODO: invalid state
+      }
+
       this.result = new Result();
 
-      let reloadId = this.route.snapshot.queryParamMap.get('reloadId');
-
-      if (reloadId) {
-        this.result.reloadId = +reloadId;
-      }
-
-      let firearmId = this.route.snapshot.queryParamMap.get('firearmId');
-
-      if (firearmId) {
-        this.result.firearmId = +firearmId;
-      }
+      this.result.reloadId = reloadId;
+      this.result.firearmId = firearmId;
     } else {
       this.mode = 'edit';
       this.subscriptions.add(this.resultService.getResult(+param).subscribe(result => this.result = result));
     }
 
     this.lookups$ = this.reloadService.getEnums();
+    this.firearm$ = this.firearmService.getFirearm(firearmId);
+    this.reload$ = this.reloadService.getReload(reloadId);
   }
 
   ngOnDestroy() {
@@ -62,6 +68,17 @@ export class ResultEditComponent implements OnInit, OnDestroy {
   onSubmit() {
 
   }
+
+  getReloadDescription(reload: Reload) {
+    let reloadMain = `${reload.powderCharge} gr ${reload.powder}, ${reload.bullet.weight} gr ${reload.bullet.brand}`;
+
+    if (reload.nickname) {
+      return `${reload.nickname} (${reloadMain})`;
+    }
+
+    return reloadMain;
+  }
+
   /* TODO:
     Must handle with and without reload and firearm Ids
   */

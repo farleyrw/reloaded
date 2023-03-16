@@ -3,6 +3,24 @@
       [ngClass]="{ 'was-validated': resultForm.submitted }">
     <h1 class="mb-3">{{ mode | titlecase }} Result</h1>
 
+    <div class="mb-3 row" *ngIf="firearm$ | async as firearm">
+        <label for="staticFirearm" class="col-2 col-form-label">Firearm</label>
+        <div class="col-10">
+            <input type="text" class="form-control-plaintext fw-bold" id="staticFirearm" [value]="firearm.name" readonly />
+        </div>
+    </div>
+
+    <!-- TODO: show firearm picker matching caliber -->
+
+    <div class="mb-3 row" *ngIf="reload$ | async as reload">
+        <label for="staticReload" class="col-2 col-form-label">Reload</label>
+        <div class="col-10">
+            <input type="text" class="form-control-plaintext fw-bold" id="staticReload" [value]="getReloadDescription(reload)" readonly />
+        </div>
+    </div>
+
+    <!-- TODO: show firearm picker matching caliber -->
+
     <div class="mb-3">
         <label for="date" class="form-label">Date</label>
         <input type="date" class="form-control" id="date" name="date"
@@ -11,12 +29,6 @@
         <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
             Please select a valid date.
         </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="notes" class="form-label">Notes (optional)</label>
-        <textarea class="form-control" id="notes" name="notes"
-                  [(ngModel)]="result.notes" maxlength="500"></textarea>
     </div>
 
     <div class="row mb-3">
@@ -68,6 +80,12 @@
         </div>
     </div>
 
+    <div class="mb-3">
+        <label for="notes" class="form-label">Notes (optional)</label>
+        <textarea class="form-control" id="notes" name="notes"
+                  [(ngModel)]="result.notes" maxlength="500"></textarea>
+    </div>
+
     <div class="row m-3 g-3 justify-content-sm-end text-center">
         <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3">
             <i class="bi bi-check-circle-fill"></i>
@@ -86,4 +104,7 @@
     Implement save
     Accept firearmId from querystring
     Accept reloadId from querystring
+    Can't create a result without firearm and reload
+    Calculate MOA, store?
+    Weather -> metadata?
 -->

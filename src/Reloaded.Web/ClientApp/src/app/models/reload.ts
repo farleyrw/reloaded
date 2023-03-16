@@ -3,14 +3,14 @@ export class Reload {
   accountId!: number;
   createdOn!: Date;
   lastUpdatedOn!: Date;
+  nickname!: string;
+  notes!: string;
   powder!: string;
   powderCharge!: number;
   overallLength!: number;
   primer = new Primer();
   casing = new Casing();
   bullet = new Bullet();
-  nickname!: string;
-  notes!: string;
 }
 
 export class Primer {

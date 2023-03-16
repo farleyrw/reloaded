@@ -11,7 +11,7 @@ export class FirearmService {
 
   constructor(private http: HttpClient) { }
 
-  getFirearm(firearmId: number): Observable<Firearm> {
+  getFirearm(firearmId: string | number): Observable<Firearm> {
     return of(this.firearms[0]);
 
     //return this.http.get(`${this.baseUrl}/${firearmId}`);

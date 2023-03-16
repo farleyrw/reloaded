@@ -85,7 +85,12 @@
           <div class="row">
             <!-- TODO: link out to manage reload -->
             <!-- TODO: link out to view results-->
-            <div class="col">{{ reload.createdOn | date: 'longDate' }}</div>
+            <div class="col">
+                <a routerLink="/results/edit/add" [queryParams]="{ firearmId: firearm.firearmId, reloadId: reload.reloadId }">
+                    <i class="bi bi-bullseye" role="button" title="Add Result"></i>
+                </a>
+                {{ reload.createdOn | date: 'mediumDate' }}
+            </div>
             <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
             <div class="col">
               {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
