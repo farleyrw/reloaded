@@ -13,11 +13,11 @@ export class ResultService {
     return of(this.results);
   }
 
-  getResultsForReload(reloadId: number): Observable<Result[]> {
+  getResultsForReload(reloadId: string | number): Observable<Result[]> {
     return of(this.results)
   }
 
-  getResult(reloadResultId: number): Observable<Result> {
+  getResult(reloadResultId: string | number): Observable<Result> {
     return of(this.results[0])
   }
 

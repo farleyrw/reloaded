@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Reload } from '@app/models/reload';
 import { ReloadService } from '@app/shared/services/reload.service';
 import { Lookup } from '@app/models/lookup';
+import { FirearmService } from '@app/shared/services/firearm.service';
+import { Firearm } from '@app/models/firearm';
 
 @Component({
   selector: 'app-reload-view',
@@ -11,21 +13,28 @@ import { Lookup } from '@app/models/lookup';
   styleUrls: ['./reload-view.component.scss']
 })
 export class ReloadViewComponent implements OnInit {
+  reloadId!: string;
+
   reload$!: Observable<Reload>;
+
+  firearms$!: Observable<Firearm[]>;
 
   lookups$!: Observable<Lookup>;
 
   constructor(
     private route: ActivatedRoute,
-    private reloadService: ReloadService
+    private reloadService: ReloadService,
+    private firearmService: FirearmService
   ) { }
 
   ngOnInit() {
-    let reloadId = +this.route.snapshot.paramMap.get('reloadId')!;
+    this.reloadId = this.route.snapshot.paramMap.get('reloadId')!;
 
-    this.reload$ = this.reloadService.getReload(reloadId);
+    this.reload$ = this.reloadService.getReload(this.reloadId);
 
     this.lookups$ = this.reloadService.getEnums();
+
+    this.firearms$ = this.firearmService.getFirearmsByCartridge('1');
   }
 
   getTitle(reload: Reload, lookups: Lookup): string {

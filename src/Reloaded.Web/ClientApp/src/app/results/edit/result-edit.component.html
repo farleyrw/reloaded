@@ -3,23 +3,44 @@
       [ngClass]="{ 'was-validated': resultForm.submitted }">
     <h1 class="mb-3">{{ mode | titlecase }} Result</h1>
 
-    <div class="mb-3 row" *ngIf="firearm$ | async as firearm">
-        <label for="staticFirearm" class="col-2 col-form-label">Firearm</label>
-        <div class="col-10">
-            <input type="text" class="form-control-plaintext fw-bold" id="staticFirearm" [value]="firearm.name" readonly />
+    <div class="mb-3 row">
+        <div class="col-12 col-md">
+
+            <div class="mb-3" *ngIf="reload">
+                <label for="staticReload" class="col-2 col-form-label">Reload</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext fw-bold" id="staticReload" [value]="getReloadDescription(reload)" readonly />
+                </div>
+            </div>
+
+            <div class="mb-3" *ngIf="needsFirearmSelection">
+                <div *ngIf="firearms$ | async as firearms">
+                    <label for="selectFirearm" class="form-label">Firearm</label>
+                    <select name="firearm" class="form-select form-control"
+                            [(ngModel)]="result.firearmId" #selectFirearm="ngModel" required>
+                        <option [ngValue]="undefined" disabled hidden>Select a firearm</option>
+                        <option *ngFor="let firearm of firearms" [value]="firearm.firearmId">{{ firearm.name }}</option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="resultForm.submitted && selectFirearm.errors">
+                        Please select a firearm.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3" *ngIf="firearm$ | async as firearm">
+                <label for="staticFirearm" class="col-2 col-form-label">Firearm</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext fw-bold" id="staticFirearm" [value]="firearm.name" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md">
+            <label for="notes" class="form-label">Notes (optional)</label>
+            <textarea class="form-control h-75" id="notes" name="notes"
+                      [(ngModel)]="result.notes" maxlength="500"></textarea>
         </div>
     </div>
-
-    <!-- TODO: show firearm picker matching caliber -->
-
-    <div class="mb-3 row" *ngIf="reload$ | async as reload">
-        <label for="staticReload" class="col-2 col-form-label">Reload</label>
-        <div class="col-10">
-            <input type="text" class="form-control-plaintext fw-bold" id="staticReload" [value]="getReloadDescription(reload)" readonly />
-        </div>
-    </div>
-
-    <!-- TODO: show firearm picker matching caliber -->
 
     <div class="mb-3">
         <label for="date" class="form-label">Date</label>
@@ -80,13 +101,7 @@
         </div>
     </div>
 
-    <div class="mb-3">
-        <label for="notes" class="form-label">Notes (optional)</label>
-        <textarea class="form-control" id="notes" name="notes"
-                  [(ngModel)]="result.notes" maxlength="500"></textarea>
-    </div>
-
-    <div class="row m-3 g-3 justify-content-sm-end text-center">
+    <div class="row m-1 g-3 justify-content-sm-end text-center">
         <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3">
             <i class="bi bi-check-circle-fill"></i>
             Save

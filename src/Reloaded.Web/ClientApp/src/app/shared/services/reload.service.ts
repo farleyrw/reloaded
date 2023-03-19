@@ -17,13 +17,13 @@ export class ReloadService {
     //return this.http.get(`${this.baseUrl}/1`); // account # hard coded
   }
 
-  getReload(reloadId: number): Observable<Reload> {
+  getReload(reloadId: string | number): Observable<Reload> {
     return of(this.reloads[0]);
 
     //return this.http.get(`${this.baseUrl}/${reloadId}`);
   }
 
-  getReloadsForFirearm(firearmId: number): Observable<Reload[]> {
+  getReloadsForFirearm(firearmId: string | number): Observable<Reload[]> {
     return of(this.reloads);
 
     //return this.http.get(`${this.baseUrl}/firearm/${firearmId}`);

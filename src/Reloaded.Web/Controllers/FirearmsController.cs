@@ -30,6 +30,12 @@ namespace Reloaded.Web.Controllers
 			return firearm;
 		}
 
+		[HttpGet("cartridge")]
+		public async Task<IEnumerable<Firearm>> GetByCartridge(string cartridge)
+		{
+			throw new NotImplementedException();
+		}
+
 		[HttpGet("list/{accountId:int}")]
 		public async Task<IEnumerable<Firearm>> GetList(int accountId)
 		{

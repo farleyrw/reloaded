@@ -99,8 +99,33 @@
         </ul>
 
         <!--<pre>{{ data.lookups | json }}</pre>-->
-        <!-- TODO: list firearms -->
-        <!-- TODO: list reloads -->
+        <!-- TODO: list results for reload -->
+    </div>
+
+    <!-- TODO: move to component -->
+    <div class="container my-3" *ngIf="firearms$ | async as firearms">
+        <h2>Firearms for cartridge</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Firearm</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let firearm of firearms">
+                    <td>{{ firearm.name }}</td>
+                    <td>{{ firearm.nickname }}</td>
+                    <td>
+                        <a routerLink="/results/edit/add" [queryParams]="{ reloadId: reloadId, firearmId: firearm.firearmId }">
+                            <i class="bi bi-clipboard-plus-fill" title="Add result"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </ng-container>
 
