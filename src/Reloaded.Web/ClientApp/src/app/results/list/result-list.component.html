@@ -1,4 +1,4 @@
-<h1 class="mb-4">
+<h1 class="mb-4" id="tableHeader">
   All Results
 
   <!-- TODO: Add firearm and reload IDs-->
@@ -10,7 +10,7 @@
 </h1>
 
 <div class="container" *ngIf="results$ | async as results">
-  <table class="table">
+  <table class="table" aria-describedby="tableHeader">
     <thead>
       <tr>
         <th scope="col">Date</th>

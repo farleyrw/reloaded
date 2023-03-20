@@ -104,9 +104,9 @@
 
     <!-- TODO: move to component -->
     <div class="container my-3" *ngIf="firearms$ | async as firearms">
-        <h2>Firearms for cartridge</h2>
+        <h2 id="tableHeader">Firearms for cartridge</h2>
 
-        <table class="table">
+        <table class="table" aria-describedby="tableHeader">
             <thead>
                 <tr>
                     <th scope="col">Firearm</th>
@@ -118,9 +118,9 @@
                 <tr *ngFor="let firearm of firearms">
                     <td>{{ firearm.name }}</td>
                     <td>{{ firearm.nickname }}</td>
-                    <td>
+                    <td class="text-end pe-3">
                         <a routerLink="/results/edit/add" [queryParams]="{ reloadId: reloadId, firearmId: firearm.firearmId }">
-                            <i class="bi bi-clipboard-plus-fill" title="Add result"></i>
+                            <i class="bi bi-plus-circle-fill" title="Add result"></i>
                         </a>
                     </td>
                 </tr>
