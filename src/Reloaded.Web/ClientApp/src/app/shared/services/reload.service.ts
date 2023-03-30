@@ -18,7 +18,7 @@ export class ReloadService {
   }
 
   getReload(reloadId: string | number): Observable<Reload> {
-    return of(this.reloads[0]);
+    return of(this.reloads.filter(r => r.reloadId == reloadId)[0]);
 
     //return this.http.get(`${this.baseUrl}/${reloadId}`);
   }

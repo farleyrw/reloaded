@@ -1,110 +1,108 @@
 
 <div *ngIf="firearm$ | async as firearm" class="container">
-  <div class="row align-items-center">
-    <h1 class="col my-4 text-truncate">{{ firearm.name }}</h1>
+    <div class="row align-items-center">
+        <h1 class="col my-4 text-truncate">{{ firearm.name }}</h1>
 
-    <div class="col-auto">
-      <a class="btn btn-primary" routerLink="/firearms/edit/{{ firearm.firearmId }}">
-        <i class="bi bi-pencil-fill"></i>
-        Edit
-      </a>
+        <div class="col-auto">
+            <a class="btn btn-primary" routerLink="/firearms/edit/{{ firearm.firearmId }}">
+                <i class="bi bi-pencil-fill"></i>
+                Edit
+            </a>
+        </div>
     </div>
-  </div>
-  <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngIf="firearm.nickname">
-          <div class="row">
-              <div class="col fw-bold">Nickname</div>
-              <div class="col-8">{{ firearm.nickname }}</div>
-          </div>
-      </li>
-      <li class="list-group-item">
-          <div class="row">
-              <div class="col fw-bold">Brand</div>
-              <div class="col-8">{{ firearm.brand }}</div>
-          </div>
-      </li>
-      <li class="list-group-item">
-          <div class="row">
-              <div class="col fw-bold">Model</div>
-              <div class="col-8">{{ firearm.model }}</div>
-          </div>
-      </li>
-      <li class="list-group-item">
-          <div class="row">
-              <div class="col fw-bold">Chamber</div>
-              <div class="col-8" *ngIf="lookups$ | async as lookup">
-                  {{ lookup.cartridges[firearm.chamber] }}
-              </div>
-          </div>
-      </li>
-      <li class="list-group-item">
-          <div class="row">
-              <div class="col fw-bold">Barrel Length</div>
-              <div class="col-8">
-                  {{ firearm.barrelLength | number: '2.2-2' }} inches
-              </div>
-          </div>
-      </li>
-      <li class="list-group-item">
-          <div class="row">
-              <div class="col fw-bold">Barrel Twist</div>
-              <div class="col-8">
-                  1 in {{ firearm.barrelTwist }} inches
-              </div>
-          </div>
-      </li>
-  </ul>
-
-  <ng-container *ngIf="{reloads: reloads$ | async, lookups: lookups$ | async} as data">
-    <div *ngIf="data.reloads && data.lookups">
-      <h2 class="my-4">
-        Reloads
-        <span class="fs-6 align-text-top badge rounded-pill text-bg-info">{{ data.reloads.length }}</span>
-
-        <a class="btn btn-primary float-end" routerLink="/reloads/edit/add/{{ firearm.firearmId }}">
-          <i class="bi bi-plus-lg"></i>
-          Add
-        </a>
-        <!-- TODO: link to reload view for firearm -->
-        <a class="btn btn-link float-end me-2" routerLink="/reloads">
-          <i class="bi bi-list"></i>
-          View All
-        </a>
-      </h2>
-
-      <ul class="list-group list-group-flush" *ngIf="data.reloads.length > 0">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngIf="firearm.nickname">
+            <div class="row">
+                <div class="col fw-bold">Nickname</div>
+                <div class="col-8">{{ firearm.nickname }}</div>
+            </div>
+        </li>
         <li class="list-group-item">
-          <div class="row fw-bold">
-            <div class="col">Date</div>
-            <div class="col">Powder</div>
-            <div class="col">Bullet</div>
-          </div>
+            <div class="row">
+                <div class="col fw-bold">Brand</div>
+                <div class="col-8">{{ firearm.brand }}</div>
+            </div>
         </li>
-        <!-- TODO: order by create date  -->
-        <li class="list-group-item" *ngFor="let reload of data.reloads; index as i">
-          <div class="row">
-            <!-- TODO: link out to manage reload -->
-            <!-- TODO: link out to view results-->
-            <div class="col">
-                <a routerLink="/results/edit/add" [queryParams]="{ firearmId: firearm.firearmId, reloadId: reload.reloadId }">
-                    <i class="bi bi-bullseye" role="button" title="Add Result"></i>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col fw-bold">Model</div>
+                <div class="col-8">{{ firearm.model }}</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col fw-bold">Chamber</div>
+                <div class="col-8" *ngIf="lookups$ | async as lookup">
+                    {{ lookup.cartridges[firearm.chamber] }}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col fw-bold">Barrel Length</div>
+                <div class="col-8">
+                    {{ firearm.barrelLength | number: '2.2-2' }} inches
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col fw-bold">Barrel Twist</div>
+                <div class="col-8">
+                    1 in {{ firearm.barrelTwist }} inches
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ng-container *ngIf="{reloads: reloads$ | async, lookups: lookups$ | async} as data">
+        <div *ngIf="data.reloads && data.lookups">
+            <h2 class="my-4" id="tableHeader">
+                Reloads
+                <span class="fs-6 align-text-top badge rounded-pill text-bg-info">{{ data.reloads.length }}</span>
+
+                <a class="btn btn-primary float-end" routerLink="/reloads/edit/add/{{ firearm.firearmId }}">
+                    <i class="bi bi-plus-lg"></i>
+                    Add
                 </a>
-                {{ reload.createdOn | date: 'mediumDate' }}
+                <!-- TODO: link to reload view for firearm -->
+                <a class="btn btn-link float-end me-2" routerLink="/reloads">
+                    <i class="bi bi-list"></i>
+                    View All
+                </a>
+            </h2>
+
+            <table *ngIf="data.reloads.length > 0" class="table table-striped" aria-describedby="tableHeader">
+                <thead>
+                    <tr>
+                        <th scope="col">Reload</th>
+                        <th scope="col">Powder</th>
+                        <th scope="col">Bullet</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let reload of data.reloads; index as i">
+                        <td>
+                            <a routerLink="/results/edit/add" [queryParams]="{ firearmId: firearm.firearmId, reloadId: reload.reloadId }">
+                                <i class="bi bi-bullseye" role="button" title="Add Result"></i>
+                            </a>
+                            {{ reload.nickname || (reload.createdOn | date: 'mediumDate') }}
+                        </td>
+                        <td>
+                            {{ reload.powderCharge }} gr {{ reload.powder }}
+                        </td>
+                        <td>
+                            {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
+                            {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="data.reloads.length == 0">
+                No reloads yet
             </div>
-            <div class="col">{{ reload.powderCharge }} gr {{ reload.powder }}</div>
-            <div class="col">
-              {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
-              {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
-            </div>
-          </div>
-          <!--<pre>{{ reload | json }}</pre>-->
-        </li>
-      </ul>
-      <div *ngIf="data.reloads.length == 0">
-        No reloads yet
-      </div>
-    </div>
-  </ng-container>
+        </div>
+    </ng-container>
 </div>
 
 <!-- TODO:

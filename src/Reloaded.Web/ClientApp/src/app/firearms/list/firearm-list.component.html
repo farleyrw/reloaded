@@ -1,44 +1,46 @@
-<h1 class="mb-4">
-  Firearms
+<h1 class="mb-4" id="tableHeader">
+    Firearms
 
-  <a class="btn btn-primary float-end" routerLink="/firearms/edit/add">
-    <i class="bi bi-plus-lg"></i>
-    Add
-  </a>
+    <a class="btn btn-primary float-end" routerLink="/firearms/edit/add">
+        <i class="bi bi-plus-lg"></i>
+        Add
+    </a>
 </h1>
 
-<ul class="list-group list-group-flush container">
-  <li class="list-group-item fw-bold">
-    <div class="row">
-      <div class="col">Gun</div>
-    </div>
-  </li>
-  <li *ngFor="let firearm of firearms$ | async" class="list-group-item">
-    <div class="row">
-      <div class="col">
-        {{ firearm.name }}
-        <span *ngIf="firearm.nickname">({{ firearm.nickname }})</span>
-      </div>
-      <div class="col-auto">
-        {{ firearm.type }}
-      </div>
-      <div class="col-auto">
-        <a routerLink="/firearms/{{ firearm.firearmId }}">
-          <i class="bi bi-eye-fill" role="button" title="View"></i>
-        </a>
-        <a routerLink="/firearms/edit/{{ firearm.firearmId }}">
-          <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
-        </a>
-        <i class="bi bi-bullseye" role="button" title="Results"></i>
-      </div>
-    </div>
-  </li>
-</ul>
+<table class="table table-striped" aria-describedby="tableHeader">
+    <thead>
+        <tr>
+            <th scope="col">Gun</th>
+            <th scope="col" class="d-none d-sm-table-cell">Type</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr *ngFor="let firearm of firearms$ | async">
+            <td>
+                {{ firearm.name }}
+                <span *ngIf="firearm.nickname">({{ firearm.nickname }})</span>
+            </td>
+            <td class="d-none d-sm-table-cell">
+                {{ firearm.type }}
+            </td>
+            <td>
+                <a class="me-2" routerLink="/firearms/{{ firearm.firearmId }}">
+                    <i class="bi bi-eye-fill" role="button" title="View"></i>
+                </a>
+                <a class="me-2" routerLink="/firearms/edit/{{ firearm.firearmId }}">
+                    <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
+                </a>
+                <i class="bi bi-bullseye" role="button" title="Results"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 <!-- TODO:
-  Link to handloads for each gun
+  Link to reloads for each gun
   Breadcrumbs
   Show icon for type
   Add filter options
-  Create aggregate query for view model (name, #handloads, )
+  Create aggregate query for view model (name, # reloads)
 -->

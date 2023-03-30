@@ -37,3 +37,11 @@ input, select, select option, textarea {
 .ng-submitted input.ng-invalid + label {
   border-color: $danger;
 }
+
+i.bi {
+    font-size: 1.2rem;
+}
+
+a:not(.btn) i.bi {
+    color: $blue-300;
+}
