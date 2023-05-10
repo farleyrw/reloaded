@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reloaded.Core.Business.Guns;
 using Reloaded.Core.Business.Reloading;
@@ -17,5 +18,12 @@ namespace Reloaded.Core.Extensions
 
 			return services;
 		}
+
+		public static IServiceProvider ConfigureCore(this IServiceProvider services)
+		{
+			services.ConfigureDbMigrations();
+
+			return services;
+        }
 	}
 }

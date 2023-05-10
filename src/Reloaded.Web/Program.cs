@@ -33,4 +33,6 @@ app.MapFallbackToFile("index.html");
 
 app.ConfigureHealthChecks();
 
+app.ConfigureCore();
+
 app.Run();

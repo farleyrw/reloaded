@@ -1,5 +1,6 @@
 ﻿using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Reloaded.Core.Extensions;
 
 namespace Reloaded.Web.Extensions
 {
@@ -17,5 +18,12 @@ namespace Reloaded.Web.Extensions
 
             return app;
 		}
+
+        public static WebApplication ConfigureCore(this WebApplication app)
+        {
+            app.Services.ConfigureCore();
+
+            return app;
+        }
 	}
 }

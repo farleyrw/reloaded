@@ -6,7 +6,7 @@ namespace Reloaded.Common.Models
 {
     /// <summary>The account class.</summary>
     [Table("account")]
-	public class Account : IAuditTimestamp
+	public class UserAccount : IAuditTimestamp
 	{
 		[Key]
         public int AccountId { get; set; }
