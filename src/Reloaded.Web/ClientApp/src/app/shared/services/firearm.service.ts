@@ -12,15 +12,15 @@ export class FirearmService {
   constructor(private http: HttpClient) { }
 
   getFirearm(firearmId: string | number): Observable<Firearm> {
-    return of(this.firearms[0]);
+    //return of(this.firearms[0]);
 
-    //return this.http.get(`${this.baseUrl}/${firearmId}`);
+    return this.http.get<Firearm>(`${this.baseUrl}/${firearmId}`);
   }
 
   getFirearms(): Observable<Firearm[]> {
-    return of(this.firearms);
+    //return of(this.firearms);
 
-    //return this.http.get(`${this.baseUrl}/list/1`); // account # hard coded
+    return this.http.get<Firearm[]>(`${this.baseUrl}/list/1`); // account # hard coded
   }
 
   getFirearmsByCartridge(cartridge: string | number): Observable<Firearm[]> {

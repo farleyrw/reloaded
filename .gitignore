@@ -343,3 +343,5 @@ healthchecksdb
 coverage.opencover.xml
 
 .angular
+/app/CodeCoverage
+/app

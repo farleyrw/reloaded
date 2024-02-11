@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
 using Reloaded.Common.Enums;
 using Reloaded.Common.Enums.Firearms;
@@ -46,43 +48,12 @@ namespace Reloaded.Data.Initialization
             {
                 var accounts = this.userAccountContext.UserAccounts.ToList();
 
-                this.firearmContext.Firearms.AddRange(
-                    new Firearm
-                    {
-                        Nickname = "Sharts",
-                        Notes = "Super awesome scope",
-                        Model = "700 SPS",
-                        Brand = "Remington",
-                        BarrelLength = 22,
-                        BarrelTwist = 8,
-                        Type = FirearmType.Rifle,
-                        Chamber = Cartridge.TwoTwoThreeRemington,
-                        AccountId = accounts.FirstOrDefault().AccountId
-                    },
-                    new Firearm
-                    {
-                        Nickname = "Turds",
-                        Notes = "A truck gun",
-                        Model = "Model 70",
-                        Brand = "Winchester",
-                        BarrelLength = 20,
-                        BarrelTwist = 10,
-                        Type = FirearmType.Rifle,
-                        Chamber = Cartridge.ThirtyOSixSpringfield,
-                        AccountId = accounts.FirstOrDefault().AccountId
-                    },
-                    new Firearm
-                    {
-                        Nickname = "Boof",
-                        Notes = "A boofer",
-                        Model = "AR 15",
-                        Brand = "Custom",
-                        BarrelLength = 16,
-                        BarrelTwist = 8,
-                        Type = FirearmType.Rifle,
-                        Chamber = Cartridge.TwoTwoThreeRemington,
-                        AccountId = accounts.LastOrDefault().AccountId
-                    });
+                var firearms = GetData<Firearm>();
+
+                // Map to account by index
+                firearms.ForEach(x => x.AccountId = accounts[x.AccountId].AccountId);
+
+                this.firearmContext.Firearms.AddRange(firearms);
 
                 this.firearmContext.SaveChanges();
             }
@@ -107,7 +78,14 @@ namespace Reloaded.Data.Initialization
         {
             string filePath = GetFileContents<T>();
 
-            return JsonSerializer.Deserialize<List<T>>(filePath, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            options.Converters.Add(new JsonStringEnumConverter());
+
+            return JsonSerializer.Deserialize<List<T>>(filePath, options);
         }
     }
 }

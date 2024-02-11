@@ -12,4 +12,10 @@ DELETE FROM dbo.reload
 DELETE FROM dbo.firearm
 DELETE FROM dbo.account
 
+DBCC CHECKIDENT ('[reloadFirearmMap]', RESEED, 0);
+DBCC CHECKIDENT ('[reloadResult]', RESEED, 0);
+DBCC CHECKIDENT ('[reload]', RESEED, 0);
+DBCC CHECKIDENT ('[firearm]', RESEED, 0);
+DBCC CHECKIDENT ('[account]', RESEED, 0);
+
 GO

@@ -7,6 +7,8 @@ builder.ConfigureWebServices();
 
 var app = builder.Build();
 
+// TODO: setup auth (auth0): https://auth0.com/blog/introducing-auth0-templates-for-dotnet/
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

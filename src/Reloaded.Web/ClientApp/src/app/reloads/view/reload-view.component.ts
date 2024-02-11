@@ -34,7 +34,7 @@ export class ReloadViewComponent implements OnInit {
 
     this.lookups$ = this.reloadService.getEnums();
 
-    this.firearms$ = this.firearmService.getFirearmsByCartridge('1');
+    this.firearms$ = this.firearmService.getFirearmsByCartridge('1'); // TODO: get value from reload stream
   }
 
   getTitle(reload: Reload, lookups: Lookup): string {
