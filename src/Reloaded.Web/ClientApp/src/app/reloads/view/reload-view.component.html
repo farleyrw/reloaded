@@ -119,9 +119,10 @@
                     <td>{{ firearm.name }}</td>
                     <td>{{ firearm.nickname }}</td>
                     <td class="text-end pe-3">
-                        <a routerLink="/results/edit/add" [queryParams]="{ reloadId: reloadId, firearmId: firearm.firearmId }">
-                            <i class="bi bi-plus-circle-fill" title="Add result"></i>
+                        <a class="me-2" routerLink="/results/edit/add" [queryParams]="{ reloadId: reloadId, firearmId: firearm.firearmId }">
+                            <i class="bi bi-binoculars-fill" title="See results"></i>
                         </a>
+                        <i class="bi bi-journal-plus" title="Add result"></i>
                     </td>
                 </tr>
             </tbody>
