@@ -16,7 +16,6 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.11" />
-    <PackageReference Include="NLog" Version="5.1.4" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.4" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="9.3.0.71466">
       <PrivateAssets>all</PrivateAssets>
