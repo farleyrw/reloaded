@@ -1,0 +1,27 @@
+FROM node as build-node
+WORKDIR /ClientApp
+
+# ClientApp folder contains all SPA code
+COPY src/Reload.Web/ClientApp/package.json .
+COPY src/Reload.Web/ClientApp/package-lock.json .
+RUN npm install
+COPY src/Reload.Web/ClientApp/ . 
+# This command will generate build folder
+RUN npm run build
+
+FROM mcr.microsoft.com/dotnet/sdk AS build-env
+WORKDIR /App
+
+# Copy everything
+COPY . ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet
+WORKDIR /App
+COPY --from=build-env /App/out .
+EXPOSE 5000
+ENTRYPOINT ["dotnet", "Reloaded.Web.dll"]

@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk AS build-env
+RUN apt-get update
+RUN apt-get install gnupg wget git unzip -y
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install nodejs -y
+
+WORKDIR /app
+
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+
+COPY out ./
+
+EXPOSE 5000
+ENTRYPOINT ["dotnet", "Reloaded.Web.dll"]

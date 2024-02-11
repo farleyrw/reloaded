@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reloaded.Common.Tests", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reloaded.Web", "src\Reloaded.Web\Reloaded.Web.csproj", "{2299B686-CE33-4D32-8573-C85BDDDA2522}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reloaded.Web.Tests", "tests\Reloaded.Web.Tests\Reloaded.Web.Tests.csproj", "{155EAC67-851A-4314-A820-950B82C9997D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reloaded.Web.Tests", "tests\Reloaded.Web.Tests\Reloaded.Web.Tests.csproj", "{155EAC67-851A-4314-A820-950B82C9997D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8DF3A031-D5EB-42EB-8C7D-B1B225DA39EE}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
