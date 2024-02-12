@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Reload } from '@app/models/reload';
+import { Lookup } from '../../models/lookup';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,20 @@ export class ReloadService {
 
   saveReloadResult(result: any) { // TODO: add type
     return this.http.post(`${this.baseUrl}/result`, result);
+  }
+
+  getTitle(reload: Reload, lookups: Lookup): string {
+    if (reload.nickname) {
+      return reload.nickname;
+    }
+
+    return [
+      lookups.cartridges[reload.casing.cartridge],
+      reload.bullet.weight, 'gr',
+      reload.bullet.brand,
+      reload.powderCharge, 'gr',
+      reload.powder
+    ].join(' ');
   }
 
   private reloads: Reload[] = [

@@ -2,22 +2,21 @@
 <div *ngIf="result$ | async as result" class="container">
   <div class="row align-items-center">
     <h1 class="col my-4 text-truncate">
-      Result:
-      {{ result.date | date: 'longDate' }}
+      Result: {{ result.date | date: 'longDate' }}
     </h1>
 
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         <div class="row">
           <div class="col fw-bold">Date</div>
-          <div class="col-8">{{ result.date | date: 'MMMM d, y, h:mm:ss a' }}</div>
+          <div class="col-8">{{ result.date | date: 'MMMM d, y h:mm a' }}</div>
         </div>
       </li>
       <li class="list-group-item">
         <div class="row">
           <div class="col fw-bold">Reload</div>
           <div class="col-8">
-            <a routerLink="/reloads/view/{{ result.reloadId}}">
+            <a routerLink="/reloads/view/{{ result.reloadId }}">
               {{ result.reloadId }}
             </a>
           </div>
@@ -37,7 +36,7 @@
         <div class="row">
           <div class="col fw-bold">Distance</div>
           <div class="col-8">
-            {{ result.distance }} yards
+            {{ result.distance }} yds.
           </div>
         </div>
       </li>
@@ -45,7 +44,7 @@
         <div class="row">
           <div class="col fw-bold">Group Size</div>
           <div class="col-8">
-            {{ result.groupSize | number: '1.2-2' }} inches
+            {{ result.groupSize | number: '1.2-2' }} in.
           </div>
         </div>
       </li>
@@ -70,7 +69,7 @@
           <div class="col fw-bold">Weather</div>
           <div class="col-8" >
             <div *ngIf="result.weather.hasData(); else noData">
-              <div>{{ result.weather.temperature }} F</div>
+              <div>{{ result.weather.temperature }} °F</div>
               <div>{{ result.weather.elevation }} ft</div>
               <div>{{ result.weather.windSpeed }} mph</div>
             </div>
@@ -79,5 +78,11 @@
         </div>
       </li>
     </ul>
+    
+    <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
+        <h2 *ngIf="data.reload && data.lookups" class="my-3">Reload: {{ getTitle(data.reload, data.lookups) }}</h2>
+
+        <!-- TODO: create reload child component -->
+    </ng-container>
   </div>
 </div>

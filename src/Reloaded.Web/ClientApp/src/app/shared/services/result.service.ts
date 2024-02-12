@@ -14,12 +14,14 @@ export class ResultService {
   }
 
   getResultsForReload(reloadId: string | number): Observable<Result[]> {
-    return of(this.results)
+    return of(this.results);
   }
 
   getResult(reloadResultId: string | number): Observable<Result> {
-    return of(this.results[0])
+    return of(this.results[+reloadResultId - 1]);
   }
+
+  // TODO: move to service/data
 
   private results: Result[] = [{
     reloadResultId: 1,
@@ -31,6 +33,17 @@ export class ResultService {
     totalShots: 5,
     velocity: 3350,
     groupSize: .85,
+    weather: new Weather()
+  }, {
+    reloadResultId: 2,
+    reloadId: 2,
+    firearmId: 2,
+    date: new Date("2022-03-15T04:56:15.488Z"),
+    notes: 'Upset stomach, indigestion',
+    distance: 200,
+    totalShots: 5,
+    velocity: 2950,
+    groupSize: 1.25,
     weather: new Weather()
   }];
 }
