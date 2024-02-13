@@ -16,4 +16,6 @@ export class FirearmListComponent implements OnInit {
   ngOnInit() {
     this.firearms$ = this.firearmService.getFirearms();
   }
+
+  getTitle = this.firearmService.getTitle;
 }

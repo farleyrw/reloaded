@@ -13,9 +13,10 @@
             <thead>
                 <tr>
                     <th class="d-none d-sm-table-cell" scope="col">Reload</th>
+                    <th scope="col">Cartridge</th>
                     <th scope="col">Bullet</th>
                     <th scope="col">Powder</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -24,21 +25,24 @@
                         {{ reload.nickname || (reload.createdOn | date: 'longDate') }}
                     </td>
                     <td>
-                        {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
-                        {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
+                        {{ data.lookups.cartridges[reload.casing.cartridge] }}
                     </td>
                     <td>
-                        {{ reload.powderCharge }} gr {{ reload.powder }}
+                        {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
+                        <span class="d-block d-sm-inline">{{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}</span>
+                    </td>
+                    <td>
+                        {{ reload.powderCharge }} gr <span class="d-block d-sm-inline">{{ reload.powder }}</span>
                     </td>
                     <td class="text-end">
-                        <a class="me-2" routerLink="/reloads/view/{{ reload.reloadId }}">
+                        <a class="ms-2 d-block d-md-inline-block" routerLink="/reloads/view/{{ reload.reloadId }}">
                             <i class="bi bi-eye-fill" role="button" title="View"></i>
                         </a>
-                        <a class="me-2" routerLink="/reloads/edit/{{ reload.reloadId }}">
+                        <a class="ms-2 d-block d-md-inline-block" routerLink="/reloads/edit/{{ reload.reloadId }}">
                             <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
                         </a>
-                        <a routerLink="/results/view/{{ reload.reloadId }}">
-                            <i class="bi bi-bullseye" role="button" title="Results"></i>
+                        <a class="ms-2 d-block d-md-inline-block" routerLink="/results" [queryParams]="{ reloadId: reload.reloadId }">
+                            <i class="bi bi-list-ul" role="button" title="Results"></i>
                         </a>
                     </td>
                 </tr>
@@ -52,4 +56,5 @@
 
 <!-- TODO:
   show message when no firearms
+  show tags
 -->

@@ -1,125 +1,147 @@
-<form name="resultForm" class="container needs-validation" novalidate
-      *ngIf="result && lookups$ | async as lookups" #resultForm="ngForm" (ngSubmit)="resultForm.valid && onSubmit()"
-      [ngClass]="{ 'was-validated': resultForm.submitted }">
-    <h1 class="mb-3">{{ mode | titlecase }} Result</h1>
+<div *ngIf="reloadMissing; else noError">
+    <div class="alert alert-warning" role="alert">
+        You've accessed this page in error.
+        <button class="btn btn-link" onclick="history.back()">Go Back</button>
+    </div>
+</div>
 
-    <div class="mb-3 row">
-        <div class="col-12 col-md">
+<ng-template #noError>
+    <ng-container *ngIf="{ result: result$ | async, lookups: lookups$ | async } as data">
+        <form name="resultForm" *ngIf="data.result && data.lookups" class="container needs-validation" novalidate
+              #resultForm="ngForm" (ngSubmit)="resultForm.valid && onSubmit()"
+              [ngClass]="{ 'was-validated': resultForm.submitted }">
+            <h1 class="mb-3">{{ mode | titlecase }} Result</h1>
 
-            <div class="mb-3" *ngIf="reload">
-                <label for="staticReload" class="col-2 col-form-label">Reload</label>
-                <div class="col-10">
-                    <input type="text" class="form-control-plaintext fw-bold" id="staticReload" [value]="getReloadDescription(reload)" readonly />
+            <div class="mb-3 row">
+                <div class="col-12 col-md">
+
+                    <div class="mb-3" *ngIf="reload$ | async as reload">
+                        <label for="staticReload" class="col-2 col-form-label">Reload</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control fw-bold" id="staticReload" [value]="getReloadTitle(reload, data.lookups)" disabled readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3" *ngIf="needsFirearmSelection">
+                        <div *ngIf="firearms$ | async as firearms">
+                            <label for="selectFirearm" class="form-label">Firearm</label>
+                            <select name="firearm" class="form-select form-control"
+                                    [(ngModel)]="data.result.firearmId" #selectFirearm="ngModel" required>
+                                <option [ngValue]="undefined" disabled hidden>Select a firearm</option>
+                                <option *ngFor="let firearm of firearms" [value]="firearm.firearmId">{{ firearm.name }}</option>
+                            </select>
+                            <div class="invalid-feedback" *ngIf="resultForm.submitted && selectFirearm.errors">
+                                Please select a firearm.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" *ngIf="firearm$ | async as firearm">
+                        <label for="staticFirearm" class="col-2 col-form-label">Firearm</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control fw-bold" id="staticFirearm" [value]="getFirearmTitle(firearm)" disabled readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md">
+                    <label for="notes" class="form-label">Notes (optional)</label>
+                    <textarea class="form-control h-75" id="notes" name="notes"
+                              [(ngModel)]="data.result.notes" maxlength="500"></textarea>
                 </div>
             </div>
 
-            <div class="mb-3" *ngIf="needsFirearmSelection">
-                <div *ngIf="firearms$ | async as firearms">
-                    <label for="selectFirearm" class="form-label">Firearm</label>
-                    <select name="firearm" class="form-select form-control"
-                            [(ngModel)]="result.firearmId" #selectFirearm="ngModel" required>
-                        <option [ngValue]="undefined" disabled hidden>Select a firearm</option>
-                        <option *ngFor="let firearm of firearms" [value]="firearm.firearmId">{{ firearm.name }}</option>
-                    </select>
-                    <div class="invalid-feedback" *ngIf="resultForm.submitted && selectFirearm.errors">
-                        Please select a firearm.
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="date" class="form-label">Date</label>
+                    <!-- <input type="date" class="form-control" id="date" name="date"
+                       [(ngModel)]="data.result.date" #date="ngModel"
+                       [min]="minDate | date:'yyyy-MM-dd'" [max]="maxDate | date:'yyyy-MM-dd'" required /> -->
+                    <p-calendar inputId="date" name="date" #date="ngModel" class="d-block"
+                                [minDate]="minDate" [maxDate]="maxDate"
+                                [(ngModel)]="data.result.date" [showIcon]="true"></p-calendar>
+                    <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
+                        Please select a valid date.
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-end align-items-center">
+                    <button class="btn btn-success" type="button">
+                        <i class="bi bi-cloud-sun-fill"></i>
+                        Add Weather
+                    </button>
+
+                    <pre>{{ data.result.weather | json }}</pre>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="distance" class="form-label">Distance</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="distance" name="distance"
+                               [(ngModel)]="data.result.distance" #distance="ngModel" min="10" max="1000" required />
+                        <span class="input-group-text">yds.</span>
+                        <div class="invalid-feedback" *ngIf="resultForm.submitted && distance.errors">
+                            Please provide a distance between 10 and 1000 yds.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="velocity" class="form-label">Velocity (optional)</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="velocity" name="velocity"
+                               [(ngModel)]="data.result.velocity" #velocity="ngModel" min="500" max="5000" />
+                        <span class="input-group-text">fps</span>
+                        <div class="invalid-feedback" *ngIf="resultForm.submitted && velocity.errors">
+                            Please provide a velocity between 500 and 5000 fps.
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-3" *ngIf="firearm$ | async as firearm">
-                <label for="staticFirearm" class="col-2 col-form-label">Firearm</label>
-                <div class="col-10">
-                    <input type="text" class="form-control-plaintext fw-bold" id="staticFirearm" [value]="firearm.name" readonly />
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="totalShots" class="form-label">Total Shots</label>
+                    <input type="number" class="form-control" id="totalShots" name="totalShots"
+                           [(ngModel)]="data.result.totalShots" #totalShots="ngModel" min="2" max="10" required />
+                    <div class="invalid-feedback" *ngIf="resultForm.submitted && totalShots.errors">
+                        Please provide the # of shots between 2 and 10.
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label for="groupSize" class="form-label">Group Size</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="groupSize" name="groupSize"
+                               [(ngModel)]="data.result.groupSize" #groupSize="ngModel" min=".01" max="20" step=".01" required />
+                        <span class="input-group-text">in.</span>
+                        <div class="invalid-feedback" *ngIf="resultForm.submitted && groupSize.errors">
+                            Please provide a group size between 0 and 20 inches.
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-12 col-md">
-            <label for="notes" class="form-label">Notes (optional)</label>
-            <textarea class="form-control h-75" id="notes" name="notes"
-                      [(ngModel)]="result.notes" maxlength="500"></textarea>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" id="date" name="date"
-               [(ngModel)]="result.date" #date="ngModel"
-               [min]="minDate | date:'yyyy-MM-dd'" [max]="maxDate | date:'yyyy-MM-dd'" required />
-        <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
-            Please select a valid date.
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col">
-            <label for="distance" class="form-label">Distance</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="distance" name="distance"
-                       [(ngModel)]="result.distance" #distance="ngModel" min="10" max="1000" required />
-                <span class="input-group-text">yds.</span>
-                <div class="invalid-feedback" *ngIf="resultForm.submitted && distance.errors">
-                    Please provide a distance between 10 and 1000 yds.
-                </div>
+            <div class="row m-1 g-3 justify-content-sm-end text-center">
+                <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3" [disabled]="resultForm.untouched || resultForm.invalid">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Save
+                </button>
+                <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/results">
+                    <i class="bi bi-x-circle"></i>
+                    Discard
+                </button>
             </div>
-        </div>
+        </form>
 
-        <div class="col">
-            <label for="velocity" class="form-label">Velocity (optional)</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="velocity" name="velocity"
-                       [(ngModel)]="result.velocity" #velocity="ngModel" min="500" max="5000" />
-                <span class="input-group-text">fps</span>
-                <div class="invalid-feedback" *ngIf="resultForm.submitted && velocity.errors">
-                    Please provide a velocity between 500 and 5000 fps.
-                </div>
-            </div>
-        </div>
-    </div>
+        <pre>{{ data.result | json }}</pre>
 
-    <div class="row mb-3">
-        <div class="col">
-            <label for="totalShots" class="form-label">Total Shots</label>
-            <input type="number" class="form-control" id="totalShots" name="totalShots"
-                   [(ngModel)]="result.totalShots" #totalShots="ngModel" min="2" max="10" required />
-            <div class="invalid-feedback" *ngIf="resultForm.submitted && totalShots.errors">
-                Please provide the # of shots between 2 and 10.
-            </div>
-        </div>
+        <!-- TODO:
+            Implement save
+            Weather -> metadata?
+            Calculate MOA, store?
+        -->
 
-        <div class="col">
-            <label for="groupSize" class="form-label">Group Size</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="groupSize" name="groupSize"
-                       [(ngModel)]="result.groupSize" #groupSize="ngModel" min="0" max="20" step=".01" required />
-                <span class="input-group-text">in.</span>
-                <div class="invalid-feedback" *ngIf="resultForm.submitted && groupSize.errors">
-                    Please provide a group size between 0 and 20 inches.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row m-1 g-3 justify-content-sm-end text-center">
-        <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3">
-            <i class="bi bi-check-circle-fill"></i>
-            Save
-        </button>
-        <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/results">
-            <i class="bi bi-x-circle"></i>
-            Discard
-        </button>
-    </div>
-</form>
-
-<pre>{{ result | json }}</pre>
-
-<!-- TODO:
-    Implement save
-    Accept firearmId from querystring
-    Accept reloadId from querystring
-    Can't create a result without firearm and reload
-    Calculate MOA, store?
-    Weather -> metadata?
--->
+    </ng-container>
+</ng-template>

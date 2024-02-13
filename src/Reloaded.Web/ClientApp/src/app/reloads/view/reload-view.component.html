@@ -2,13 +2,13 @@
 <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
     <div *ngIf="data.reload && data.lookups" class="container">
         <div class="row align-items-center">
-            <h1 class="col my-4 text-truncate">{{ getTitle(data.reload, data.lookups) }}</h1>
+            <h1 class="col my-4 text-truncate">{{ getReloadTitle(data.reload, data.lookups) }}</h1>
 
             <div class="col-auto">
                 <div class="btn-group">
-                    <a class="btn btn-primary" routerLink="/reloads/edit/{{ data.reload.reloadId }}">
-                        <i class="bi bi-pencil-fill"></i>
-                        Edit
+                    <a class="btn btn-primary" routerLink="/results/edit/add" [queryParams]="{ reloadId: data.reload.reloadId }">
+                        <i class="bi bi-bullseye"></i>
+                        Add
                     </a>
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
@@ -16,15 +16,15 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" routerLink="/reload/clone">
-                                <i class="bi bi-node-plus-fill"></i>
-                                Clone
+                            <a class="dropdown-item" routerLink="/reloads/edit/{{ data.reload.reloadId }}">
+                                <i class="bi bi-pencil-fill"></i>
+                                Edit
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="/results/edit/add" [queryParams]="{ reloadId: data.reload.reloadId }">
-                                <i class="bi bi-journal-plus"></i>
-                                Add result
+                            <a class="dropdown-item" routerLink="/reload/clone">
+                                <i class="bi bi-node-plus-fill"></i>
+                                Clone
                             </a>
                         </li>
                     </ul>
@@ -110,19 +110,18 @@
             <thead>
                 <tr>
                     <th scope="col">Firearm</th>
-                    <th scope="col">Nickname</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 <tr *ngFor="let firearm of firearms">
-                    <td>{{ firearm.name }}</td>
-                    <td>{{ firearm.nickname }}</td>
+                    <td>{{ getFirearmTitle(firearm) }}</td>
                     <td class="text-end pe-3">
-                        <a class="me-2" routerLink="/results/edit/add" [queryParams]="{ reloadId: reloadId, firearmId: firearm.firearmId }">
-                            <i class="bi bi-binoculars-fill" title="See results"></i>
+                        <!-- Results for reload & firearm -->
+                        <i class="bi bi-binoculars-fill" title="See results"></i>
+                        <a class="ms-2" routerLink="/results/edit/add" [queryParams]="{ reloadId: reloadId, firearmId: firearm.firearmId }">
+                            <i class="bi bi-bullseye" title="Add result"></i>
                         </a>
-                        <i class="bi bi-journal-plus" title="Add result"></i>
                     </td>
                 </tr>
             </tbody>

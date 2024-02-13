@@ -18,8 +18,7 @@
     <tbody class="table-group-divider">
         <tr *ngFor="let firearm of firearms$ | async">
             <td>
-                {{ firearm.name }}
-                <span *ngIf="firearm.nickname">({{ firearm.nickname }})</span>
+                {{ getTitle(firearm) }}
             </td>
             <td class="d-none d-sm-table-cell">
                 {{ firearm.type }}

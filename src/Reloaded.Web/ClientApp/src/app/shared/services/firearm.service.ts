@@ -35,6 +35,14 @@ export class FirearmService {
     return this.http.post(this.baseUrl, firearm);
   }
 
+  getTitle(firearm: Firearm): string {
+    if (firearm.nickname) {
+      return `${firearm.nickname} (${firearm.name})`;
+    }
+
+    return firearm.name;
+  }
+
   private firearms: Firearm[] = [
     {
       firearmId: 1,

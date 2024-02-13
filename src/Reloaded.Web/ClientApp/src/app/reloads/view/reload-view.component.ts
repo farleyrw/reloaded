@@ -36,5 +36,7 @@ export class ReloadViewComponent implements OnInit {
     this.lookups$ = this.reloadService.getEnums();
   }
 
-  getTitle = this.reloadService.getTitle;
+  getReloadTitle = this.reloadService.getTitle;
+
+  getFirearmTitle = this.firearmService.getTitle;
 }

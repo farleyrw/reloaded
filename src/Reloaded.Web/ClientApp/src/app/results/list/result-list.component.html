@@ -1,13 +1,23 @@
 <h1 class="mb-4" id="tableHeader">
-  All Results
+    All Results
 
-  <!-- TODO: Add firearm and reload IDs-->
-  <!-- Maybe add button doesn't work here -->
-  <a class="btn btn-primary float-end" routerLink="/results/edit/add/">
-    <i class="bi bi-plus-lg"></i>
-    Add
-  </a>
+    <!-- TODO: Add titles for firearm and reload IDs-->
+    <!-- Not useful without context of a reload -->
+    <!-- <a class="btn btn-primary float-end" routerLink="/results/edit/add/">
+      <i class="bi bi-plus-lg"></i>
+      Add
+    </a> -->
 </h1>
+
+<div *ngIf="reloadFiltered">
+
+    <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
+        <div *ngIf="data.reload && data.lookups" class="alert alert-primary alert-dismissible fade show" role="alert">
+            Filtering by reload <strong>{{ getReloadTitle(data.reload, data.lookups) }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" routerLink="/results"></button>
+        </div>
+    </ng-container>
+</div>
 
 <div class="container" *ngIf="results$ | async as results">
   <table class="table" aria-describedby="tableHeader">
@@ -16,7 +26,7 @@
         <th scope="col">Date</th>
         <th scope="col">Firearm</th>
         <th scope="col">Reload</th>
-        <th scope="col">Result</th>
+        <th scope="col" class="text-end">Actions</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -24,10 +34,13 @@
         <td>{{ result.date | date: 'longDate' }}</td>
         <td>{{ result.firearmId }}</td>
         <td>{{ result.reloadId }}</td>
-        <td>
-          <a routerLink="/results/view/{{ result.reloadResultId }}">
-            <i class="bi bi-eye-fill" role="button" title="View"></i>
-          </a>
+        <td class="text-end">
+            <a class="ms-2" routerLink="/results/view/{{ result.reloadResultId }}">
+                <i class="bi bi-eye-fill" role="button" title="View"></i>
+            </a>
+            <a class="ms-2" routerLink="/results/edit/{{ result.reloadResultId }}">
+                <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
+            </a>
         </td>
       </tr>
     </tbody>

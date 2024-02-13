@@ -43,17 +43,19 @@ export class ReloadService {
   }
 
   getTitle(reload: Reload, lookups: Lookup): string {
-    if (reload.nickname) {
-      return reload.nickname;
-    }
-
-    return [
+    const name = [
       lookups.cartridges[reload.casing.cartridge],
       reload.bullet.weight, 'gr',
       reload.bullet.brand,
       reload.powderCharge, 'gr',
       reload.powder
     ].join(' ');
+
+    if (reload.nickname) {
+      return `${reload.nickname} (${name})`;
+    }
+
+    return name;
   }
 
   private reloads: Reload[] = [
