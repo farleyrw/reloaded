@@ -8,15 +8,12 @@ export class Result {
   velocity!: number;
   totalShots!: number;
   groupSize!: number;
-  weather = new Weather();
+  conditions = new ResultConditions();
 }
 
 // TODO: turn into metadata
-export class Weather {
+export class ResultConditions {
   temperature!: number;
   elevation!: number;
   windSpeed!: number;
-  hasData(): boolean {
-    return !!this.temperature || !!this.elevation || !!this.windSpeed;
-  }
 }

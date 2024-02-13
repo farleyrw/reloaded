@@ -1,9 +1,14 @@
 
 <div *ngIf="result$ | async as result" class="container">
   <div class="row align-items-center">
-    <h1 class="col my-4 text-truncate">
-      Result: {{ result.date | date: 'longDate' }}
-    </h1>
+      <h1 class="col my-4 text-truncate">
+          Result: {{ result.date | date: 'longDate' }}
+
+          <a class="btn btn-primary float-end" routerLink="/results/edit/{{ result.reloadResultId }}">
+              <i class="bi bi-pencil-fill"></i>
+              Edit
+          </a>
+      </h1>
 
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
@@ -69,12 +74,12 @@
         </li>
         <li class="list-group-item">
             <div class="row">
-                <div class="col fw-bold">Weather</div>
+                <div class="col fw-bold">Conditions</div>
                 <div class="col-8">
-                    <div *ngIf="result.weather.hasData(); else noData">
-                        <div>{{ result.weather.temperature }} °F</div>
-                        <div>{{ result.weather.elevation }} ft</div>
-                        <div>{{ result.weather.windSpeed }} mph</div>
+                    <div *ngIf="hasConditions(result.conditions); else noData">
+                        <div><i class="bi bi-thermometer-half" title="Temperatore"></i> {{ result.conditions.temperature }} °F</div>
+                        <div><i class="bi bi-rulers" title="Elevation"></i> {{ result.conditions.elevation }} ft</div>
+                        <div><i class="bi bi-wind" title="Wind Speed"></i> {{ result.conditions.windSpeed }} mph</div>
                     </div>
                     <ng-template #noData>N/A</ng-template>
                 </div>

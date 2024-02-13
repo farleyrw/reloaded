@@ -45,4 +45,6 @@ export class ResultViewComponent implements OnInit {
   getReloadTitle = this.reloadService.getTitle;
 
   getFirearmTitle = this.firearmService.getTitle;
+
+  hasConditions = this.resultService.hasConditions;
 }

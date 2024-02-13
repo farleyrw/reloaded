@@ -76,8 +76,8 @@ export class ResultEditComponent implements OnInit {
       
       this.result$ = this.resultService.getResult(+param).pipe(
         tap(result => {
-        this.firearm$ = this.firearmService.getFirearm(result.firearmId);
-        this.reload$ = this.reloadService.getReload(result.reloadId);
+          this.reload$ = this.reloadService.getReload(result.reloadId);
+          this.firearm$ = this.firearmService.getFirearm(result.firearmId);
       }));
     }
     
@@ -85,14 +85,10 @@ export class ResultEditComponent implements OnInit {
   }
   
   onSubmit() {
-
+    // TODO: 
   }
   
   getReloadTitle = this.reloadService.getTitle;
 
   getFirearmTitle = this.firearmService.getTitle;
-
-  /* TODO:
-    Must handle with and without reload and firearm Ids
-  */
 }

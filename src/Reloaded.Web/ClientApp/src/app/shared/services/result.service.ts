@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Result, Weather } from '@app/models/result';
+import { Result, ResultConditions } from '@app/models/result';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class ResultService {
     return of(this.results[+reloadResultId - 1]);
   }
 
+  hasConditions(conditions: ResultConditions): boolean {
+    return conditions && (!!conditions.temperature || !!conditions.elevation || !!conditions.windSpeed);
+  }
+
   // TODO: move to service/data
 
   private results: Result[] = [{
@@ -33,11 +37,11 @@ export class ResultService {
     totalShots: 5,
     velocity: 3350,
     groupSize: .85,
-    weather: {
+    conditions: {
       elevation: 445,
       temperature: 55,
       windSpeed: 5
-    } as Weather
+    } as ResultConditions
   }, {
     reloadResultId: 2,
     reloadId: 2,
@@ -48,10 +52,10 @@ export class ResultService {
     totalShots: 5,
     velocity: 2950,
     groupSize: 1.25,
-    weather: {
+    conditions: {
       elevation: 775,
       temperature: 75,
       windSpeed: 3
-    } as Weather
+    } as ResultConditions
   }];
 }
