@@ -8,11 +8,13 @@ import { ReloadService } from '@app/shared/services/reload.service';
 import { Firearm } from '@app/models/firearm';
 import { Reload } from '@app/models/reload';
 import { FirearmService } from '@app/shared/services/firearm.service';
+import { NgbCalendar, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-result-edit',
   templateUrl: './result-edit.component.html',
-  styleUrls: ['./result-edit.component.scss']
+  styleUrls: ['./result-edit.component.scss'],
+  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class ResultEditComponent implements OnInit {
 
@@ -23,8 +25,10 @@ export class ResultEditComponent implements OnInit {
   reloadMissing = false;
   firearmMissing = false;
 
-  maxDate = new Date();
-  minDate = new Date((new Date().getFullYear() - 1).toString() + "-01-01");
+  maxDate = this.calendar.getToday();
+  minDate = this.calendar.getNext(this.maxDate, 'y', -1);
+
+  disabledDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); // 1yr ago
   
   result$!: Observable<Result>;
   firearm$!: Observable<Firearm>;
@@ -37,7 +41,8 @@ export class ResultEditComponent implements OnInit {
     private route: ActivatedRoute,
     private resultService: ResultService,
     private reloadService: ReloadService,
-    private firearmService: FirearmService
+    private firearmService: FirearmService,
+    private calendar: NgbCalendar
   ) { }
 
   ngOnInit() {
@@ -85,7 +90,8 @@ export class ResultEditComponent implements OnInit {
   }
   
   onSubmit() {
-    // TODO: 
+    // TODO:
+
   }
   
   getReloadTitle = this.reloadService.getTitle;

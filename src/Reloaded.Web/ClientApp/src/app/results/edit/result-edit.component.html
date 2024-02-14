@@ -16,10 +16,8 @@
                 <div class="col-12 col-md">
 
                     <div class="mb-3" *ngIf="reload$ | async as reload">
-                        <label for="staticReload" class="col-2 col-form-label">Reload</label>
-                        <div class="col-12">
-                            <input type="text" class="form-control fw-bold" id="staticReload" [value]="getReloadTitle(reload, data.lookups)" disabled readonly />
-                        </div>
+                        <label for="staticReload" class="form-label">Reload</label>
+                        <input type="text" class="form-control fw-bold" id="staticReload" [value]="getReloadTitle(reload, data.lookups)" disabled readonly />
                     </div>
 
                     <div class="mb-3" *ngIf="needsFirearmSelection">
@@ -37,23 +35,22 @@
                     </div>
 
                     <div class="mb-3" *ngIf="firearm$ | async as firearm">
-                        <label for="staticFirearm" class="col-2 col-form-label">Firearm</label>
-                        <div class="col-12">
-                            <input type="text" class="form-control fw-bold" id="staticFirearm" [value]="getFirearmTitle(firearm)" disabled readonly />
-                        </div>
+                        <label for="staticFirearm" class="form-label">Firearm</label>
+                        <input type="text" class="form-control fw-bold" id="staticFirearm" [value]="getFirearmTitle(firearm)" disabled readonly />
                     </div>
                 </div>
 
                 <div class="col">
                     <label for="date" class="form-label">Date</label>
-                    <!-- <input type="date" class="form-control" id="date" name="date"
-            [(ngModel)]="data.result.date" #date="ngModel"
-            [min]="minDate | date:'yyyy-MM-dd'" [max]="maxDate | date:'yyyy-MM-dd'" required /> -->
-                    <p-calendar inputId="date" name="date" #date="ngModel" class="d-block"
-                                [minDate]="minDate" [maxDate]="maxDate"
-                                [(ngModel)]="data.result.date" [showIcon]="true"></p-calendar>
-                    <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
-                        Please select a valid date.
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="MM/DD/YYYY"
+                               id="date" name="date" [minDate]="minDate" [maxDate]="maxDate"
+                               [(ngModel)]="data.result.date" ngbDatepicker #date="ngModel" #picker="ngbDatepicker" (click)="picker.toggle()"
+                               required [disabled]="data.result.date < disabledDate" />
+                        <button type="button" class="input-group-text btn btn-outline-secondary bi bi-calendar3" (click)="picker.toggle()"></button>
+                        <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
+                            Please select a valid date.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,10 +112,6 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <!-- <button class="btn btn-success" type="button">
-                <i class="bi bi-cloud-sun-fill"></i>
-                Add Conditions
-            </button> -->
                     <div class="mb-3">
                         <label for="elevation" class="form-label">Elevation</label>
                         <div class="input-group">
@@ -180,7 +173,6 @@
         <pre>{{ data.result | json }}</pre>
 
         <!-- TODO:
-            Try ng-bootstrap date picker
             Implement save
             Weather -> metadata?
             Calculate MOA, store?

@@ -5,8 +5,8 @@ import { ResultsRoutingModule } from './results-routing.module';
 import { ResultViewComponent } from './view/result-view.component';
 import { ResultEditComponent } from './edit/result-edit.component';
 import { FormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ResultsRoutingModule,
     BrowserAnimationsModule,
-    CalendarModule
+    NgbDatepickerModule
   ]
 })
 export class ResultsModule { }
