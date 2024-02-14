@@ -18,7 +18,7 @@ import { ReloadModule } from './reloads/reload.module';
     HomeComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
     FormsModule,
     FirearmModule,
