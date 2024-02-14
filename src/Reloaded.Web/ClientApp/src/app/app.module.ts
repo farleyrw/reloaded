@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FirearmModule } from './firearms/firearm.module';
 import { ResultsModule } from './results/results.module';
 import { ReloadModule } from './reloads/reload.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReloadModule } from './reloads/reload.module';
     FirearmModule,
     ReloadModule,
     ResultsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
