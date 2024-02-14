@@ -47,15 +47,29 @@
                 <div class="col">
                     <label for="date" class="form-label">Date</label>
                     <!-- <input type="date" class="form-control" id="date" name="date"
-            [(ngModel)]="data.result.date" #date="ngModel"
-            [min]="minDate | date:'yyyy-MM-dd'" [max]="maxDate | date:'yyyy-MM-dd'" required /> -->
+    [(ngModel)]="data.result.date" #date="ngModel"
+    [min]="minDate | date:'yyyy-MM-dd'" [max]="maxDate | date:'yyyy-MM-dd'" required /> -->
                     <p-calendar inputId="date" name="date" #date="ngModel" class="d-block"
                                 [minDate]="minDate" [maxDate]="maxDate"
                                 [(ngModel)]="data.result.date" [showIcon]="true"></p-calendar>
                     <div class="invalid-feedback" *ngIf="resultForm.submitted && date.errors">
                         Please select a valid date.
                     </div>
-                </div>
+
+                    <!-- <div class="input-group">
+                        <input class="form-control"
+                               placeholder="yyyy-mm-dd"
+                               name="dp"
+                               [displayMonths]="displayMonths"
+                               [navigation]="navigation"
+                               [outsideDays]="outsideDays"
+                               [showWeekNumbers]="showWeekNumbers"
+                               ngbDatepicker
+                               #d="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+ -->
+
+                    </div>
             </div>
 
             <h2>Result</h2>
@@ -115,10 +129,6 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <!-- <button class="btn btn-success" type="button">
-                <i class="bi bi-cloud-sun-fill"></i>
-                Add Conditions
-            </button> -->
                     <div class="mb-3">
                         <label for="elevation" class="form-label">Elevation</label>
                         <div class="input-group">
