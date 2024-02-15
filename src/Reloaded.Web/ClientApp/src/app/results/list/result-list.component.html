@@ -1,7 +1,7 @@
+
 <h1 class="mb-4" id="tableHeader">
     All Results
 
-    <!-- TODO: Add titles for firearm and reload IDs-->
     <!-- Not useful without context of a reload -->
     <!-- <a class="btn btn-primary float-end" routerLink="/results/edit/add/">
       <i class="bi bi-plus-lg"></i>
@@ -9,46 +9,57 @@
     </a> -->
 </h1>
 
-<div *ngIf="reloadFiltered">
-
+@if (reloadFiltered) {
     <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
-        <div *ngIf="data.reload && data.lookups" class="alert alert-primary alert-dismissible fade show" role="alert">
-            Filtering by reload <strong>{{ getReloadTitle(data.reload, data.lookups) }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" routerLink="/results"></button>
+        <div *ngIf="data.reload && data.lookups" class="alert alert-primary fade show" role="alert">
+            Filtering by reload
+            <strong>{{ getReloadTitleSingle(data.reload, data.lookups) }}</strong>
+            <button type="button" class="btn-close" aria-label="Close"
+                    routerLink="/results" [queryParams]="{reloadId: null}" queryParamsHandling="merge"></button>
         </div>
     </ng-container>
-</div>
+}
 
-<div class="container" *ngIf="results$ | async as results">
-  <table class="table" aria-describedby="tableHeader">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Firearm</th>
-        <th scope="col">Reload</th>
-        <th scope="col" class="text-end">Actions</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <tr *ngFor="let result of results">
-        <td>{{ result.date | date: 'longDate' }}</td>
-        <td>{{ result.firearmId }}</td>
-        <td>{{ result.reloadId }}</td>
-        <td class="text-end">
-            <a class="ms-2" routerLink="/results/view/{{ result.reloadResultId }}">
-                <i class="bi bi-eye-fill" role="button" title="View"></i>
-            </a>
-            <a class="ms-2" routerLink="/results/edit/{{ result.reloadResultId }}">
-                <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
-            </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<ng-container *ngIf="{ results: results$ | async, firearms: firearms$ | async, reloads: reloads$ | async, lookups: lookups$ | async } as data">
+    <div class="container" *ngIf="data.results && data.firearms && data.reloads && data.lookups">
+        <table class="table" aria-describedby="tableHeader">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Firearm</th>
+                    <th scope="col">Reload</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let result of data.results">
+                    <td>{{ result.date | date: 'longDate' }}</td>
+                    <td>
+                        <a routerLink="/firearms/view/{{ result.firearmId }}">
+                            {{ getFirearmTitle(result.firearmId, data.firearms) || 'N/A' }}
+                        </a>
+                    </td>
+                    <td>
+                        <a routerLink="/reloads/view/{{ result.reloadId }}">
+                            {{ getReloadTitle(result.reloadId, data.reloads, data.lookups) || 'N/A' }}
+                        </a>
+                    </td>
+                    <td class="text-end">
+                        <a class="ms-2" routerLink="/results/view/{{ result.reloadResultId }}">
+                            <i class="bi bi-eye-fill" role="button" title="View"></i>
+                        </a>
+                        <a class="ms-2" routerLink="/results/edit/{{ result.reloadResultId }}">
+                            <i class="bi bi-pencil-fill" role="button" title="Edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>
+
 
 <!--<pre>{{ results$ | async | json }}</pre>-->
-
 <!-- TODO:
   When none show message, check for reloads and firearms
   Reloads without results, with reloadId and firearmId

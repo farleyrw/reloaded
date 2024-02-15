@@ -78,14 +78,12 @@
                         <th scope="col">Reload</th>
                         <th scope="col">Powder</th>
                         <th scope="col">Bullet</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     <tr *ngFor="let reload of data.reloads; index as i">
                         <td>
-                            <a routerLink="/results/edit/add" [queryParams]="{ firearmId: firearm.firearmId, reloadId: reload.reloadId }">
-                                <i class="bi bi-bullseye" role="button" title="Add Result"></i>
-                            </a>
                             {{ reload.nickname || (reload.createdOn | date: 'mediumDate') }}
                         </td>
                         <td>
@@ -94,6 +92,11 @@
                         <td>
                             {{ reload.bullet.weight }} gr {{ reload.bullet.brand }}
                             {{ data.lookups.bulletTipTypes[reload.bullet.tipType] }}
+                        </td>
+                        <td>
+                            <a routerLink="/results/edit/add" [queryParams]="{ firearmId: firearm.firearmId, reloadId: reload.reloadId }">
+                                <i class="bi bi-bullseye" role="button" title="Add Result"></i>
+                            </a>
                         </td>
                     </tr>
                 </tbody>

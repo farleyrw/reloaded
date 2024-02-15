@@ -189,7 +189,7 @@
     </div>
 
     <div class="row m-1 g-3 justify-content-sm-end text-center">
-        <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3">
+        <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3" [disabled]="reloadForm.invalid || reloadForm.pristine">
             <i class="bi bi-check-circle-fill"></i>
             Save
         </button>

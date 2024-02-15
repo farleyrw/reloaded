@@ -8,7 +8,7 @@ import { FirearmEditComponent } from './edit/firearm-edit.component';
   imports: [
     RouterModule.forChild([
       { path: 'firearms', component: FirearmListComponent, title: 'My Firearms' },
-      { path: 'firearms/:firearmId', component: FirearmViewComponent, title: 'My Firearm' },
+      { path: 'firearms/view/:firearmId', component: FirearmViewComponent, title: 'My Firearm' },
       { path: 'firearms/edit/:firearmId', component: FirearmEditComponent, title: 'Manage Firearm' }
       // TODO: firearms/reloads/analysis/:firearmId
     ])

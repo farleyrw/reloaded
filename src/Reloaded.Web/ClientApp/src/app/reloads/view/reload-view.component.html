@@ -115,7 +115,7 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr *ngFor="let firearm of firearms">
-                    <td>{{ getFirearmTitle(firearm) }}</td>
+                    <td><a routerLink="/firearms/view/{{ firearm.firearmId }}">{{ getFirearmTitle(firearm) }}</a></td>
                     <td class="text-end pe-3">
                         <!-- Results for reload & firearm -->
                         <i class="bi bi-binoculars-fill" title="See results"></i>

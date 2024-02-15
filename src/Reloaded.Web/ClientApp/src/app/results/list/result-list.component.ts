@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Result } from '@app/models/result';
 import { ResultService } from '@app/shared/services/result.service';
 import { ActivatedRoute } from '@angular/router';
 import { ReloadService } from '../../shared/services/reload.service';
 import { Reload } from '../../models/reload';
 import { Lookup } from '../../models/lookup';
+import { Firearm } from '../../models/firearm';
+import { FirearmService } from '../../shared/services/firearm.service';
 
 @Component({
   selector: 'app-result-list',
@@ -17,6 +19,8 @@ export class ResultListComponent implements OnInit {
 
   reload$!: Observable<Reload>;
 
+  firearms$!: Observable<Firearm[]>;
+  reloads$!: Observable<Reload[]>;
   lookups$!: Observable<Lookup>;
 
   reloadFiltered = false;
@@ -25,7 +29,8 @@ export class ResultListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private resultService: ResultService,
-    private reloadService: ReloadService
+    private reloadService: ReloadService,
+    private firearmSerivce: FirearmService
   ) { }
 
   ngOnInit() {
@@ -34,13 +39,29 @@ export class ResultListComponent implements OnInit {
     if (reloadId) {
       this.results$ = this.resultService.getResultsForReload(+reloadId);
       this.reload$ = this.reloadService.getReload(+reloadId);
-      this.lookups$ = this.reloadService.getEnums();
+      this.reloads$ = new BehaviorSubject([]);
       this.reloadFiltered = true;
     } else {
       this.results$ = this.resultService.getResults();
+      this.reloads$ = this.reloadService.getReloads();
     }
+
+    this.firearms$ = this.firearmSerivce.getFirearms();
+    this.lookups$ = this.reloadService.getEnums();
   }
 
-  getReloadTitle = this.reloadService.getTitle;
+  getReloadTitle(reloadId: number, reloads: Reload[], lookup: Lookup): string {
+    const reload = reloads.filter(r => r.reloadId == reloadId)[0];
+
+    return reload && this.reloadService.getTitle(reload, lookup);
+  }
+
+  getFirearmTitle(firearmId: number, firearms: Firearm[]): string {
+    const firearm = firearms.filter(f => f.firearmId == firearmId)[0];
+
+    return firearm && this.firearmSerivce.getTitle(firearm);
+  }
+
+  getReloadTitleSingle = this.reloadService.getTitle;
 
 }
