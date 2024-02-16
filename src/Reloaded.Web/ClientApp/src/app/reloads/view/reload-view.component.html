@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush list-group-striped">
             <li class="list-group-item">
                 <div class="row">
                     <div class="col fw-bold">Bullet</div>
@@ -106,7 +106,7 @@
     <div class="container my-3" *ngIf="firearms$ | async as firearms">
         <h2 id="tableHeader">Firearms for cartridge</h2>
 
-        <table class="table" aria-describedby="tableHeader">
+        <table class="table table-striped" aria-describedby="tableHeader">
             <thead>
                 <tr>
                     <th scope="col">Firearm</th>

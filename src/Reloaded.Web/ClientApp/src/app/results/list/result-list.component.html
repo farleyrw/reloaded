@@ -9,6 +9,7 @@
     </a> -->
 </h1>
 
+<!-- TODO: fix alert dismiss -->
 @if (reloadFiltered) {
     <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
         <div *ngIf="data.reload && data.lookups" class="alert alert-primary fade show" role="alert">
@@ -22,7 +23,7 @@
 
 <ng-container *ngIf="{ results: results$ | async, firearms: firearms$ | async, reloads: reloads$ | async, lookups: lookups$ | async } as data">
     <div class="container" *ngIf="data.results && data.firearms && data.reloads && data.lookups">
-        <table class="table" aria-describedby="tableHeader">
+        <table class="table table-striped" aria-describedby="tableHeader">
             <thead>
                 <tr>
                     <th scope="col">Date</th>

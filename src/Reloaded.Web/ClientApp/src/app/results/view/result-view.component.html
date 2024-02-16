@@ -10,81 +10,81 @@
           </a>
       </h1>
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Date</div>
-                <div class="col-8">{{ result.date | date: 'MMMM d, y h:mm a' }}</div>
-            </div>
-        </li>
-        
-        <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
-            <li *ngIf="data.reload && data.lookups" class="list-group-item">
-                <div class="row">
-                    <div class="col fw-bold">Reload</div>
-                    <div class="col-8">
-                        <a routerLink="/reloads/view/{{ result.reloadId }}">
-                            {{ getReloadTitle(data.reload, data.lookups) }}
-                        </a>
-                    </div>
-                </div>
-            </li>
-        </ng-container>
-        <li *ngIf="firearm$ | async as firearm" class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Firearm</div>
-                <div class="col-8">
-                    <a routerLink="/firearms/{{ result.firearmId }}">
-                        {{ getFirearmTitle(firearm) }}
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Distance</div>
-                <div class="col-8">
-                    {{ result.distance }} yds.
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Group Size</div>
-                <div class="col-8">
-                    {{ result.groupSize | number: '1.2-2' }} in.
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Velocity</div>
-                <div class="col-8">
-                    {{ result.velocity }} fps
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Notes</div>
-                <div class="col-8">
-                    {{ result.notes }}
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col fw-bold">Conditions</div>
-                <div class="col-8">
-                    <div *ngIf="hasConditions(result.conditions); else noData">
-                        <div><i class="bi bi-thermometer-half" title="Temperatore"></i> {{ result.conditions.temperature }} °F</div>
-                        <div><i class="bi bi-rulers" title="Elevation"></i> {{ result.conditions.elevation }} ft</div>
-                        <div><i class="bi bi-wind" title="Wind Speed"></i> {{ result.conditions.windSpeed }} mph</div>
-                    </div>
-                    <ng-template #noData>N/A</ng-template>
-                </div>
-            </div>
-        </li>
-    </ul>
+      <ul class="list-group list-group-flush list-group-striped">
+          <li class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Date</div>
+                  <div class="col-8">{{ result.date | date: 'MMMM d, y h:mm a' }}</div>
+              </div>
+          </li>
+
+          <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
+              <li *ngIf="data.reload && data.lookups" class="list-group-item">
+                  <div class="row">
+                      <div class="col fw-bold">Reload</div>
+                      <div class="col-8">
+                          <a routerLink="/reloads/view/{{ result.reloadId }}">
+                              {{ getReloadTitle(data.reload, data.lookups) }}
+                          </a>
+                      </div>
+                  </div>
+              </li>
+          </ng-container>
+          <li *ngIf="firearm$ | async as firearm" class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Firearm</div>
+                  <div class="col-8">
+                      <a routerLink="/firearms/{{ result.firearmId }}">
+                          {{ getFirearmTitle(firearm) }}
+                      </a>
+                  </div>
+              </div>
+          </li>
+          <li class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Distance</div>
+                  <div class="col-8">
+                      {{ result.distance }} yds.
+                  </div>
+              </div>
+          </li>
+          <li class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Group Size</div>
+                  <div class="col-8">
+                      {{ result.groupSize | number: '1.2-2' }} in.
+                  </div>
+              </div>
+          </li>
+          <li class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Velocity</div>
+                  <div class="col-8">
+                      {{ result.velocity }} fps
+                  </div>
+              </div>
+          </li>
+          <li class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Notes</div>
+                  <div class="col-8">
+                      {{ result.notes }}
+                  </div>
+              </div>
+          </li>
+          <li class="list-group-item">
+              <div class="row">
+                  <div class="col fw-bold">Conditions</div>
+                  <div class="col-8">
+                      <div *ngIf="hasConditions(result.conditions); else noData">
+                          <div><i class="bi bi-thermometer-half" title="Temperatore"></i> {{ result.conditions.temperature }} °F</div>
+                          <div><i class="bi bi-rulers" title="Elevation"></i> {{ result.conditions.elevation }} ft</div>
+                          <div><i class="bi bi-wind" title="Wind Speed"></i> {{ result.conditions.windSpeed }} mph</div>
+                      </div>
+                      <ng-template #noData>N/A</ng-template>
+                  </div>
+              </div>
+          </li>
+      </ul>
   </div>
 </div>

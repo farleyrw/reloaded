@@ -48,3 +48,7 @@ a:not(.btn) i.bi {
     color: $blue-300;
 }
 */
+
+ul.list-group.list-group-striped li:nth-of-type(odd) {
+  background-color: var(--bs-list-group-action-hover-bg);
+}
