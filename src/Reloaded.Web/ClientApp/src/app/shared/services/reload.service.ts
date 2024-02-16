@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, shareReplay } from 'rxjs';
 import { Reload } from '@app/models/reload';
 import { Lookup } from '../../models/lookup';
 
@@ -31,7 +31,7 @@ export class ReloadService {
   }
 
   getEnums(): Observable<{}> {
-    return this.http.get(`${this.baseUrl}/enums`);
+    return this.http.get(`${this.baseUrl}/enums`).pipe(shareReplay());
   }
 
   saveReload(reload: Reload) {

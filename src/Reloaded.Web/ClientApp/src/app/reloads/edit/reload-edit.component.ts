@@ -71,6 +71,8 @@ export class ReloadEditComponent implements OnInit {
     //}));
   }
 
+  getFirearmTitle = this.firearmService.getTitle;
+
   // TODO: clone reload functionality
   // TODO: lock cartridge & caliber
 }

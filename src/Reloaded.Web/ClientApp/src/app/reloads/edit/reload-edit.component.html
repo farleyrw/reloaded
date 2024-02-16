@@ -4,7 +4,7 @@
 
     @if (mode == 'add') {
     <span *ngIf="firearm$ | async as firearm" class="fs-4 fw-light fst-italic">
-        ({{ firearm.name }})
+        {{ getFirearmTitle(firearm) }}
     </span>
     }
 </h1>
