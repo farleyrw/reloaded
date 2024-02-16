@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirearmService } from '@app/shared/services/firearm.service';
 import { ReloadService } from '@app/shared/services/reload.service';
 import { Reload } from '@app/models/reload';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { Firearm } from '@app/models/firearm';
 import { Lookup } from '@app/models/lookup';
 
@@ -13,22 +13,21 @@ import { Lookup } from '@app/models/lookup';
   templateUrl: './reload-edit.component.html',
   styleUrls: ['./reload-edit.component.scss']
 })
-export class ReloadEditComponent implements OnInit, OnDestroy {
+export class ReloadEditComponent implements OnInit {
   mode: 'edit' | 'add' = 'add';
 
   reloadId = 0;
 
-  // TODO: replace with observable?
-  reload!: Reload;
-
-  firearm!: Firearm;
+  hasFirearm = false;
+  
+  reload$!: Observable<Reload>;
+  
+  firearm$!: Observable<Firearm>;
 
   lookups$!: Observable<Lookup>;
 
   originalOrder = OrderingService.originalOrder;
-
-  subscriptions = new Subscription();
-
+  
   constructor(
     private route: ActivatedRoute,
     private reloadService: ReloadService,
@@ -41,38 +40,27 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
     let param = this.route.snapshot.paramMap.get('reloadId')!;
 
     if (param == 'add') {
-      this.reload = new Reload();
+      const reload = new Reload();
+
+      this.reload$ = new BehaviorSubject(reload);
+
+      if (firearmId) {
+        this.hasFirearm = true;
+
+        this.firearm$ = this.firearmService.getFirearm(+firearmId).pipe(
+          shareReplay(),
+          tap(f => reload.casing.cartridge = f.chamber)
+          // TODO: set bullet.caliber from above, needs mapping
+        );
+      }
     } else {
       this.mode = 'edit';
       this.reloadId = +param;
 
-      this.loadReload(this.reloadId);
-    }
-
-    if (firearmId) {
-      this.loadFirearm(+firearmId);
+      this.reload$ = this.reloadService.getReload(this.reloadId);
     }
 
     this.lookups$ = this.reloadService.getEnums();
-  }
-
-  loadFirearm(firearmId: number) {
-    this.subscriptions.add(this.firearmService.getFirearm(firearmId).subscribe(firearm => {
-      this.firearm = firearm; // locks cartridge selection
-
-      if (this.mode == 'add') {
-        this.reload.casing.cartridge = this.firearm.chamber;
-      }
-      // TODO: set bullet.caliber from above, needs mapping
-    }));
-  }
-
-  loadReload(reloadId: number) {
-    this.subscriptions.add(this.reloadService.getReload(reloadId).subscribe(reload => this.reload = reload));
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
   }
 
   onSubmit() {
@@ -84,6 +72,5 @@ export class ReloadEditComponent implements OnInit, OnDestroy {
   }
 
   // TODO: clone reload functionality
-  // TODO: map to firearm by caliber
   // TODO: lock cartridge & caliber
 }

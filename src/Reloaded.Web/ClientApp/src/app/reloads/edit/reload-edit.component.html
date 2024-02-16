@@ -1,207 +1,233 @@
-<form name="reloadForm" class="container needs-validation" novalidate
-      *ngIf="reload && lookups$ | async as lookups" #reloadForm="ngForm" [ngClass]="{ 'was-validated': reloadForm.submitted }"
-      (ngSubmit)="reloadForm.valid && onSubmit()">
-    <h1 class="mb-3">{{ mode | titlecase }} Reload</h1>
 
-    <div class="row">
-        <div class="col col-12 col-md-6 mb-3">
-            <label for="nickname" class="form-label">Nickname (optional)</label>
-            <input type="text" class="form-control" id="nickname" name="nickname"
-                   [(ngModel)]="reload.nickname" maxlength="50" />
+<h1 class="mb-3">
+    {{ mode | titlecase }} Reload
+
+    @if (mode == 'add') {
+    <span *ngIf="firearm$ | async as firearm" class="fs-4 fw-light fst-italic">
+        ({{ firearm.name }})
+    </span>
+    }
+</h1>
+
+<ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
+
+    <form name="reloadForm" class="container needs-validation" novalidate
+          *ngIf="data.reload && data.lookups" #reloadForm="ngForm" [ngClass]="{ 'was-validated': reloadForm.submitted }"
+          (ngSubmit)="reloadForm.valid && onSubmit()">
+
+        <div class="row">
+            <div class="col col-12 col-md-6 mb-3">
+                <label for="nickname" class="form-label">Nickname (optional)</label>
+                <input type="text" class="form-control" id="nickname" name="nickname"
+                       [(ngModel)]="data.reload.nickname" maxlength="50" />
+            </div>
+
+            <div class="col col-12 col-md-6 mb-3">
+                <label for="notes" class="form-label">Notes (optional)</label>
+                <textarea class="form-control" id="notes" name="notes"
+                          [(ngModel)]="data.reload.notes" maxlength="500"></textarea>
+            </div>
         </div>
 
-        <div class="col col-12 col-md-6 mb-3">
-            <label for="notes" class="form-label">Notes (optional)</label>
-            <textarea class="form-control" id="notes" name="notes"
-                      [(ngModel)]="reload.notes" maxlength="500"></textarea>
-        </div>
-    </div>
+        <h2>Bullet</h2>
+        <hr />
 
-    <div class="fw-bold">Bullet</div>
-    <hr />
-
-    <div class="row mb-3">
-        <div class="col">
-            <label for="bulletWeight" class="form-label">Weight</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="bulletWeight" name="bulletWeight"
-                       [(ngModel)]="reload.bullet.weight" #bulletWeight="ngModel" min="1" max="300" step=".01" required />
-                <span class="input-group-text">gr.</span>
-                <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletWeight.errors">
-                    Please provide a bullet weight between 1 and 300 gr.
+        <div class="row mb-3">
+            <div class="col">
+                <label for="bulletWeight" class="form-label">Weight</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="bulletWeight" name="bulletWeight"
+                           [(ngModel)]="data.reload.bullet.weight" #bulletWeight="ngModel" min="1" max="300" step=".01" required />
+                    <span class="input-group-text">gr.</span>
+                    <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletWeight.errors">
+                        Please provide a bullet weight between 1 and 300 gr.
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <label for="bulletBrand" class="form-label">Brand</label>
+                <select name="bulletBrand" class="form-select form-control"
+                        [(ngModel)]="data.reload.bullet.brand" #bulletBrand="ngModel" required>
+                    <option *ngFor="let brand of data.lookups.bulletManufacturers | keyvalue: originalOrder" [value]="brand.key">{{ brand.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletBrand.errors">
+                    Please select a bullet brand.
                 </div>
             </div>
         </div>
-        <div class="col">
-            <label for="bulletBrand" class="form-label">Brand</label>
-            <select name="bulletBrand" class="form-select form-control"
-                    [(ngModel)]="reload.bullet.brand" #bulletBrand="ngModel" required>
-                <option *ngFor="let brand of lookups.bulletManufacturers | keyvalue: originalOrder" [value]="brand.key">{{ brand.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletBrand.errors">
-                Please select a bullet brand.
+        <div class="row mb-3">
+            <div class="col">
+                <label for="bulletCaliber" class="form-label">
+                    Caliber
+                    @if (mode == 'add') {
+                    <span *ngIf="firearm$ | async as firearm" class="fst-italic">
+                        (set by firearm)
+                    </span>
+                    }
+                </label>
+                <select name="bulletCaliber" class="form-select form-control"
+                        [(ngModel)]="data.reload.bullet.caliber" #bulletCaliber="ngModel" required [disabled]="mode == 'edit'">
+                    <option *ngFor="let caliber of data.lookups.calibers | keyvalue: originalOrder" [value]="caliber.key">{{ caliber.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletCaliber.errors">
+                    Please select a bullet caliber.
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col">
-            <label for="bulletCaliber" class="form-label">Caliber</label>
-            <select name="bulletCaliber" class="form-select form-control"
-                    [(ngModel)]="reload.bullet.caliber" #bulletCaliber="ngModel" required [disabled]="mode == 'edit'">
-                <option *ngFor="let caliber of lookups.calibers | keyvalue: originalOrder" [value]="caliber.key">{{ caliber.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletCaliber.errors">
-                Please select a bullet caliber.
-            </div>
-        </div>
-        <div class="col">
-            <label for="bulletConstruction" class="form-label">Construction</label>
-            <select name="bulletConstruction" class="form-select form-control"
-                    [(ngModel)]="reload.bullet.construction" #bulletConstruction="ngModel" required>
-                <option *ngFor="let construction of lookups.bulletConstructions | keyvalue: originalOrder" [value]="construction.key">{{ construction.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletConstruction.errors">
-                Please select a bullet construction.
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col">
-            <label for="bulletTipType" class="form-label">Tip Type</label>
-            <select name="bulletTipType" class="form-select form-control"
-                    [(ngModel)]="reload.bullet.tipType" #bulletTipType="ngModel" required>
-                <option *ngFor="let tip of lookups.bulletTipTypes | keyvalue: originalOrder" [value]="tip.key">{{ tip.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletTipType.errors">
-                Please select a bullet tip type.
-            </div>
-        </div>
-        <div class="col">
-            <label for="bulletBaseType" class="form-label">Base Type</label>
-            <select name="bulletBaseType" class="form-select form-control"
-                    [(ngModel)]="reload.bullet.baseType" #bulletBaseType="ngModel" required>
-                <option *ngFor="let base of lookups.bulletBaseTypes | keyvalue: originalOrder" [value]="base.key">{{ base.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletBaseType.errors">
-                Please select a bullet base type.
-            </div>
-        </div>
-    </div>
-
-    <div class="fw-bold">Powder</div>
-    <hr />
-
-    <div class="row mb-3">
-        <div class="col">
-            <label for="powderCharge" class="form-label">Powder Charge</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="powderCharge" name="powderCharge"
-                       [(ngModel)]="reload.powderCharge" #powderCharge="ngModel" min="1" max="100" step=".01" required />
-                <span class="input-group-text">gr.</span>
-                <div class="invalid-feedback" *ngIf="reloadForm.submitted && powderCharge.errors">
-                    Please provide a powder charge between 1 and 100 gr.
+            <div class="col">
+                <label for="bulletConstruction" class="form-label">Construction</label>
+                <select name="bulletConstruction" class="form-select form-control"
+                        [(ngModel)]="data.reload.bullet.construction" #bulletConstruction="ngModel" required>
+                    <option *ngFor="let construction of data.lookups.bulletConstructions | keyvalue: originalOrder" [value]="construction.key">{{ construction.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletConstruction.errors">
+                    Please select a bullet construction.
                 </div>
             </div>
         </div>
-        <div class="col">
-            <label for="powderBrand" class="form-label">Powder Brand</label>
-            <select name="powderBrand" class="form-select form-control"
-                    [(ngModel)]="reload.powder" #powderBrand="ngModel" required>
-                <option *ngFor="let powder of lookups.gunPowders | keyvalue: originalOrder" [value]="powder.key">{{ powder.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && powderBrand.errors">
-                Please select a powder brand.
+        <div class="row mb-3">
+            <div class="col">
+                <label for="bulletTipType" class="form-label">Tip Type</label>
+                <select name="bulletTipType" class="form-select form-control"
+                        [(ngModel)]="data.reload.bullet.tipType" #bulletTipType="ngModel" required>
+                    <option *ngFor="let tip of data.lookups.bulletTipTypes | keyvalue: originalOrder" [value]="tip.key">{{ tip.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletTipType.errors">
+                    Please select a bullet tip type.
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="fw-bold">Casing</div>
-    <hr />
-
-    <div class="row mb-3">
-        <div class="col">
-            <label for="casingBrand" class="form-label">Casing Brand</label>
-            <select name="casingBrand" class="form-select form-control"
-                    [(ngModel)]="reload.casing.brand" #casingBrand="ngModel" required>
-                <option *ngFor="let casing of lookups.brassManufacturers | keyvalue: originalOrder" [value]="casing.key">{{ casing.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingBrand.errors">
-                Please select a casing brand.
-            </div>
-        </div>
-        <div class="col">
-            <label for="casingCartridge" class="form-label">Casing Cartridge</label>
-            <select name="casingCartridge" class="form-select form-control"
-                    [(ngModel)]="reload.casing.cartridge" #casingCartridge="ngModel" required [disabled]="mode == 'edit'">
-                <option *ngFor="let cartridge of lookups.cartridges | keyvalue: originalOrder" [value]="cartridge.key">{{ cartridge.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingCartridge.errors">
-                Please select a casing cartridge.
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col">
-            <label for="overallLength" class="form-label">Overall Length</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="overallLength" name="overallLength"
-                       [(ngModel)]="reload.overallLength" #overallLength="ngModel" min="1" max="5" step=".01" required />
-                <span class="input-group-text">in.</span>
-                <div class="invalid-feedback" *ngIf="reloadForm.submitted && overallLength.errors">
-                    Please provide an overall length between 1 and 5 inches.
+            <div class="col">
+                <label for="bulletBaseType" class="form-label">Base Type</label>
+                <select name="bulletBaseType" class="form-select form-control"
+                        [(ngModel)]="data.reload.bullet.baseType" #bulletBaseType="ngModel" required>
+                    <option *ngFor="let base of data.lookups.bulletBaseTypes | keyvalue: originalOrder" [value]="base.key">{{ base.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && bulletBaseType.errors">
+                    Please select a bullet base type.
                 </div>
             </div>
         </div>
-        <div class="col">
-            <label class="form-check-label"></label>
-            <div class="form-check form-switch">
-                <input type="checkbox" class="form-check-input" id="casingNewBrass" name="casingNewBrass"
-                       [(ngModel)]="reload.casing.newBrass" role="button" />
-                <label for="casingNewBrass" class="form-check-label" role="button">New Brass?</label>
+
+        <h2>Powder</h2>
+        <hr />
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="powderCharge" class="form-label">Charge</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="powderCharge" name="powderCharge"
+                           [(ngModel)]="data.reload.powderCharge" #powderCharge="ngModel" min="1" max="100" step=".01" required />
+                    <span class="input-group-text">gr.</span>
+                    <div class="invalid-feedback" *ngIf="reloadForm.submitted && powderCharge.errors">
+                        Please provide a powder charge between 1 and 100 gr.
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <label for="powderBrand" class="form-label">Brand</label>
+                <select name="powderBrand" class="form-select form-control"
+                        [(ngModel)]="data.reload.powder" #powderBrand="ngModel" required>
+                    <option *ngFor="let powder of data.lookups.gunPowders | keyvalue: originalOrder" [value]="powder.key">{{ powder.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && powderBrand.errors">
+                    Please select a powder brand.
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="fw-bold">Primer</div>
-    <hr />
+        <h2>Casing</h2>
+        <hr />
 
-    <div class="row mb-3">
-        <div class="col">
-            <label for="primerBrand" class="form-label">Primer</label>
-            <select name="primerBrand" class="form-select form-control"
-                    [(ngModel)]="reload.primer.brand" #primerBrand="ngModel" required>
-                <option *ngFor="let brand of lookups.primerManufacturers | keyvalue: originalOrder" [value]="brand.key">{{ brand.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && primerBrand.errors">
-                Please select a primer brand.
+        <div class="row mb-3">
+            <div class="col">
+                <label for="casingBrand" class="form-label">Brand</label>
+                <select name="casingBrand" class="form-select form-control"
+                        [(ngModel)]="data.reload.casing.brand" #casingBrand="ngModel" required>
+                    <option *ngFor="let casing of data.lookups.brassManufacturers | keyvalue: originalOrder" [value]="casing.key">{{ casing.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingBrand.errors">
+                    Please select a casing brand.
+                </div>
+            </div>
+            <div class="col">
+                <label for="casingCartridge" class="form-label">
+                    Cartridge
+                    @if (mode == 'add') {
+                    <span *ngIf="firearm$ | async as firearm">
+                        (set by firearm)
+                    </span>
+                    }
+                </label>
+                <select name="casingCartridge" class="form-select form-control"
+                        [(ngModel)]="data.reload.casing.cartridge" #casingCartridge="ngModel" required [disabled]="mode == 'edit' || hasFirearm">
+                    <option *ngFor="let cartridge of data.lookups.cartridges | keyvalue: originalOrder" [value]="cartridge.key">{{ cartridge.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && casingCartridge.errors">
+                    Please select a casing cartridge.
+                </div>
             </div>
         </div>
-        <div class="col">
-            <label for="primerType" class="form-label">Primer Type</label>
-            <select name="primerType" class="form-select form-control"
-                    [(ngModel)]="reload.primer.type" #primerType="ngModel" required>
-                <option *ngFor="let type of lookups.primerTypes | keyvalue: originalOrder" [value]="type.key">{{ type.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="reloadForm.submitted && primerType.errors">
-                Please select a primer type.
+        <div class="row mb-3">
+            <div class="col">
+                <label for="overallLength" class="form-label">Overall Length</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="overallLength" name="overallLength"
+                           [(ngModel)]="data.reload.overallLength" #overallLength="ngModel" min="1" max="5" step=".01" required />
+                    <span class="input-group-text">in.</span>
+                    <div class="invalid-feedback" *ngIf="reloadForm.submitted && overallLength.errors">
+                        Please provide an overall length between 1 and 5 inches.
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <label class="form-check-label"></label>
+                <div class="form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="casingNewBrass" name="casingNewBrass"
+                           [(ngModel)]="data.reload.casing.newBrass" role="button" />
+                    <label for="casingNewBrass" class="form-check-label" role="button">New Brass?</label>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row m-1 g-3 justify-content-sm-end text-center">
-        <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3" [disabled]="reloadForm.invalid || reloadForm.pristine">
-            <i class="bi bi-check-circle-fill"></i>
-            Save
-        </button>
-        <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/reloads">
-            <i class="bi bi-x-circle"></i>
-            Discard
-        </button>
-    </div>
-</form>
+        <h2>Primer</h2>
+        <hr />
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="primerBrand" class="form-label">Primer</label>
+                <select name="primerBrand" class="form-select form-control"
+                        [(ngModel)]="data.reload.primer.brand" #primerBrand="ngModel" required>
+                    <option *ngFor="let brand of data.lookups.primerManufacturers | keyvalue: originalOrder" [value]="brand.key">{{ brand.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && primerBrand.errors">
+                    Please select a primer brand.
+                </div>
+            </div>
+            <div class="col">
+                <label for="primerType" class="form-label">Primer Type</label>
+                <select name="primerType" class="form-select form-control"
+                        [(ngModel)]="data.reload.primer.type" #primerType="ngModel" required>
+                    <option *ngFor="let type of data.lookups.primerTypes | keyvalue: originalOrder" [value]="type.key">{{ type.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="reloadForm.submitted && primerType.errors">
+                    Please select a primer type.
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-1 g-3 justify-content-sm-end text-center">
+            <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3" [disabled]="reloadForm.invalid || reloadForm.pristine">
+                <i class="bi bi-check-circle-fill"></i>
+                Save
+            </button>
+            <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/reloads">
+                <i class="bi bi-x-circle"></i>
+                Discard
+            </button>
+        </div>
+    </form>
+</ng-container>
 
 <!--<pre>{{ reload | json }}</pre>-->
-
 <!-- TODO:
     Implement save
     Implement firearm mapping by caliber
