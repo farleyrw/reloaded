@@ -12,11 +12,11 @@
 <!-- TODO: fix alert dismiss -->
 @if (reloadFiltered) {
     <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
-        <div *ngIf="data.reload && data.lookups" class="alert alert-primary fade show" role="alert">
+        <div *ngIf="data.reload && data.lookups" class="alert alert-primary alert-dismissible fade show" role="alert">
             Filtering by reload
             <strong>{{ getReloadTitleSingle(data.reload, data.lookups) }}</strong>
-            <button type="button" class="btn-close" aria-label="Close"
-                    routerLink="/results" [queryParams]="{reloadId: null}" queryParamsHandling="merge"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    (click)="clearReloadFilter()"></button>
         </div>
     </ng-container>
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Result } from '@app/models/result';
 import { ResultService } from '@app/shared/services/result.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReloadService } from '../../shared/services/reload.service';
 import { Reload } from '../../models/reload';
 import { Lookup } from '../../models/lookup';
@@ -28,12 +28,15 @@ export class ResultListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private resultService: ResultService,
     private reloadService: ReloadService,
     private firearmSerivce: FirearmService
   ) { }
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
     let reloadId = this.route.snapshot.queryParamMap.get('reloadId')!;
 
     if (reloadId) {
@@ -48,6 +51,10 @@ export class ResultListComponent implements OnInit {
 
     this.firearms$ = this.firearmSerivce.getFirearms();
     this.lookups$ = this.reloadService.getEnums();
+  }
+
+  clearReloadFilter() {
+    this.router.navigate(['/results']);
   }
 
   getReloadTitle(reloadId: number, reloads: Reload[], lookup: Lookup): string {
