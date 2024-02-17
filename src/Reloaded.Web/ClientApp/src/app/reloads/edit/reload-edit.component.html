@@ -1,13 +1,12 @@
 
-<h1 class="mb-3">
-    {{ mode | titlecase }} Reload
+<h1 class="mb-3">{{ mode | titlecase }} Reload</h1>
 
-    @if (mode == 'add') {
-    <span *ngIf="firearm$ | async as firearm" class="fs-4 fw-light fst-italic">
-        {{ getFirearmTitle(firearm) }}
-    </span>
-    }
-</h1>
+@if (mode == 'add') {
+<div *ngIf="firearm$ | async as firearm" class="alert alert-primary fade show" role="alert">
+    <i class="bi bi-info-circle-fill me-2"></i>
+    Adding reload for firearm <strong>{{ getFirearmTitle(firearm) }}</strong>
+</div>
+}
 
 <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
 
@@ -230,10 +229,9 @@
 <!--<pre>{{ reload | json }}</pre>-->
 <!-- TODO:
     Implement save
-    Implement firearm mapping by caliber
-    Display warning or lock when modifying and results exist
+    Set caliber by firearm mapping
+    Display warning or lock when modifying and results exist (offer clone option)
     Interactive diagram of input component attributes
-    Set bullet caliber and casing cartridge from firearm, hide input
     Create reload related loads (from cloning)
     Firearm picker by cartridge
 -->

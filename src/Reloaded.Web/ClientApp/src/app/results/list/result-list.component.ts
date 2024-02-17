@@ -35,7 +35,7 @@ export class ResultListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false; // hack to force reload alert dismiss
 
     let reloadId = this.route.snapshot.queryParamMap.get('reloadId')!;
 
@@ -70,5 +70,4 @@ export class ResultListComponent implements OnInit {
   }
 
   getReloadTitleSingle = this.reloadService.getTitle;
-
 }

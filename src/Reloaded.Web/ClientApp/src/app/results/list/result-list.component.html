@@ -1,24 +1,16 @@
 
-<h1 class="mb-4" id="tableHeader">
-    All Results
+<h1 class="mb-4" id="tableHeader">All Results</h1>
 
-    <!-- Not useful without context of a reload -->
-    <!-- <a class="btn btn-primary float-end" routerLink="/results/edit/add/">
-      <i class="bi bi-plus-lg"></i>
-      Add
-    </a> -->
-</h1>
-
-<!-- TODO: fix alert dismiss -->
 @if (reloadFiltered) {
-    <ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
-        <div *ngIf="data.reload && data.lookups" class="alert alert-primary alert-dismissible fade show" role="alert">
-            Filtering by reload
-            <strong>{{ getReloadTitleSingle(data.reload, data.lookups) }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                    (click)="clearReloadFilter()"></button>
-        </div>
-    </ng-container>
+<ng-container *ngIf="{ reload: reload$ | async, lookups: lookups$ | async } as data">
+    <div *ngIf="data.reload && data.lookups" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        Filtering by reload
+        <strong>{{ getReloadTitleSingle(data.reload, data.lookups) }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="clearReloadFilter()"></button>
+    </div>
+</ng-container>
 }
 
 <ng-container *ngIf="{ results: results$ | async, firearms: firearms$ | async, reloads: reloads$ | async, lookups: lookups$ | async } as data">
@@ -62,8 +54,9 @@
 
 <!--<pre>{{ results$ | async | json }}</pre>-->
 <!-- TODO:
-  When none show message, check for reloads and firearms
-  Reloads without results, with reloadId and firearmId
-  list all, per firearm
-  compute MOA
+    Order results by date desc
+    Filter by firearm
+    When none show message, check for reloads and firearms
+    Reloads without results, with reloadId and firearmId
+    compute MOA
 -->
