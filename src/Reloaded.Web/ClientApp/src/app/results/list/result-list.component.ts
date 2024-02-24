@@ -70,4 +70,9 @@ export class ResultListComponent implements OnInit {
   }
 
   getReloadTitleSingle = this.reloadService.getTitle;
+
+  orderResults(resultA: Result, resultB: Result): number {
+    return resultA.date > resultB.date ? -1 : 1;
+  }
+  
 }

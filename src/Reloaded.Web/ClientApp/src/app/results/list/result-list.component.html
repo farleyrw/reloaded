@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let result of data.results">
+                <tr *ngFor="let result of data.results | sort:orderResults">
                     <td>{{ result.date | date: 'longDate' }}</td>
                     <td>
                         <a routerLink="/firearms/view/{{ result.firearmId }}">
@@ -54,7 +54,6 @@
 
 <!--<pre>{{ results$ | async | json }}</pre>-->
 <!-- TODO:
-    Order results by date desc
     Filter by firearm
     When none show message, check for reloads and firearms
     Reloads without results, with reloadId and firearmId

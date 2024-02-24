@@ -7,6 +7,7 @@ import { ResultEditComponent } from './edit/result-edit.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { SortPipe } from '../shared/pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ResultsRoutingModule,
     BrowserAnimationsModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    SortPipe
   ]
 })
 export class ResultsModule { }
