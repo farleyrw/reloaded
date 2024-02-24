@@ -1,96 +1,98 @@
-<form name="firearmForm" class="container needs-validation" novalidate
-      *ngIf="firearm" #firearmForm="ngForm" [ngClass]="{ 'was-validated': firearmForm.submitted }"
-      (ngSubmit)="firearmForm.valid && onSubmit()">
-    <h1 class="mb-3">{{ mode | titlecase }} Firearm</h1>
+<ng-container *ngIf="firearm$ | async as firearm">
+    <form name="firearmForm" class="container needs-validation" novalidate
+          *ngIf="firearm" #firearmForm="ngForm" [ngClass]="{ 'was-validated': firearmForm.submitted }"
+          (ngSubmit)="firearmForm.valid && onSubmit()">
+        <h1 class="mb-3">{{ mode | titlecase }} Firearm</h1>
 
-    <div class="mb-3">
-        <label for="nickname" class="form-label">Nickname (optional)</label>
-        <input type="text" class="form-control" id="nickname" name="nickname"
-               [(ngModel)]="firearm.nickname" maxlength="50" />
-    </div>
-    <div class="row mb-3">
-        <div class="col">
-            <label for="brand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="brand" name="brand"
-                   [(ngModel)]="firearm.brand" #brand="ngModel" maxlength="50" required />
-            <div class="invalid-feedback" *ngIf="firearmForm.submitted && brand.errors">
-                Please provide a brand.
-            </div>
+        <div class="mb-3">
+            <label for="nickname" class="form-label">Nickname (optional)</label>
+            <input type="text" class="form-control" id="nickname" name="nickname"
+                   [(ngModel)]="firearm.nickname" maxlength="50" />
         </div>
-        <div class="col">
-            <label for="model" class="form-label">Model</label>
-            <input type="text" class="form-control" id="model" name="model"
-                   [(ngModel)]="firearm.model" #model="ngModel" maxlength="50" required />
-            <div class="invalid-feedback" *ngIf="firearmForm.submitted && model.errors">
-                Please provide a model.
+        <div class="row mb-3">
+            <div class="col">
+                <label for="brand" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand"
+                       [(ngModel)]="firearm.brand" #brand="ngModel" maxlength="50" required />
+                <div class="invalid-feedback" *ngIf="firearmForm.submitted && brand.errors">
+                    Please provide a brand.
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col" *ngIf="lookups$ | async as lookups">
-            <label for="chamber" class="form-label">Chamber</label>
-            <select name="chamber" class="form-select form-control"
-                    [(ngModel)]="firearm.chamber" #chamber="ngModel" required>
-                <option *ngFor="let chamber of lookups.cartridges | keyvalue: originalOrder" [value]="chamber.key">{{ chamber.value }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="firearmForm.submitted && chamber.errors">
-                Please select a chamber.
-            </div>
-        </div>
-        <div class="col">
-            <label for="type" class="form-label">Type</label>
-            <div class="btn-group d-block" role="group">
-                <input type="radio" class="btn-check" name="type" id="type-rifle" value="Rifle" autocomplete="off"
-                       [(ngModel)]="firearm.type" #type="ngModel" required />
-                <label class="btn btn-outline-primary" for="type-rifle">Rifle</label>
-
-                <input type="radio" class="btn-check" name="type" id="type-pistol" value="Pistol" autocomplete="off"
-                       [(ngModel)]="firearm.type" #type="ngModel" required />
-                <label class="btn btn-outline-primary" for="type-pistol">Pistol</label>
-
-                <input type="radio" class="btn-check" name="type" id="type-other" value="Other" autocomplete="off"
-                       [(ngModel)]="firearm.type" #type="ngModel" required />
-                <label class="btn btn-outline-primary" for="type-other">Other</label>
-                <div class="invalid-feedback" *ngIf="firearmForm.submitted && type.errors">
-                    Please select a type.
+            <div class="col">
+                <label for="model" class="form-label">Model</label>
+                <input type="text" class="form-control" id="model" name="model"
+                       [(ngModel)]="firearm.model" #model="ngModel" maxlength="50" required />
+                <div class="invalid-feedback" *ngIf="firearmForm.submitted && model.errors">
+                    Please provide a model.
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col">
-            <label for="barrelLength" class="form-label">Barrel Length</label>
-            <div class="input-group">
-                <input type="number" class="form-control" id="barrelLength" name="barrelLength"
-                       [(ngModel)]="firearm.barrelLength" #barrelLength="ngModel" min="1" max="30" required />
-                <span class="input-group-text">in.</span>
-                <div class="invalid-feedback" *ngIf="firearmForm.submitted && barrelLength.errors">
-                    Please provide a valid barrel length between 1 and 30 inches.
+        <div class="row mb-3">
+            <div class="col" *ngIf="lookups$ | async as lookups">
+                <label for="chamber" class="form-label">Chamber</label>
+                <select name="chamber" class="form-select form-control"
+                        [(ngModel)]="firearm.chamber" #chamber="ngModel" required>
+                    <option *ngFor="let chamber of lookups.cartridges | keyvalue: originalOrder" [value]="chamber.key">{{ chamber.value }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="firearmForm.submitted && chamber.errors">
+                    Please select a chamber.
+                </div>
+            </div>
+            <div class="col">
+                <label for="type" class="form-label">Type</label>
+                <div class="btn-group d-block" role="group">
+                    <input type="radio" class="btn-check" name="type" id="type-rifle" value="Rifle" autocomplete="off"
+                           [(ngModel)]="firearm.type" #type="ngModel" required />
+                    <label class="btn btn-outline-primary" for="type-rifle">Rifle</label>
+
+                    <input type="radio" class="btn-check" name="type" id="type-pistol" value="Pistol" autocomplete="off"
+                           [(ngModel)]="firearm.type" #type="ngModel" required />
+                    <label class="btn btn-outline-primary" for="type-pistol">Pistol</label>
+
+                    <input type="radio" class="btn-check" name="type" id="type-other" value="Other" autocomplete="off"
+                           [(ngModel)]="firearm.type" #type="ngModel" required />
+                    <label class="btn btn-outline-primary" for="type-other">Other</label>
+                    <div class="invalid-feedback" *ngIf="firearmForm.submitted && type.errors">
+                        Please select a type.
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <label for="barrelTwist" class="form-label">Barrel Twist (optional)</label>
-            <div class="input-group">
-                <span class="input-group-text">1 in </span>
-                <input type="number" class="form-control" id="barrelTwist" name="barrelTwist"
-                       [(ngModel)]="firearm.barrelTwist" min="1" max="20" />
-                <span class="input-group-text">in.</span>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="barrelLength" class="form-label">Barrel Length</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="barrelLength" name="barrelLength"
+                           [(ngModel)]="firearm.barrelLength" #barrelLength="ngModel" min="1" max="30" required />
+                    <span class="input-group-text">in.</span>
+                    <div class="invalid-feedback" *ngIf="firearmForm.submitted && barrelLength.errors">
+                        Please provide a valid barrel length between 1 and 30 inches.
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <label for="barrelTwist" class="form-label">Barrel Twist (optional)</label>
+                <div class="input-group">
+                    <span class="input-group-text">1 in </span>
+                    <input type="number" class="form-control" id="barrelTwist" name="barrelTwist"
+                           [(ngModel)]="firearm.barrelTwist" min="1" max="20" />
+                    <span class="input-group-text">in.</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row m-1 g-3 justify-content-sm-end text-center">
-        <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3" [disabled]="firearmForm.invalid || firearmForm.pristine">
-            <i class="bi bi-check-circle-fill"></i>
-            Save
-        </button>
-        <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/firearms/view/{{ firearm.firearmId }}">
-            <i class="bi bi-x-circle"></i>
-            Discard
-        </button>
-    </div>
-</form>
+        <div class="row m-1 g-3 justify-content-sm-end text-center">
+            <button type="submit" class="col-12 col-sm-auto btn btn-primary me-3" [disabled]="firearmForm.invalid || firearmForm.pristine">
+                <i class="bi bi-check-circle-fill"></i>
+                Save
+            </button>
+            <button type="button" class="col-12 col-sm-auto btn btn-secondary" routerLink="/firearms/view/{{ firearm.firearmId }}">
+                <i class="bi bi-x-circle"></i>
+                Discard
+            </button>
+        </div>
+    </form>
+</ng-container>
 
 <!-- TODO:
   Add delete option

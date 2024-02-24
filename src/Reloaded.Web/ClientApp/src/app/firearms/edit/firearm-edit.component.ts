@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Firearm } from '@app/models/firearm';
 import { FirearmService } from '@app/shared/services/firearm.service';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
 import { Lookup } from '@app/models/lookup';
 
@@ -11,48 +11,31 @@ import { Lookup } from '@app/models/lookup';
   templateUrl: './firearm-edit.component.html',
   styleUrls: ['./firearm-edit.component.scss']
 })
-export class FirearmEditComponent implements OnInit, OnDestroy {
+export class FirearmEditComponent implements OnInit {
   mode: 'edit' | 'add' = 'add';
-
-  firearmId = 0;
-
-  // TODO: replace with observable?
-  firearm = new Firearm();
-
+  
+  firearm$!: Observable<Firearm>;
+  
   lookups$!: Observable<Lookup>;
 
   originalOrder = OrderingService.originalOrder;
-
-  subscriptions = new Subscription();
-
+  
   constructor(private firearmService: FirearmService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.subscriptions.add(this.route.params.subscribe(params => {
-      let param = params.firearmId;
+    let param = this.route.snapshot.paramMap.get('firearmId')!;
 
-      if (!isNaN(param)) {
-        this.mode = 'edit';
-        this.firearmId = +param;
+    if (param != 'add') {
+      this.mode = 'edit';
 
-        this.loadFirearm();
-      } else if (param != 'add') {
-        // invalid parameter
-        console.log('invalid paramter', param);
-      }
-    }));
-
+      this.firearm$ = this.firearmService.getFirearm(+param);
+    } else {
+      this.firearm$ = new BehaviorSubject(new Firearm());
+    }
+    
     this.lookups$ = this.firearmService.getEnums();
   }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
-  loadFirearm() {
-    this.subscriptions.add(this.firearmService.getFirearm(this.firearmId).subscribe(firearm => this.firearm = firearm));
-  }
-
+  
   onSubmit() {
     console.log('form submitted');
 
