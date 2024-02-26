@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { Reload } from '@app/models/reload';
-import { ReloadService } from '@app/shared/services/reload.service';
 import { Lookup } from '@app/models/lookup';
-import { FirearmService } from '@app/shared/services/firearm.service';
 import { Firearm } from '@app/models/firearm';
+import { ReloadService } from '../services/reload.service';
+import { FirearmService } from '../../firearms/services/firearm.service';
+import { LookupService } from '../../shared/services/lookup.service';
 
 @Component({
   selector: 'app-reload-view',
@@ -24,7 +25,8 @@ export class ReloadViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reloadService: ReloadService,
-    private firearmService: FirearmService
+    private firearmService: FirearmService,
+    private lookupService: LookupService
   ) { }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class ReloadViewComponent implements OnInit {
     this.reload$ = this.reloadService.getReload(this.reloadId)
       .pipe(tap(reload => this.firearms$ = this.firearmService.getFirearmsByCartridge(reload.casing.cartridge)));
 
-    this.lookups$ = this.reloadService.getEnums();
+    this.lookups$ = this.lookupService.getEnums();
   }
 
   getReloadTitle = this.reloadService.getTitle;

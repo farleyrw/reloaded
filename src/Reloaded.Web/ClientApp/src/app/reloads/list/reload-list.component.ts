@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ReloadService } from '@app/shared/services/reload.service';
 import { Observable } from 'rxjs';
 import { Reload } from '@app/models/reload';
 import { Lookup } from '@app/models/lookup';
+import { ReloadService } from '../services/reload.service';
+import { LookupService } from '../../shared/services/lookup.service';
 
 @Component({
   selector: 'app-reload-list',
@@ -14,10 +15,13 @@ export class ReloadListComponent implements OnInit {
 
   lookups$!: Observable<Lookup>;
 
-  constructor(private reloadService: ReloadService) { }
+  constructor(
+    private reloadService: ReloadService,
+    private lookupService: LookupService
+  ) { }
 
   ngOnInit() {
     this.reloads$ = this.reloadService.getReloads();
-    this.lookups$ = this.reloadService.getEnums();
+    this.lookups$ = this.lookupService.getEnums();
   }
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { Result } from '@app/models/result';
-import { ResultService } from '@app/shared/services/result.service';
 import { ActivatedRoute } from '@angular/router';
 import { Reload } from '../../models/reload';
-import { ReloadService } from '../../shared/services/reload.service';
 import { Lookup } from '../../models/lookup';
 import { Firearm } from '../../models/firearm';
-import { FirearmService } from '../../shared/services/firearm.service';
+import { ResultService } from '../services/result.service';
+import { ReloadService } from '../../reloads/services/reload.service';
+import { FirearmService } from '../../firearms/services/firearm.service';
+import { LookupService } from '../../shared/services/lookup.service';
 
 @Component({
   selector: 'app-result-view',
@@ -27,6 +28,7 @@ export class ResultViewComponent implements OnInit {
     private resultService: ResultService,
     private reloadService: ReloadService,
     private firearmService: FirearmService,
+    private lookupService: LookupService,
     private route: ActivatedRoute
   ) { }
 
@@ -39,7 +41,7 @@ export class ResultViewComponent implements OnInit {
         this.firearm$ = this.firearmService.getFirearm(result.firearmId);
       }));
 
-    this.lookups$ = this.reloadService.getEnums();
+    this.lookups$ = this.lookupService.getEnums();
   }
 
   getReloadTitle = this.reloadService.getTitle;

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirearmService } from '@app/shared/services/firearm.service';
-import { ReloadService } from '@app/shared/services/reload.service';
 import { Reload } from '@app/models/reload';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
 import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { Firearm } from '@app/models/firearm';
 import { Lookup } from '@app/models/lookup';
+import { ReloadService } from '../services/reload.service';
+import { FirearmService } from '../../firearms/services/firearm.service';
+import { LookupService } from '../../shared/services/lookup.service';
 
 @Component({
   selector: 'app-reload-edit',
@@ -31,7 +32,8 @@ export class ReloadEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private reloadService: ReloadService,
-    private firearmService: FirearmService
+    private firearmService: FirearmService,
+    private lookupService: LookupService
   ) { }
 
   ngOnInit() {
@@ -60,7 +62,7 @@ export class ReloadEditComponent implements OnInit {
       this.reload$ = this.reloadService.getReload(this.reloadId);
     }
 
-    this.lookups$ = this.reloadService.getEnums();
+    this.lookups$ = this.lookupService.getEnums();
   }
 
   onSubmit() {

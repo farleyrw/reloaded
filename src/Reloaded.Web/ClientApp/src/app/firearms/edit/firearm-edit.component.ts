@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Firearm } from '@app/models/firearm';
-import { FirearmService } from '@app/shared/services/firearm.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OrderingService } from '@app/shared/pipes/ordering.service';
 import { Lookup } from '@app/models/lookup';
+import { FirearmService } from '../services/firearm.service';
 
 @Component({
   selector: 'app-firearm-edit',

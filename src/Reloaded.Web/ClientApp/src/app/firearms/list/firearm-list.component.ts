@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FirearmService } from '@app/shared/services/firearm.service';
 import { Observable } from 'rxjs';
 import { Firearm } from '@app/models/firearm';
+import { FirearmService } from '../services/firearm.service';
 
 @Component({
   selector: 'app-firearm-list',

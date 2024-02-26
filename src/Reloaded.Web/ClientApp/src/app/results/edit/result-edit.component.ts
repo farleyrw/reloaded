@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ResultService } from '@app/shared/services/result.service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Lookup } from '@app/models/lookup';
 import { Result } from '@app/models/result';
-import { ReloadService } from '@app/shared/services/reload.service';
 import { Firearm } from '@app/models/firearm';
 import { Reload } from '@app/models/reload';
-import { FirearmService } from '@app/shared/services/firearm.service';
 import { NgbCalendar, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { ResultService } from '../services/result.service';
+import { ReloadService } from '../../reloads/services/reload.service';
+import { FirearmService } from '../../firearms/services/firearm.service';
+import { LookupService } from '../../shared/services/lookup.service';
 
 @Component({
   selector: 'app-result-edit',
@@ -42,6 +43,7 @@ export class ResultEditComponent implements OnInit {
     private resultService: ResultService,
     private reloadService: ReloadService,
     private firearmService: FirearmService,
+    private lookupService: LookupService,
     private calendar: NgbCalendar
   ) { }
 
@@ -85,8 +87,8 @@ export class ResultEditComponent implements OnInit {
           this.firearm$ = this.firearmService.getFirearm(result.firearmId);
       }));
     }
-    
-    this.lookups$ = this.reloadService.getEnums();
+
+    this.lookups$ = this.lookupService.getEnums();
   }
   
   onSubmit() {
