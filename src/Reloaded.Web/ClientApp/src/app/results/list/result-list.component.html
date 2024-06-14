@@ -14,7 +14,7 @@
 }
 
 <ng-container *ngIf="{ results: results$ | async, firearms: firearms$ | async, reloads: reloads$ | async, lookups: lookups$ | async } as data">
-    <div class="container" *ngIf="data.results && data.firearms && data.reloads && data.lookups">
+    <div *ngIf="data.results && data.firearms && data.reloads && data.lookups">
         <table class="table table-striped" aria-describedby="tableHeader">
             <thead>
                 <tr>
